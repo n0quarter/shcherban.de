@@ -107,5 +107,5 @@ function MobileMenu() {
 
 /** Doctolib's official white wordmark, for the booking buttons (self-hosted copy of their button asset). */
 function DoctolibLogo({ className }: { className?: string }) {
-  return <img src="/doctolib-white.png" alt="Doctolib" className={cn("h-[15px] w-auto translate-y-px", className)} />
+  return <img src="/doctolib-white.png" alt="Doctolib" className={cn("h-[13px] w-auto", className)} />
 }
