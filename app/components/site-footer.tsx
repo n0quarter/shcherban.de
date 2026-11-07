@@ -5,57 +5,101 @@ import { localizedPath, useLang } from "~/lib/i18n"
 import { practice, siteName } from "~/lib/practice"
 
 const text = {
-  de: { writeUs: "Schreiben Sie uns", imprint: "Impressum & Datenschutz", hours: "Sprechstunde", contact: "Kontakt", directions: "Route planen" },
-  en: { writeUs: "Write to us", imprint: "Imprint & privacy", hours: "Consultation hours", contact: "Contact", directions: "Get directions" },
+  de: {
+    writeUs: "Schreiben Sie uns",
+    imprint: "Impressum & Datenschutz",
+    hours: "Sprechstunde",
+    contact: "Kontakt",
+    directions: "Route planen",
+    rights: "Alle Rechte vorbehalten.",
+  },
+  en: {
+    writeUs: "Write to us",
+    imprint: "Imprint & privacy",
+    hours: "Consultation hours",
+    contact: "Contact",
+    directions: "Get directions",
+    rights: "All rights reserved.",
+  },
 }
 
+/** Layout follows the footer of the old shcherban.de site. */
 export function SiteFooter() {
   const lang = useLang()
   const t = text[lang]
 
   return (
     <footer className="mt-24 bg-ink text-white sm:mt-32">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3 sm:py-20">
-        <div className="space-y-3">
-          <p className="font-heading text-3xl font-semibold tracking-tight">{practice.doctor}</p>
-          <p className="text-white/65">{siteName[lang]}</p>
-          <div className="flex flex-col gap-1 text-sm">
-            <Link to={localizedPath(lang, "/kontakt/")} className="hover:underline">{t.writeUs}</Link>
-            <Link to={localizedPath(lang, "/impressum/")} className="hover:underline">{t.imprint}</Link>
-            <a href={practice.instagramUrl} target="_blank" rel="noopener" className="hover:underline">
-              Instagram
-            </a>
+      <div className="mx-auto grid max-w-6xl gap-x-12 gap-y-14 px-4 py-16 md:grid-cols-2 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="md:col-span-2 lg:col-span-1">
+          <p className="text-sm font-bold tracking-wide uppercase">{practice.doctor}</p>
+          <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance text-cream sm:text-5xl">{siteName[lang]}</p>
+          <Link
+            to={localizedPath(lang, "/kontakt/")}
+            className="mt-10 inline-block border-b-3 border-sun pb-2 text-xl font-semibold text-sun transition-opacity hover:opacity-80"
+          >
+            {t.writeUs}
+          </Link>
+          <p className="mt-8">
+            <Link to={localizedPath(lang, "/impressum/")} className="text-lg text-sun hover:underline">
+              {t.imprint}
+            </Link>
+          </p>
+        </div>
+
+        <div>
+          <FooterHeading>{t.hours}</FooterHeading>
+          <div className="text-base [&_dd]:text-white [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2 [&_dl]:text-base [&_dt]:font-bold">
+            <OpeningHours />
+          </div>
+          <a href={practice.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram" className="mt-8 inline-block hover:text-sun">
+            <InstagramIcon />
+          </a>
+        </div>
+
+        <div>
+          <FooterHeading>{t.contact}</FooterHeading>
+          <div className="space-y-5 text-base leading-relaxed">
+            <p>
+              {practice.street}
+              <br />
+              {practice.city}
+              <br />
+              <a href={practice.directionsUrl} target="_blank" rel="noopener" className="text-sun hover:underline">
+                {t.directions}
+              </a>
+            </p>
+            <p>
+              Tel.: <a href={practice.phoneHref} className="hover:underline">{practice.phone}</a>
+              <br />
+              Fax: {practice.fax}
+              <br />
+              <a href={`mailto:${practice.email}`} className="text-sun hover:underline">
+                {practice.email}
+              </a>
+            </p>
           </div>
         </div>
-
-        <div className="space-y-3 [&_dd]:text-white/65">
-          <p className="font-semibold">{t.hours}</p>
-          <OpeningHours />
-        </div>
-
-        <div className="space-y-3 text-sm">
-          <p className="text-base font-semibold">{t.contact}</p>
-          <p>
-            {practice.street}
-            <br />
-            {practice.city}
-            <br />
-            <a href={practice.directionsUrl} target="_blank" rel="noopener" className="text-sun hover:underline">
-              {t.directions}
-            </a>
-          </p>
-          <p>
-            Tel.: <a href={practice.phoneHref} className="hover:underline">{practice.phone}</a>
-            <br />
-            Fax: {practice.fax}
-            <br />
-            <a href={`mailto:${practice.email}`} className="hover:underline">{practice.email}</a>
-          </p>
-        </div>
       </div>
-      <p className="border-t border-white/10 py-6 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Frauenarztpraxis im Friedrichshain
+
+      <p className="mx-auto max-w-6xl px-4 pb-10 text-sm text-white/60">
+        © {new Date().getFullYear()} Frauenarztpraxis im Friedrichshain. {t.rights}
       </p>
     </footer>
+  )
+}
+
+function FooterHeading({ children }: { children: string }) {
+  return <p className="mb-6 border-b border-white/70 pb-4 text-2xl font-medium text-cream">{children}</p>
+}
+
+/** Instagram glyph (lucide-react v1 dropped brand icons). */
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-9" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
   )
 }
