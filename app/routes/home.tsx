@@ -104,11 +104,11 @@ export default function Home() {
       <PracticeShapeDefs />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-clip">
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
-        <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-14 md:items-start px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
           <div className="min-w-0">
-            <h1 className="font-heading text-[clamp(2.3rem,5.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
+            <h1 className="font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
               {t.heading[0]}
               <span className="text-primary">{t.heading[1]}</span>
               {t.heading[2]}
@@ -127,7 +127,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
+          <div className="relative mx-auto w-full max-w-sm md:sticky md:top-28 md:max-w-none">
             <div className="absolute -inset-3 -z-10 rotate-3 rounded-[2.5rem] bg-primary/10" />
             <img
               src="/images/ganna-portrait.jpg"
