@@ -14,11 +14,11 @@ export function SiteFooter() {
   const t = text[lang]
 
   return (
-    <footer className="mt-24 border-t bg-muted/40">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-3">
+    <footer className="mt-24 bg-ink text-white sm:mt-32">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3 sm:py-20">
         <div className="space-y-3">
-          <p className="font-heading text-lg font-semibold">{practice.doctor}</p>
-          <p className="text-muted-foreground">{siteName[lang]}</p>
+          <p className="font-heading text-3xl font-semibold tracking-tight">{practice.doctor}</p>
+          <p className="text-white/65">{siteName[lang]}</p>
           <div className="flex flex-col gap-1 text-sm">
             <Link to={localizedPath(lang, "/kontakt/")} className="hover:underline">{t.writeUs}</Link>
             <Link to={localizedPath(lang, "/impressum/")} className="hover:underline">{t.imprint}</Link>
@@ -28,7 +28,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 [&_dd]:text-white/65">
           <p className="font-semibold">{t.hours}</p>
           <OpeningHours />
         </div>
@@ -40,7 +40,7 @@ export function SiteFooter() {
             <br />
             {practice.city}
             <br />
-            <a href={practice.directionsUrl} target="_blank" rel="noopener" className="text-primary hover:underline">
+            <a href={practice.directionsUrl} target="_blank" rel="noopener" className="text-sun hover:underline">
               {t.directions}
             </a>
           </p>
@@ -53,7 +53,7 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
-      <p className="border-t py-6 text-center text-xs text-muted-foreground">
+      <p className="border-t border-white/10 py-6 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Frauenarztpraxis im Friedrichshain
       </p>
     </footer>
