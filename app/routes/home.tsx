@@ -1,6 +1,6 @@
 import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
 import type { CSSProperties, ReactNode } from "react"
-import { Link } from "react-router"
+import { Link, useSearchParams } from "react-router"
 
 import { OpeningHours } from "~/components/opening-hours"
 import { PhotoGallery } from "~/components/photo-gallery"
@@ -41,7 +41,6 @@ const serviceGroups = [
 const text = {
   de: {
     eyebrow: "Frauenarztpraxis in Berlin-Friedrichshain",
-    heading: ["Frauen‑Gesundheit im Herzen von ", "Friedrichshain"],
     lead: "Von Vorsorge und Verhütung über Schwangerschaftsbetreuung bis zur Menopause-Beratung – persönlich, mit modernster Medizintechnik und auf Basis aktueller Forschung.",
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     assistantRole: "Medizinische Fachangestellte",
@@ -70,7 +69,6 @@ const text = {
   },
   en: {
     eyebrow: "Gynaecological practice in Berlin-Friedrichshain",
-    heading: ["Women's health in the heart of ", "Friedrichshain"],
     lead: "From screening and contraception to pregnancy care and menopause advice – personal, with state-of-the-art medical technology and based on current research.",
     doctorRole: "Specialist in gynaecology and obstetrics",
     assistantRole: "Medical assistant",
@@ -99,9 +97,52 @@ const text = {
   },
 }
 
+// TEMPORARY: headline candidates to choose from. Pick one with ?title=1…5; the picker shows only in dev.
+// Each entry: [text before, highlighted part, text after].
+const headlineOptions: Record<Lang, [string, string, string][]> = {
+  de: [
+    ["Frauen‑Gesundheit im Herzen von ", "Friedrichshain", ""],
+    ["", "Ganna Shcherban", " – Ihre Frauenärztin in Friedrichshain"],
+    ["Frauenarztpraxis ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
+    ["Willkommen bei ", "Ganna Shcherban", " – Frauenheilkunde im Herzen von Friedrichshain"],
+    ["Persönlich betreut von ", "Ganna Shcherban", ", Ihrer Frauenärztin in Friedrichshain"],
+    ["Frauen‑Gesundheit in Friedrichshain – mit ", "Ganna Shcherban", ""],
+  ],
+  en: [
+    ["Women's health in the heart of ", "Friedrichshain", ""],
+    ["", "Ganna Shcherban", " – your gynaecologist in Friedrichshain"],
+    ["Gynaecological practice ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
+    ["Welcome to ", "Ganna Shcherban", " – gynaecology in the heart of Friedrichshain"],
+    ["Personal care from ", "Ganna Shcherban", ", your gynaecologist in Friedrichshain"],
+    ["Women's health in Friedrichshain – with ", "Ganna Shcherban", ""],
+  ],
+}
+
+function HeadlinePicker({ current, onPick }: { current: number; onPick: (index: number) => void }) {
+  if (!import.meta.env.DEV) return null
+  return (
+    <div className="mb-4 flex items-center gap-1 text-xs text-muted-foreground">
+      Titel:
+      {headlineOptions.de.map((_, index) => (
+        <button
+          key={index}
+          type="button"
+          onClick={() => onPick(index)}
+          className={cn("size-7 rounded-full border bg-background font-semibold", index === current && "border-primary bg-primary text-primary-foreground")}
+        >
+          {index === 0 ? "0" : index}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 export default function Home() {
   const lang = useLang()
   const t = text[lang]
+  const [searchParams, setSearchParams] = useSearchParams()
+  const headlineIndex = Math.min(Number(searchParams.get("title")) || 0, headlineOptions[lang].length - 1)
+  const headline = headlineOptions[lang][headlineIndex]
 
   return (
     <>
@@ -112,10 +153,12 @@ export default function Home() {
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
           <div className="min-w-0">
+            <HeadlinePicker current={headlineIndex} onPick={(index) => setSearchParams(index ? { title: String(index) } : {}, { replace: true, preventScrollReset: true })} />
             <Eyebrow>{t.eyebrow}</Eyebrow>
             <h1 className="mt-6 font-heading text-[clamp(2.3rem,5.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
-              {t.heading[0]}
-              <span className="text-primary">{t.heading[1]}</span>
+              {headline[0]}
+              <span className="text-primary">{headline[1]}</span>
+              {headline[2]}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t.lead}</p>
             <div className="mt-9 flex flex-wrap gap-3">
@@ -208,8 +251,8 @@ export default function Home() {
         <div className="mx-auto mt-16 max-w-6xl px-4">
           <ul className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 md:grid-cols-3">
             <TeamMember name={practice.doctor} role={t.doctorRole} photo="/images/ganna-avatar.jpg" />
-            <TeamMember name="Sabine Lüdecke" role={t.assistantRole} photo="/images/sabine-luedecke.jpg" photoZoom="origin-[50%_25%] scale-[1.4]" />
             <TeamMember name="Jessica Richter" role={t.assistantRole} />
+            <TeamMember name="Sabine Lüdecke" role={t.assistantRole} photo="/images/sabine-luedecke.jpg" photoZoom="origin-[50%_25%] scale-[1.4]" />
           </ul>
           <MoreLink to={localizedPath(lang, "/praxisteam/")} className="mt-8">{t.team}</MoreLink>
         </div>
