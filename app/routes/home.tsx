@@ -42,14 +42,12 @@ const text = {
   de: {
     heading: ["Frauenarztpraxis ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
-    assistantRole: "Medizinische Fachangestellte",
     servicesHeading: "Wobei wir Sie begleiten",
     allServices: "Alle Leistungen",
     notListed: "Ihr Anliegen ist nicht dabei?",
     notListedText: "Schreiben Sie uns – wir sagen Ihnen gern, ob und wie wir Ihnen helfen können.",
     contactPage: "Kontakt aufnehmen",
     welcomeHeading: "Willkommen in unserer Frauenarztpraxis",
-    team: "Das Praxisteam kennenlernen",
     practiceHeading: "Ein Ort zum Wohlfühlen",
     practiceTour: "Rundgang durch die Praxis",
     photos: [
@@ -68,14 +66,12 @@ const text = {
   en: {
     heading: ["Gynaecological practice ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
     doctorRole: "Specialist in gynaecology and obstetrics",
-    assistantRole: "Medical assistant",
     servicesHeading: "How we can help",
     allServices: "All services",
     notListed: "Don't see your concern?",
     notListedText: "Write to us – we will gladly tell you whether and how we can help.",
     contactPage: "Get in touch",
     welcomeHeading: "Welcome to our gynaecological practice",
-    team: "Meet the team",
     practiceHeading: "A place to feel at ease",
     practiceTour: "Tour the practice",
     photos: [
@@ -201,14 +197,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mx-auto mt-16 max-w-6xl px-4">
-          <ul className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 md:grid-cols-3">
-            <TeamMember name={practice.doctor} role={t.doctorRole} photo="/images/ganna-avatar.jpg" />
-            <TeamMember name="Jessica Richter" role={t.assistantRole} />
-            <TeamMember name="Sabine Lüdecke" role={t.assistantRole} photo="/images/sabine-luedecke.jpg" photoZoom="origin-[50%_25%] scale-[1.4]" />
-          </ul>
-          <MoreLink to={localizedPath(lang, "/praxisteam/")} className="mt-8">{t.team}</MoreLink>
-        </div>
       </section>
 
       {/* Practice photos */}
@@ -291,28 +279,6 @@ function MoreLink({ to, className, children }: { to: string; className?: string;
       {children}
       <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
     </Link>
-  )
-}
-
-/** Team member with a diamond-cropped photo, or initials when there is no photo yet. */
-function TeamMember({ name, role, photo, photoZoom }: { name: string; role: string; photo?: string; photoZoom?: string }) {
-  const initials = name.split(" ").map((part) => part[0]).join("")
-  return (
-    <li className="flex items-center gap-4">
-      {photo ? (
-        <span className="size-20 shrink-0 overflow-hidden" style={practiceShape}>
-          <img src={photo} alt={name} loading="lazy" className={cn("size-full object-cover object-top", photoZoom)} />
-        </span>
-      ) : (
-        <span className="flex size-20 shrink-0 items-center justify-center bg-sun text-xl font-semibold text-ink" style={practiceShape}>
-          {initials}
-        </span>
-      )}
-      <div>
-        <p className="font-semibold leading-tight text-ink">{name}</p>
-        <p className="mt-0.5 text-sm text-muted-foreground">{role}</p>
-      </div>
-    </li>
   )
 }
 
