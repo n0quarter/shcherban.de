@@ -55,24 +55,41 @@ export function PhotoGallery({ photos }: { photos: Photo[] }) {
             if (event.key === "ArrowRight") step(1)
           }}
         >
-          {current && (
+          {current && openIndex !== null && (
             <>
-              <img src={current.src} alt={current.caption} className="max-h-[75vh] w-full rounded-3xl object-contain" />
-              <div className="flex items-center justify-between gap-3 px-2 pb-1">
+              {/* The wrapper is as wide as the photo, so the arrows sit on the photo's edges. */}
+              <div className="relative mx-auto w-fit">
+                <img src={current.src} alt={current.caption} className="max-h-[75vh] w-auto max-w-full rounded-3xl" />
+                <ArrowButton side="left" label={t.previous} onClick={() => step(-1)} />
+                <ArrowButton side="right" label={t.next} onClick={() => step(1)} />
+              </div>
+              <div className="flex items-baseline justify-between gap-3 px-2 pb-1">
                 <DialogTitle className="text-base font-medium">{current.caption}</DialogTitle>
-                <div className="flex gap-1">
-                  <Button variant="outline" size="icon" onClick={() => step(-1)} aria-label={t.previous}>
-                    <ChevronLeftIcon />
-                  </Button>
-                  <Button variant="outline" size="icon" onClick={() => step(1)} aria-label={t.next}>
-                    <ChevronRightIcon />
-                  </Button>
-                </div>
+                <span className="text-sm text-muted-foreground tabular-nums">
+                  {openIndex + 1} / {photos.length}
+                </span>
               </div>
             </>
           )}
         </DialogContent>
       </Dialog>
     </>
+  )
+}
+
+function ArrowButton({ side, label, onClick }: { side: "left" | "right"; label: string; onClick: () => void }) {
+  const Icon = side === "left" ? ChevronLeftIcon : ChevronRightIcon
+  return (
+    <Button
+      variant="outline"
+      onClick={onClick}
+      aria-label={label}
+      className={cn(
+        "absolute top-1/2 size-12 -translate-y-1/2 rounded-full border-0 bg-white/90 text-ink shadow-lg backdrop-blur hover:bg-white sm:size-14 [&_svg:not([class*='size-'])]:size-6",
+        side === "left" ? "left-3 sm:left-4" : "right-3 sm:right-4"
+      )}
+    >
+      <Icon />
+    </Button>
   )
 }
