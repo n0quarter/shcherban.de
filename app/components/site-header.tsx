@@ -13,12 +13,13 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to={localizedPath(lang, "/")} className="shrink-0">
+      {/* Phone: logo + burger. Tablet: menu on its own second row. Desktop: everything in one row. */}
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 lg:flex-nowrap">
+        <Link to={localizedPath(lang, "/")} className="flex h-16 shrink-0 items-center">
           <img src="/logo.svg" alt={`${siteName[lang]} – ${practice.doctor}`} className="h-9 w-auto" />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="order-last -mx-3 hidden w-full items-center gap-1 pb-2 md:flex lg:order-none lg:mx-0 lg:w-auto lg:pb-0">
           {navigation.map((item) => (
             <NavLink
               key={item.path}
@@ -72,7 +73,7 @@ function MobileMenu() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger render={<Button variant="ghost" size="icon" className="lg:hidden" />}>
+      <SheetTrigger render={<Button variant="ghost" size="icon" className="md:hidden" />}>
         <MenuIcon />
         <span className="sr-only">Menu</span>
       </SheetTrigger>
