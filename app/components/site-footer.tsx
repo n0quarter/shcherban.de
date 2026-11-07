@@ -5,8 +5,8 @@ import { localizedPath, useLang } from "~/lib/i18n"
 import { practice, siteName } from "~/lib/practice"
 
 const text = {
-  de: { writeUs: "Schreiben Sie uns", imprint: "Impressum & Datenschutz", hours: "Sprechstunde", contact: "Kontakt" },
-  en: { writeUs: "Write to us", imprint: "Imprint & privacy", hours: "Consultation hours", contact: "Contact" },
+  de: { writeUs: "Schreiben Sie uns", imprint: "Impressum & Datenschutz", hours: "Sprechstunde", contact: "Kontakt", directions: "Route planen" },
+  en: { writeUs: "Write to us", imprint: "Imprint & privacy", hours: "Consultation hours", contact: "Contact", directions: "Get directions" },
 }
 
 export function SiteFooter() {
@@ -39,6 +39,10 @@ export function SiteFooter() {
             {practice.street}
             <br />
             {practice.city}
+            <br />
+            <a href={practice.directionsUrl} target="_blank" rel="noopener" className="text-primary hover:underline">
+              {t.directions}
+            </a>
           </p>
           <p>
             Tel.: <a href={practice.phoneHref} className="hover:underline">{practice.phone}</a>
