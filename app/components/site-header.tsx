@@ -38,8 +38,9 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <LanguageSwitch />
-          <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants(), "hidden sm:inline-flex")}>
+          <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants(), "hidden gap-2.5 px-4 sm:inline-flex")}>
             {bookingLabel[lang]}
+            <DoctolibLogo />
           </a>
           <MobileMenu />
         </div>
@@ -87,10 +88,16 @@ function MobileMenu() {
             {item.label[lang]}
           </Link>
         ))}
-        <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants(), "mt-4")}>
+        <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "mt-4 gap-2.5")}>
           {bookingLabel[lang]}
+          <DoctolibLogo />
         </a>
       </SheetContent>
     </Sheet>
   )
+}
+
+/** Doctolib's official white wordmark, for the booking buttons (self-hosted copy of their button asset). */
+function DoctolibLogo() {
+  return <img src="/doctolib-white.png" alt="Doctolib" className="h-[15px] w-auto translate-y-px" />
 }
