@@ -47,8 +47,8 @@ export function SiteHeader() {
             aria-label={`${bookingLabel[lang]} – Doctolib`}
             className={cn(buttonVariants(), "hidden gap-2.5 px-4 sm:inline-flex")}
           >
-            <span className="md:max-lg:hidden">{bookingLabel[lang]}</span>
-            <DoctolibLogo />
+            <span>{bookingLabel[lang]}</span>
+            <DoctolibLogo className="md:max-lg:hidden" />
           </a>
           <MobileMenu />
         </div>
@@ -106,6 +106,6 @@ function MobileMenu() {
 }
 
 /** Doctolib's official white wordmark, for the booking buttons (self-hosted copy of their button asset). */
-function DoctolibLogo() {
-  return <img src="/doctolib-white.png" alt="Doctolib" className="h-[15px] w-auto translate-y-px" />
+function DoctolibLogo({ className }: { className?: string }) {
+  return <img src="/doctolib-white.png" alt="Doctolib" className={cn("h-[15px] w-auto translate-y-px", className)} />
 }
