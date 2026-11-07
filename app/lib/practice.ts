@@ -35,7 +35,6 @@ export const navigation: { path: string; label: Localized }[] = [
   { path: "/praxisteam/", label: { de: "Praxisteam", en: "Team" } },
   { path: "/praxis/", label: { de: "Praxis", en: "Practice" } },
   { path: "/leistungen/", label: { de: "Leistungen", en: "Services" } },
-  { path: "/actuales/", label: { de: "Aktuelles", en: "News" } },
   { path: "/kontakt/", label: { de: "Kontakt", en: "Contact" } },
 ]
 

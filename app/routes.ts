@@ -17,22 +17,9 @@ const pages: Record<string, string> = {
   "leistungen/praeventionsmedizin": "routes/leistungen/praeventionsmedizin.tsx",
   "leistungen/impfungen": "routes/leistungen/impfungen.tsx",
   "leistungen/igel-leistungen": "routes/leistungen/igel-leistungen.tsx",
-  actuales: "routes/news/index.tsx",
   kontakt: "routes/kontakt.tsx",
   impressum: "routes/impressum.tsx",
 }
-
-// News posts keep their old dated URLs. Each path needs an entry in app/content/news.tsx.
-const newsPosts = [
-  "2025/05/05/urlaub-vertretung",
-  "2024/12/22/oeffnungszeiten-ueber-die-feiertage",
-  "2024/09/08/neu-im-team-sabine-luedecke",
-  "2023/09/06/urlaub-sonderoeffnugszeiten-vacation-special-opening-hours",
-  "2023/08/06/geaenderte-oeffnungszeiten-28-8-bis-1-9-changed-opening-hours-28-8-1-9",
-  "2023/07/06/praxis-am-19-5-geschlossen-office-closed-19-5",
-]
-for (const post of newsPosts) pages[post] = "routes/news/post.tsx"
-
 
 export default Object.entries(pages).flatMap(([path, file]) => [
   path === "" ? index(file, { id: "de" }) : route(path, file, { id: `de/${path}` }),

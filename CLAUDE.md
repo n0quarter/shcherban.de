@@ -13,7 +13,6 @@ Static website of a gynaecological practice in Berlin. Mostly edited by Claude C
 - `app/lib/practice.ts` – address, phone, opening hours, booking URL, navigation, `SITE_URL`.
 - `app/lib/i18n.ts` – `useLang()`, `localizedPath()`; `app/lib/seo.ts` – `pageMeta()` for every route's `meta`.
 - `app/components/` – header, footer, page layouts (`service-page.tsx`, `page-header.tsx`), shared blocks (`service-groups.tsx`, `photo-gallery.tsx` incl. lightbox, `team-member.tsx`, `doctolib-logo.tsx`); `app/components/ui/` – shadcn components.
-- `app/content/news.tsx` – news posts (Aktuelles). A new post needs an entry there AND its path in `newsPosts` in `app/routes.ts`.
 - `app/lib/services.ts` – the 10 services (title, teaser, icon) used by the overview lists; each service also has its own page under `app/routes/leistungen/`.
 - `public/images/` – web-sized photos. `old-site/` – archive of the old site (raw HTML + original images); `content/` – old texts as Markdown, reference only.
 

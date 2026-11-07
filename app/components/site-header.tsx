@@ -28,8 +28,7 @@ export function SiteHeader() {
   return (
     <header className={cn("sticky top-0 z-40 border-b bg-background/90 backdrop-blur transition-shadow", scrolled && "shadow-sm")}>
       {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu.
-          At the top of the page the header is taller with a larger logo (where there is room); it shrinks on scroll.
-          Tablet and small desktop keep the logo size, because the one-row menu exactly fills the width there. */}
+          At the top of the page the header is taller with a larger logo; it shrinks on scroll. */}
       <div
         className={cn(
           "mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 transition-[height] duration-300",
@@ -40,7 +39,7 @@ export function SiteHeader() {
           <img
             src="/logo.svg"
             alt={`${siteName[lang]} – ${practice.doctor}`}
-            className={cn("w-auto transition-[height] duration-300", scrolled ? "h-8 lg:h-9 xl:h-10" : "h-11 md:h-8 lg:h-9 xl:h-14")}
+            className={cn("w-auto transition-[height] duration-300", scrolled ? "h-8 lg:h-9 xl:h-10" : "h-11 md:h-12 lg:h-14")}
           />
         </Link>
 
