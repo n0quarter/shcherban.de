@@ -108,10 +108,10 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
-        <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
           <div className="min-w-0">
             <Eyebrow>{t.eyebrow}</Eyebrow>
-            <h1 className="mt-6 font-heading text-[2.4rem] leading-[1.05] font-semibold tracking-tight text-balance text-ink sm:text-6xl">
+            <h1 className="mt-6 font-heading text-[clamp(2.3rem,5.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
               {t.heading[0]}
               <span className="text-primary">{t.heading[1]}</span>
             </h1>
@@ -126,14 +126,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
             <div className="absolute -inset-3 -z-10 rotate-3 rounded-[2.5rem] bg-primary/10" />
             <img
               src="/images/ganna-portrait.jpg"
               alt="Ganna Shcherban"
               className="aspect-[4/5] w-full rounded-[2rem] object-cover object-top shadow-xl shadow-primary/10"
             />
-            <div className="absolute -bottom-6 left-4 right-4 rounded-2xl border bg-background/95 p-4 shadow-lg backdrop-blur sm:left-auto sm:-right-6 sm:w-72">
+            <div className="absolute -bottom-6 left-4 right-4 rounded-2xl border bg-background/95 p-4 shadow-lg backdrop-blur sm:left-auto sm:right-4 sm:w-72 lg:-right-6">
               <p className="font-heading text-lg font-semibold">{practice.doctor}</p>
               <p className="text-sm text-muted-foreground">{t.doctorRole}</p>
             </div>
@@ -153,7 +153,7 @@ export default function Home() {
                 <Diamond className="size-2.5 bg-sun" />
                 {group.title[lang]}
               </p>
-              <ul>
+              <ul className="md:grid md:grid-cols-2 md:gap-x-8 lg:block">
                 {group.slugs.map((slug) => {
                   const service = services.find((s) => s.slug === slug)!
                   const Icon = service.icon
@@ -190,23 +190,23 @@ export default function Home() {
 
       {/* Welcome letter and team */}
       <section className="mt-24 bg-tint py-24 sm:mt-32 sm:py-32">
-        <div className="mx-auto grid max-w-6xl items-start gap-14 px-4 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto grid max-w-6xl items-start gap-14 px-4 md:grid-cols-[0.8fr_1.2fr] md:gap-10 lg:gap-14">
           <img
             src="/images/praxis-10.jpg"
             alt={practice.doctor}
             loading="lazy"
-            className="aspect-[3/4] w-full rounded-[2rem] object-cover lg:sticky lg:top-28"
+            className="aspect-[3/4] w-full rounded-[2rem] object-cover md:sticky md:top-28"
           />
           <div>
             <Eyebrow>{t.welcomeEyebrow}</Eyebrow>
-            <h2 className="mt-5 text-4xl font-semibold tracking-tight text-balance text-ink sm:text-5xl">{t.welcomeHeading}</h2>
+            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.welcomeHeading}</h2>
             <div className="prose prose-lg mt-8 max-w-none prose-neutral prose-strong:text-ink">
               <WelcomeLetter lang={lang} />
             </div>
           </div>
         </div>
         <div className="mx-auto mt-16 max-w-6xl px-4">
-          <ul className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 md:grid-cols-3">
             <TeamMember name={practice.doctor} role={t.doctorRole} photo="/images/ganna-portrait.jpg" photoZoom="origin-[56%_9%] scale-[2.8]" />
             <TeamMember name="Sabine Lüdecke" role={t.assistantRole} photo="/images/sabine-luedecke.jpg" photoZoom="origin-[50%_25%] scale-[1.4]" />
             <TeamMember name="Jessica Richter" role={t.assistantRole} />
@@ -229,10 +229,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
         <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-16">
           <div className="absolute -right-24 -bottom-28 size-96 bg-white/8 sm:-right-16" style={practiceShape} />
-          <div className="relative grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+          <div className="relative grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
               <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.contactLabel}</p>
-              <h2 className="mt-6 text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.04] font-semibold tracking-tight text-balance">{t.contactHeading}</h2>
+              <h2 className="mt-6 text-[clamp(2rem,4.2vw,3rem)] leading-[1.04] font-semibold tracking-tight text-balance">{t.contactHeading}</h2>
               <p className="mt-5 max-w-lg text-primary-foreground/80">{t.contactText}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 bg-sun px-6 text-base text-ink hover:bg-sun/85")}>
@@ -243,7 +243,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
               <div className="[&_dd]:text-white/75 [&_dl]:text-base">
                 <p className="mb-3 font-semibold">{t.hours}</p>
                 <OpeningHours />
@@ -295,7 +295,7 @@ function Eyebrow({ children }: { children: ReactNode }) {
 function SectionHeading({ heading, children }: { heading: string; children?: ReactNode }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-6">
-      <h2 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance text-ink sm:text-6xl">{heading}</h2>
+      <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{heading}</h2>
       {children}
     </div>
   )

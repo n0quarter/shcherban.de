@@ -13,13 +13,13 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      {/* Phone: logo + burger. Tablet: menu on its own second row. Desktop: everything in one row. */}
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 lg:flex-nowrap">
-        <Link to={localizedPath(lang, "/")} className="flex h-16 shrink-0 items-center">
-          <img src="/logo.svg" alt={`${siteName[lang]} – ${practice.doctor}`} className="h-9 w-auto" />
+      {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu. */}
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4">
+        <Link to={localizedPath(lang, "/")} className="shrink-0">
+          <img src="/logo.svg" alt={`${siteName[lang]} – ${practice.doctor}`} className="h-8 w-auto lg:h-9" />
         </Link>
 
-        <nav className="order-last -mx-3 hidden w-full items-center gap-1 pb-2 md:flex lg:order-none lg:mx-0 lg:w-auto lg:pb-0">
+        <nav className="hidden items-center md:flex lg:gap-1">
           {navigation.map((item) => (
             <NavLink
               key={item.path}
@@ -27,8 +27,9 @@ export function SiteHeader() {
               end={item.path === "/"}
               className={({ isActive }) =>
                 cn(
-                  "rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                  isActive && "bg-muted text-foreground"
+                  "rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground lg:px-3",
+                  isActive && "bg-muted text-foreground",
+                  item.path === "/" && "hidden lg:block" // the logo links home on smaller screens
                 )
               }
             >
@@ -37,10 +38,16 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 lg:gap-2">
           <LanguageSwitch />
-          <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants(), "hidden gap-2.5 px-4 sm:inline-flex")}>
-            {bookingLabel[lang]}
+          <a
+            href={practice.bookingUrl}
+            target="_blank"
+            rel="noopener"
+            aria-label={`${bookingLabel[lang]} – Doctolib`}
+            className={cn(buttonVariants(), "hidden gap-2.5 px-4 sm:inline-flex")}
+          >
+            <span className="md:max-lg:hidden">{bookingLabel[lang]}</span>
             <DoctolibLogo />
           </a>
           <MobileMenu />

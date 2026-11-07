@@ -22,7 +22,7 @@ export function PhotoGallery({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:grid-rows-2">
         {photos.map((photo, index) => (
           <button
             key={photo.src}
@@ -31,7 +31,7 @@ export function PhotoGallery({ photos }: { photos: Photo[] }) {
             aria-label={`${t.open}: ${photo.caption}`}
             className={cn(
               "group relative cursor-zoom-in overflow-hidden rounded-2xl text-left outline-none focus-visible:ring-3 focus-visible:ring-ring",
-              index === 0 && "col-span-2 lg:row-span-2"
+              index === 0 && "col-span-2 md:row-span-2"
             )}
           >
             <img
