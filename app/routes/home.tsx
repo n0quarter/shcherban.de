@@ -115,6 +115,7 @@ export default function Home() {
             </h1>
             <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-ink">
               <HeroIntro lang={lang} />
+              <WelcomeLetter lang={lang} />
             </div>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-base" })}>

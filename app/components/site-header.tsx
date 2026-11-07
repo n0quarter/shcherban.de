@@ -1,5 +1,5 @@
 import { MenuIcon } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, NavLink, useLocation } from "react-router"
 
 import { Button, buttonVariants } from "~/components/ui/button"
@@ -8,15 +8,39 @@ import { localizedPath, switchLanguagePath, useLang } from "~/lib/i18n"
 import { bookingLabel, navigation, practice, siteName } from "~/lib/practice"
 import { cn } from "~/lib/utils"
 
+/** True once the page is scrolled down a little; the header then shrinks. */
+function useScrolled(offset = 24) {
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > offset)
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    return () => window.removeEventListener("scroll", update)
+  }, [offset])
+  return scrolled
+}
+
 export function SiteHeader() {
   const lang = useLang()
+  const scrolled = useScrolled()
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu. */}
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4">
+    <header className={cn("sticky top-0 z-40 border-b bg-background/90 backdrop-blur transition-shadow", scrolled && "shadow-sm")}>
+      {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu.
+          At the top of the page the header is taller with a larger logo (where there is room); it shrinks on scroll.
+          Tablet and small desktop keep the logo size, because the one-row menu exactly fills the width there. */}
+      <div
+        className={cn(
+          "mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 transition-[height] duration-300",
+          scrolled ? "h-16" : "h-20 xl:h-24"
+        )}
+      >
         <Link to={localizedPath(lang, "/")} className="shrink-0">
-          <img src="/logo.svg" alt={`${siteName[lang]} – ${practice.doctor}`} className="h-8 w-auto lg:h-9" />
+          <img
+            src="/logo.svg"
+            alt={`${siteName[lang]} – ${practice.doctor}`}
+            className={cn("w-auto transition-[height] duration-300", scrolled ? "h-8 lg:h-9 xl:h-10" : "h-11 md:h-8 lg:h-9 xl:h-14")}
+          />
         </Link>
 
         <nav className="hidden items-center md:flex lg:gap-1">
