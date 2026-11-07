@@ -1,13 +1,9 @@
-import { CalendarCheckIcon } from "lucide-react"
-import { DoctolibLogo } from "~/components/doctolib-logo"
 import { PageHeader } from "~/components/page-header"
 import { TeamMember } from "~/components/team-member"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion"
-import { buttonVariants } from "~/components/ui/button"
 import { useLang, type Lang } from "~/lib/i18n"
-import { bookingLabel, practice } from "~/lib/practice"
+import { practice } from "~/lib/practice"
 import { pageMeta } from "~/lib/seo"
-import { cn } from "~/lib/utils"
 import type { Route } from "./+types/praxisteam"
 
 const title = { de: "Praxisteam", en: "Our team" }
@@ -29,9 +25,6 @@ const text = {
       "Sabine ist eine erfahrene MFA, die umfangreiche Kenntnisse im gynäkologischen Bereich mitbringt. Mit ihrer ruhigen und empathischen Art kümmert sie sich aufmerksam um die Anliegen unserer Patientinnen und sorgt für eine vertrauensvolle Atmosphäre. Sabine unterstützt unser Team tatkräftig und steht unseren Patientinnen bei Fragen und Bedürfnissen jederzeit zur Seite.",
     jessica:
       "Jessica ist die jüngste Ergänzung unserer Praxis und bringt frischen Wind sowie moderne Ansätze zur Digitalisierung mit. Ihre freundliche und aufgeschlossene Persönlichkeit macht sie zur idealen ersten Anlaufstelle für unsere Patienten. Jessica unterstützt mich in administrativen Aufgaben und bei der Patientenversorgung.",
-    contactLabel: "Termin",
-    contactHeading: "Vereinbaren Sie Ihren Termin",
-    contactText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
   },
   en: {
     doctorRole: "Specialist in gynaecology and obstetrics",
@@ -43,9 +36,6 @@ const text = {
       "Sabine is an experienced medical assistant with extensive knowledge of gynaecology. With her calm and empathetic manner, she attentively takes care of our patients' concerns and creates an atmosphere of trust. Sabine gives our team active support and is always there for our patients with their questions and needs.",
     jessica:
       "Jessica is the newest addition to our practice and brings a breath of fresh air as well as modern approaches to digitalisation. Her friendly and open personality makes her the ideal first point of contact for our patients. Jessica supports me with administrative tasks and patient care.",
-    contactLabel: "Appointments",
-    contactHeading: "Book your appointment",
-    contactText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
   },
 }
 
@@ -103,27 +93,6 @@ export default function Praxisteam() {
           >
             {t.sabine}
           </TeamMember>
-        </div>
-      </section>
-
-      {/* Booking */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
-        <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-16">
-          <span aria-hidden className="absolute -right-16 -bottom-40 size-80 rotate-45 rounded-[28%] bg-white/8" />
-          <div className="relative max-w-2xl">
-            <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.contactLabel}</p>
-            <h2 className="mt-6 text-[clamp(2rem,4.2vw,3rem)] leading-[1.04] font-semibold tracking-tight text-balance">{t.contactHeading}</h2>
-            <p className="mt-5 max-w-lg text-primary-foreground/80">{t.contactText}</p>
-            <a
-              href={practice.bookingUrl}
-              target="_blank"
-              rel="noopener"
-              className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}
-            >
-              <CalendarCheckIcon /> {bookingLabel[lang]}
-              <DoctolibLogo color="ink" className="h-[15px]" />
-            </a>
-          </div>
         </div>
       </section>
     </>

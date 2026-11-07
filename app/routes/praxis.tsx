@@ -1,14 +1,9 @@
-import { CalendarCheckIcon } from "lucide-react"
 import { useState } from "react"
 
-import { DoctolibLogo } from "~/components/doctolib-logo"
 import { PageHeader } from "~/components/page-header"
 import { PhotoLightbox } from "~/components/photo-gallery"
-import { buttonVariants } from "~/components/ui/button"
 import { useLang } from "~/lib/i18n"
-import { bookingLabel, practice } from "~/lib/practice"
 import { pageMeta } from "~/lib/seo"
-import { cn } from "~/lib/utils"
 import type { Route } from "./+types/praxis"
 
 const title = { de: "Praxis", en: "Practice" }
@@ -32,8 +27,6 @@ const text = {
       { src: "/images/praxis-28.jpg", caption: "CTG-Zimmer: Entspannen Sie sich, während das Wohlbefinden Ihres Kindes überprüft wird." },
       { src: "/images/praxis-30.jpg", caption: "Laborecke: Erfahrene MFA sorgen für schnelle und schmerzlose Blutentnahme." },
     ],
-    bookingHeading: "Vereinbaren Sie Ihren Termin",
-    bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
   },
   en: {
     enlarge: "Enlarge photo",
@@ -47,8 +40,6 @@ const text = {
       { src: "/images/praxis-28.jpg", caption: "CTG room: relax while your baby's well-being is checked." },
       { src: "/images/praxis-30.jpg", caption: "Lab corner: experienced medical assistants make sure taking blood is quick and painless." },
     ],
-    bookingHeading: "Book your appointment",
-    bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
   },
 }
 
@@ -86,26 +77,6 @@ export default function Praxis() {
           ))}
         </ul>
         <PhotoLightbox photos={t.photos} openIndex={openIndex} onOpenIndexChange={setOpenIndex} />
-      </section>
-
-      {/* Booking */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
-        <div className="relative overflow-hidden rounded-3xl bg-tint px-6 py-12 sm:px-12 sm:py-16">
-          <span aria-hidden className="absolute -right-20 -bottom-24 size-80 rotate-45 rounded-[28%] bg-primary/8" />
-          <div className="relative max-w-xl">
-            <h2 className="text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.bookingHeading}</h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{t.bookingText}</p>
-            <a
-              href={practice.bookingUrl}
-              target="_blank"
-              rel="noopener"
-              className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 gap-2.5 px-6 text-base")}
-            >
-              <CalendarCheckIcon /> {bookingLabel[lang]}
-              <DoctolibLogo className="h-[15px]" />
-            </a>
-          </div>
-        </div>
       </section>
     </>
   )
