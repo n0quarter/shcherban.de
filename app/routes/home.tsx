@@ -207,7 +207,7 @@ export default function Home() {
         </div>
         <div className="mx-auto mt-16 max-w-6xl px-4">
           <ul className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 md:grid-cols-3">
-            <TeamMember name={practice.doctor} role={t.doctorRole} photo="/images/ganna-portrait.jpg" photoZoom="origin-[56%_9%] scale-[2.8]" />
+            <TeamMember name={practice.doctor} role={t.doctorRole} photo="/images/ganna-avatar.jpg" />
             <TeamMember name="Sabine Lüdecke" role={t.assistantRole} photo="/images/sabine-luedecke.jpg" photoZoom="origin-[50%_25%] scale-[1.4]" />
             <TeamMember name="Jessica Richter" role={t.assistantRole} />
           </ul>
