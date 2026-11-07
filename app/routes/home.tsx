@@ -48,7 +48,6 @@ const text = {
     notListed: "Ihr Anliegen ist nicht dabei?",
     notListedText: "Schreiben Sie uns – wir sagen Ihnen gern, ob und wie wir Ihnen helfen können.",
     contactPage: "Kontakt aufnehmen",
-    welcomeEyebrow: "Willkommen",
     welcomeHeading: "Willkommen in unserer Frauenarztpraxis",
     team: "Das Praxisteam kennenlernen",
     practiceHeading: "Ein Ort zum Wohlfühlen",
@@ -75,7 +74,6 @@ const text = {
     notListed: "Don't see your concern?",
     notListedText: "Write to us – we will gladly tell you whether and how we can help.",
     contactPage: "Get in touch",
-    welcomeEyebrow: "Welcome",
     welcomeHeading: "Welcome to our gynaecological practice",
     team: "Meet the team",
     practiceHeading: "A place to feel at ease",
@@ -197,8 +195,7 @@ export default function Home() {
             className="aspect-[3/4] w-full rounded-[2rem] object-cover md:sticky md:top-28"
           />
           <div>
-            <Eyebrow>{t.welcomeEyebrow}</Eyebrow>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.welcomeHeading}</h2>
+            <h2 className="text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.welcomeHeading}</h2>
             <div className="prose prose-lg mt-8 max-w-none prose-neutral prose-strong:text-ink">
               <WelcomeLetter lang={lang} />
             </div>
@@ -277,15 +274,6 @@ function PracticeShapeDefs() {
 
 function Diamond({ className }: { className?: string }) {
   return <span aria-hidden className={cn("block rotate-45 rounded-[28%]", className)} />
-}
-
-function Eyebrow({ children }: { children: ReactNode }) {
-  return (
-    <p className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-sm text-muted-foreground">
-      <Diamond className="size-2 bg-primary" />
-      {children}
-    </p>
-  )
 }
 
 function SectionHeading({ heading, children }: { heading: string; children?: ReactNode }) {
