@@ -40,7 +40,6 @@ const serviceGroups = [
 
 const text = {
   de: {
-    lead: "Von Vorsorge und Verhütung über Schwangerschaftsbetreuung bis zur Menopause-Beratung – persönlich, mit modernster Medizintechnik und auf Basis aktueller Forschung.",
     heading: ["Frauenarztpraxis ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     assistantRole: "Medizinische Fachangestellte",
@@ -68,7 +67,6 @@ const text = {
     directions: "Route planen",
   },
   en: {
-    lead: "From screening and contraception to pregnancy care and menopause advice – personal, with state-of-the-art medical technology and based on current research.",
     heading: ["Gynaecological practice ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
     doctorRole: "Specialist in gynaecology and obstetrics",
     assistantRole: "Medical assistant",
@@ -115,7 +113,9 @@ export default function Home() {
               <span className="text-primary">{t.heading[1]}</span>
               {t.heading[2]}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t.lead}</p>
+            <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-ink">
+              <HeroIntro lang={lang} />
+            </div>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-base" })}>
                 <CalendarCheckIcon /> {bookingLabel[lang]}
@@ -327,7 +327,8 @@ function TeamMember({ name, role, photo, photoZoom }: { name: string; role: stri
   )
 }
 
-function WelcomeLetter({ lang }: { lang: Lang }) {
+/** Opening of the welcome letter, shown in the hero under the headline. */
+function HeroIntro({ lang }: { lang: Lang }) {
   if (lang === "en") {
     return (
       <>
@@ -339,6 +340,28 @@ function WelcomeLetter({ lang }: { lang: Lang }) {
           From check-ups and counselling to contraception, pregnancy care and menopause advice – your health and
           well-being are our top priority.
         </p>
+      </>
+    )
+  }
+  return (
+    <>
+      <p>
+        Als Fachärztin für Frauenheilkunde und Geburtshilfe, <strong>Ganna Shcherban</strong>, heiße ich Sie herzlich
+        willkommen in unserer Praxis.
+      </p>
+      <p>
+        Von Vorsorgeuntersuchungen und Beratung, über Verhütung und Schwangerschaftsbetreuung, bis hin zur
+        Menopause-Beratung – Ihre Gesundheit und Ihr Wohlbefinden stehen bei uns an erster Stelle.
+      </p>
+    </>
+  )
+}
+
+/** Rest of the welcome letter (its opening is in the hero). */
+function WelcomeLetter({ lang }: { lang: Lang }) {
+  if (lang === "en") {
+    return (
+      <>
         <p>
           I am pleased to say that our practice is equipped with state-of-the-art medical technology and that our
           diagnostic and treatment approaches are based on the latest evidence-based research.
@@ -354,14 +377,6 @@ function WelcomeLetter({ lang }: { lang: Lang }) {
   }
   return (
     <>
-      <p>
-        Als Fachärztin für Frauenheilkunde und Geburtshilfe, <strong>Ganna Shcherban</strong>, heiße ich Sie herzlich
-        willkommen in unserer Praxis.
-      </p>
-      <p>
-        Von Vorsorgeuntersuchungen und Beratung, über Verhütung und Schwangerschaftsbetreuung, bis hin zur
-        Menopause-Beratung – Ihre Gesundheit und Ihr Wohlbefinden stehen bei uns an erster Stelle.
-      </p>
       <p>
         Ich freue mich, Ihnen mitteilen zu können, dass unsere Praxis mit modernster Medizintechnik ausgestattet ist und
         dass unsere Diagnose- und Behandlungsansätze auf der aktuellsten, evidenzbasierten Forschung basieren.
