@@ -5,11 +5,11 @@ import { Link, useSearchParams } from "react-router"
 import { DoctolibLogo } from "~/components/doctolib-logo"
 import { HoursVariant, hoursVariantNames, wideHoursVariants } from "~/components/hours-variants"
 import { PhotoGallery } from "~/components/photo-gallery"
+import { ServiceGroups } from "~/components/service-groups"
 import { buttonVariants } from "~/components/ui/button"
 import { localizedPath, useLang, type Lang } from "~/lib/i18n"
 import { bookingLabel, practice } from "~/lib/practice"
 import { pageMeta } from "~/lib/seo"
-import { services } from "~/lib/services"
 import { cn } from "~/lib/utils"
 import type { Route } from "./+types/home"
 
@@ -24,30 +24,12 @@ const description = {
 
 export const meta = ({ location }: Route.MetaArgs) => pageMeta(location.pathname, title, description)
 
-const serviceGroups = [
-  {
-    title: { de: "Vorsorge", en: "Prevention" },
-    slugs: ["krebsvorsorge", "praeventionsmedizin", "impfungen", "igel-leistungen"],
-  },
-  {
-    title: { de: "Lebensphasen", en: "Phases of life" },
-    slugs: ["maedchen-sprechstunde", "verhuetung", "kinderwunsch", "schwangerenbetreuung"],
-  },
-  {
-    title: { de: "Beratung bei Beschwerden", en: "Help with complaints" },
-    slugs: ["hormonsprechstunde", "inkontinenz-senkungbeschwerden"],
-  },
-]
-
 const text = {
   de: {
     heading: ["Frauenarztpraxis ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     servicesHeading: "Wobei wir Sie begleiten",
     allServices: "Alle Leistungen",
-    notListed: "Ihr Anliegen ist nicht dabei?",
-    notListedText: "Schreiben Sie uns – wir sagen Ihnen gern, ob und wie wir Ihnen helfen können.",
-    contactPage: "Kontakt aufnehmen",
     welcomeHeading: "Willkommen in unserer Frauenarztpraxis",
     practiceHeading: "Ein Ort zum Wohlfühlen",
     practiceTour: "Rundgang durch die Praxis",
@@ -69,9 +51,6 @@ const text = {
     doctorRole: "Specialist in gynaecology and obstetrics",
     servicesHeading: "How we can help",
     allServices: "All services",
-    notListed: "Don't see your concern?",
-    notListedText: "Write to us – we will gladly tell you whether and how we can help.",
-    contactPage: "Get in touch",
     welcomeHeading: "Welcome to our gynaecological practice",
     practiceHeading: "A place to feel at ease",
     practiceTour: "Tour the practice",
@@ -145,44 +124,7 @@ export default function Home() {
         <SectionHeading heading={t.servicesHeading}>
           <MoreLink to={localizedPath(lang, "/leistungen/")}>{t.allServices}</MoreLink>
         </SectionHeading>
-        <div className="mt-12 grid gap-x-8 gap-y-12 lg:grid-cols-3">
-          {serviceGroups.map((group) => (
-            <div key={group.title.de}>
-              <p className="flex items-center gap-2.5 border-b-2 border-ink pb-3 text-sm font-semibold tracking-wide text-ink uppercase">
-                <Diamond className="size-2.5 bg-sun" />
-                {group.title[lang]}
-              </p>
-              <ul className="md:grid md:grid-cols-2 md:gap-x-8 lg:block">
-                {group.slugs.map((slug) => {
-                  const service = services.find((s) => s.slug === slug)!
-                  const Icon = service.icon
-                  return (
-                    <li key={slug} className="border-b">
-                      <Link to={localizedPath(lang, `/leistungen/${slug}/`)} className="group flex items-start gap-4 py-5">
-                        <span className="relative mt-0.5 flex size-11 shrink-0 items-center justify-center">
-                          <Diamond className="absolute inset-1 bg-tint transition-colors group-hover:bg-primary" />
-                          <Icon className="relative size-5 text-primary transition-colors group-hover:text-primary-foreground" />
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-xl font-semibold tracking-tight text-ink">{service.title[lang]}</span>
-                          <span className="mt-1 block text-sm text-muted-foreground">{service.teaser[lang]}</span>
-                        </span>
-                        <ArrowUpRightIcon className="mt-1 size-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-              {group.slugs.length < 3 && (
-                <div className="mt-8 rounded-2xl bg-tint p-6">
-                  <p className="text-xl font-semibold tracking-tight text-ink">{t.notListed}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{t.notListedText}</p>
-                  <MoreLink to={localizedPath(lang, "/kontakt/")} className="mt-4">{t.contactPage}</MoreLink>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <ServiceGroups className="mt-12" />
       </section>
 
       {/* Welcome letter and team */}
@@ -281,10 +223,6 @@ function PracticeShapeDefs() {
       </clipPath>
     </svg>
   )
-}
-
-function Diamond({ className }: { className?: string }) {
-  return <span aria-hidden className={cn("block rotate-45 rounded-[28%]", className)} />
 }
 
 function SectionHeading({ heading, children }: { heading: string; children?: ReactNode }) {

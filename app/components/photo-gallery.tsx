@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from "~/components/ui/dialog"
 import { useLang } from "~/lib/i18n"
 import { cn } from "~/lib/utils"
 
-type Photo = { src: string; caption: string }
+export type Photo = { src: string; caption: string }
 
 const text = {
   de: { open: "Foto vergrößern", previous: "Vorheriges Foto", next: "Nächstes Foto" },
@@ -17,8 +17,6 @@ const text = {
 export function PhotoGallery({ photos }: { photos: Photo[] }) {
   const t = text[useLang()]
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const current = openIndex === null ? null : photos[openIndex]
-  const step = (delta: number) => setOpenIndex((index) => (index === null ? null : (index + delta + photos.length) % photos.length))
 
   return (
     <>
@@ -47,33 +45,52 @@ export function PhotoGallery({ photos }: { photos: Photo[] }) {
         ))}
       </div>
 
-      <Dialog open={current !== null} onOpenChange={(open) => !open && setOpenIndex(null)}>
-        <DialogContent
-          className="gap-3 bg-background p-3 sm:max-w-5xl"
-          onKeyDown={(event) => {
-            if (event.key === "ArrowLeft") step(-1)
-            if (event.key === "ArrowRight") step(1)
-          }}
-        >
-          {current && openIndex !== null && (
-            <>
-              {/* The wrapper is as wide as the photo, so the arrows sit on the photo's edges. */}
-              <div className="relative mx-auto w-fit">
-                <img src={current.src} alt={current.caption} className="max-h-[75vh] w-auto max-w-full rounded-3xl" />
-                <ArrowButton side="left" label={t.previous} onClick={() => step(-1)} />
-                <ArrowButton side="right" label={t.next} onClick={() => step(1)} />
-              </div>
-              <div className="flex items-baseline justify-between gap-3 px-2 pb-1">
-                <DialogTitle className="text-base font-medium">{current.caption}</DialogTitle>
-                <span className="text-sm text-muted-foreground tabular-nums">
-                  {openIndex + 1} / {photos.length}
-                </span>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+      <PhotoLightbox photos={photos} openIndex={openIndex} onOpenIndexChange={setOpenIndex} />
     </>
+  )
+}
+
+/** Enlarged photo in a dialog, with previous/next arrows (also arrow keys). `openIndex === null` means closed. */
+export function PhotoLightbox({
+  photos,
+  openIndex,
+  onOpenIndexChange,
+}: {
+  photos: Photo[]
+  openIndex: number | null
+  onOpenIndexChange: (index: number | null) => void
+}) {
+  const t = text[useLang()]
+  const current = openIndex === null ? null : photos[openIndex]
+  const step = (delta: number) => openIndex !== null && onOpenIndexChange((openIndex + delta + photos.length) % photos.length)
+
+  return (
+    <Dialog open={current !== null} onOpenChange={(open) => !open && onOpenIndexChange(null)}>
+      <DialogContent
+        className="gap-3 bg-background p-3 sm:max-w-5xl"
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft") step(-1)
+          if (event.key === "ArrowRight") step(1)
+        }}
+      >
+        {current && openIndex !== null && (
+          <>
+            {/* The wrapper is as wide as the photo, so the arrows sit on the photo's edges. */}
+            <div className="relative mx-auto w-fit">
+              <img src={current.src} alt={current.caption} className="max-h-[75vh] w-auto max-w-full rounded-3xl" />
+              <ArrowButton side="left" label={t.previous} onClick={() => step(-1)} />
+              <ArrowButton side="right" label={t.next} onClick={() => step(1)} />
+            </div>
+            <div className="flex items-baseline justify-between gap-3 px-2 pb-1">
+              <DialogTitle className="text-base font-medium">{current.caption}</DialogTitle>
+              <span className="text-sm text-muted-foreground tabular-nums">
+                {openIndex + 1} / {photos.length}
+              </span>
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   )
 }
 

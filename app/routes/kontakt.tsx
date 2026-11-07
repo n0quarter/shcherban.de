@@ -1,14 +1,134 @@
+import { ArrowUpRightIcon, CalendarCheckIcon, ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react"
+import type { ComponentType, ReactNode } from "react"
+
+import { DoctolibLogo } from "~/components/doctolib-logo"
+import { OpeningHours } from "~/components/opening-hours"
 import { PageHeader } from "~/components/page-header"
+import { buttonVariants } from "~/components/ui/button"
 import { useLang } from "~/lib/i18n"
+import { bookingLabel, practice } from "~/lib/practice"
 import { pageMeta } from "~/lib/seo"
+import { cn } from "~/lib/utils"
 import type { Route } from "./+types/kontakt"
 
-// PLACEHOLDER – replaced by the real page.
 const title = { de: "Kontakt", en: "Contact" }
+const description = {
+  de: "Kontakt zur Frauenarztpraxis Ganna Shcherban in Berlin-Friedrichshain: Termin online über Doctolib buchen, E-Mail, Telefon, Fax, Adresse und Sprechstunde.",
+  en: "Contact the gynaecological practice of Ganna Shcherban in Berlin-Friedrichshain: book online via Doctolib, email, phone, fax, address and consultation hours.",
+}
 
-export const meta = ({ location }: Route.MetaArgs) => pageMeta(location.pathname, title)
+export const meta = ({ location }: Route.MetaArgs) => pageMeta(location.pathname, title, description)
+
+const text = {
+  de: {
+    bookingLabel: "Online-Termin",
+    bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
+    hours: "Sprechstunde",
+    email: "E-Mail",
+    phone: "Telefon",
+    fax: "Fax",
+    address: "Adresse",
+    directions: "Route planen",
+  },
+  en: {
+    bookingLabel: "Online booking",
+    bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
+    hours: "Consultation hours",
+    email: "Email",
+    phone: "Phone",
+    fax: "Fax",
+    address: "Address",
+    directions: "Get directions",
+  },
+}
 
 export default function Kontakt() {
   const lang = useLang()
-  return <PageHeader title={title[lang]} />
+  const t = text[lang]
+
+  return (
+    <>
+      <PageHeader title={title[lang]} />
+
+      <div className="mx-auto max-w-6xl space-y-6 px-4">
+        <div className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
+          <section className="rounded-3xl bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-12">
+            <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.bookingLabel}</p>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{bookingLabel[lang]}</h2>
+            <p className="mt-4 max-w-md text-primary-foreground/80">{t.bookingText}</p>
+            <a
+              href={practice.bookingUrl}
+              target="_blank"
+              rel="noopener"
+              className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}
+            >
+              <CalendarCheckIcon /> {bookingLabel[lang]}
+              <DoctolibLogo color="ink" className="h-[15px]" />
+            </a>
+          </section>
+
+          <section className="rounded-3xl bg-tint px-6 py-10 sm:px-10 sm:py-12">
+            <h2 className="flex items-center gap-3 text-2xl font-semibold tracking-tight text-ink">
+              <ClockIcon className="size-6 text-primary" /> {t.hours}
+            </h2>
+            <div className="mt-6 text-ink [&_dd]:text-ink [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2.5 [&_dl]:text-base [&_dt]:font-semibold">
+              <OpeningHours />
+            </div>
+          </section>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ContactCard icon={MailIcon} label={t.email}>
+            <a href={`mailto:${practice.email}`} className="hover:text-primary">
+              {practice.email}
+            </a>
+          </ContactCard>
+
+          <ContactCard icon={PhoneIcon} label={t.phone}>
+            <a href={practice.phoneHref} className="hover:text-primary">
+              {practice.phone}
+            </a>
+            <p className="mt-2 text-base font-normal text-muted-foreground">
+              {t.fax}: {practice.fax}
+            </p>
+          </ContactCard>
+
+          <ContactCard icon={MapPinIcon} label={t.address} className="sm:col-span-2 lg:col-span-1">
+            <p>{practice.street}</p>
+            <p>{practice.city}</p>
+            <a
+              href={practice.directionsUrl}
+              target="_blank"
+              rel="noopener"
+              className="mt-2 inline-flex items-center gap-1.5 text-base text-primary hover:underline"
+            >
+              {t.directions} <ArrowUpRightIcon className="size-4" />
+            </a>
+          </ContactCard>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function ContactCard({
+  icon: Icon,
+  label,
+  className,
+  children,
+}: {
+  icon: ComponentType<{ className?: string }>
+  label: string
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <section className={cn("rounded-3xl border p-6 sm:p-8", className)}>
+      <span className="flex size-11 items-center justify-center rounded-full bg-tint">
+        <Icon className="size-5 text-primary" />
+      </span>
+      <h2 className="mt-5 text-sm font-semibold tracking-wide text-muted-foreground uppercase">{label}</h2>
+      <div className="mt-2 text-xl font-semibold tracking-tight text-ink">{children}</div>
+    </section>
+  )
 }
