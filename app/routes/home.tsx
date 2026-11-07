@@ -40,7 +40,6 @@ const serviceGroups = [
 
 const text = {
   de: {
-    eyebrow: "Frauenarztpraxis in Berlin-Friedrichshain",
     lead: "Von Vorsorge und Verhütung über Schwangerschaftsbetreuung bis zur Menopause-Beratung – persönlich, mit modernster Medizintechnik und auf Basis aktueller Forschung.",
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     assistantRole: "Medizinische Fachangestellte",
@@ -68,7 +67,6 @@ const text = {
     directions: "Route planen",
   },
   en: {
-    eyebrow: "Gynaecological practice in Berlin-Friedrichshain",
     lead: "From screening and contraception to pregnancy care and menopause advice – personal, with state-of-the-art medical technology and based on current research.",
     doctorRole: "Specialist in gynaecology and obstetrics",
     assistantRole: "Medical assistant",
@@ -154,8 +152,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
           <div className="min-w-0">
             <HeadlinePicker current={headlineIndex} onPick={(index) => setSearchParams(index ? { title: String(index) } : {}, { replace: true, preventScrollReset: true })} />
-            <Eyebrow>{t.eyebrow}</Eyebrow>
-            <h1 className="mt-6 font-heading text-[clamp(2.3rem,5.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
+            <h1 className="font-heading text-[clamp(2.3rem,5.4vw,3.75rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
               {headline[0]}
               <span className="text-primary">{headline[1]}</span>
               {headline[2]}
