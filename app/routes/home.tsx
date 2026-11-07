@@ -30,7 +30,6 @@ const text = {
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     servicesHeading: "Wobei wir Sie begleiten",
     allServices: "Alle Leistungen",
-    welcomeHeading: "Willkommen in unserer Frauenarztpraxis",
     practiceHeading: "Ein Ort zum Wohlfühlen",
     practiceTour: "Rundgang durch die Praxis",
     photos: [
@@ -51,7 +50,6 @@ const text = {
     doctorRole: "Specialist in gynaecology and obstetrics",
     servicesHeading: "How we can help",
     allServices: "All services",
-    welcomeHeading: "Welcome to our gynaecological practice",
     practiceHeading: "A place to feel at ease",
     practiceTour: "Tour the practice",
     photos: [
@@ -125,24 +123,6 @@ export default function Home() {
           <MoreLink to={localizedPath(lang, "/leistungen/")}>{t.allServices}</MoreLink>
         </SectionHeading>
         <ServiceGroups className="mt-12" />
-      </section>
-
-      {/* Welcome letter and team */}
-      <section className="mt-24 bg-tint py-24 sm:mt-32 sm:py-32">
-        <div className="mx-auto grid max-w-6xl items-start gap-14 px-4 md:grid-cols-[0.8fr_1.2fr] md:gap-10 lg:gap-14">
-          <img
-            src="/images/praxis-10.jpg"
-            alt={practice.doctor}
-            loading="lazy"
-            className="aspect-[3/4] w-full rounded-[2rem] object-cover md:sticky md:top-28"
-          />
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.welcomeHeading}</h2>
-            <div className="prose prose-lg mt-8 max-w-none prose-neutral prose-strong:text-ink">
-              <WelcomeLetter lang={lang} />
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Practice photos */}
