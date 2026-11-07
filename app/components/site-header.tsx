@@ -2,6 +2,7 @@ import { MenuIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link, NavLink, useLocation } from "react-router"
 
+import { DoctolibLogo } from "~/components/doctolib-logo"
 import { Button, buttonVariants } from "~/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "~/components/ui/sheet"
 import { localizedPath, switchLanguagePath, useLang } from "~/lib/i18n"
@@ -127,9 +128,4 @@ function MobileMenu() {
       </SheetContent>
     </Sheet>
   )
-}
-
-/** Doctolib's official white wordmark, for the booking buttons (self-hosted copy of their button asset). */
-function DoctolibLogo({ className }: { className?: string }) {
-  return <img src="/doctolib-white.png" alt="Doctolib" className={cn("h-[13px] w-auto", className)} />
 }

@@ -2,6 +2,7 @@ import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon } from "lucide-reac
 import type { CSSProperties, ReactNode } from "react"
 import { Link } from "react-router"
 
+import { DoctolibLogo } from "~/components/doctolib-logo"
 import { OpeningHours } from "~/components/opening-hours"
 import { PhotoGallery } from "~/components/photo-gallery"
 import { buttonVariants } from "~/components/ui/button"
@@ -219,8 +220,9 @@ export default function Home() {
               <h2 className="mt-6 text-[clamp(2rem,4.2vw,3rem)] leading-[1.04] font-semibold tracking-tight text-balance">{t.contactHeading}</h2>
               <p className="mt-5 max-w-lg text-primary-foreground/80">{t.contactText}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 bg-sun px-6 text-base text-ink hover:bg-sun/85")}>
+                <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}>
                   <CalendarCheckIcon /> {bookingLabel[lang]}
+                  <DoctolibLogo color="ink" className="h-[15px]" />
                 </a>
               </div>
             </div>
