@@ -92,6 +92,9 @@ export default function Praxisteam() {
       <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
         <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.assistantsHeading}</h2>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <TeamMember name="Jessica Richter" role={t.assistantRole}>
+            {t.jessica}
+          </TeamMember>
           <TeamMember
             name="Sabine Lüdecke"
             role={t.assistantRole}
@@ -99,9 +102,6 @@ export default function Praxisteam() {
             photoClassName="origin-[50%_40%] scale-[1.25]"
           >
             {t.sabine}
-          </TeamMember>
-          <TeamMember name="Jessica Richter" role={t.assistantRole}>
-            {t.jessica}
           </TeamMember>
         </div>
       </section>
