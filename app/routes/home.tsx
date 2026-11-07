@@ -1,9 +1,9 @@
 import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
 import type { CSSProperties, ReactNode } from "react"
-import { Link } from "react-router"
+import { Link, useSearchParams } from "react-router"
 
 import { DoctolibLogo } from "~/components/doctolib-logo"
-import { OpeningHours } from "~/components/opening-hours"
+import { HoursVariant, hoursVariantNames, wideHoursVariants } from "~/components/hours-variants"
 import { PhotoGallery } from "~/components/photo-gallery"
 import { buttonVariants } from "~/components/ui/button"
 import { localizedPath, useLang, type Lang } from "~/lib/i18n"
@@ -93,6 +93,9 @@ const text = {
 export default function Home() {
   const lang = useLang()
   const t = text[lang]
+  const [searchParams, setSearchParams] = useSearchParams()
+  const hoursVariant = Math.min(Number(searchParams.get("hours")) || 0, hoursVariantNames.length - 1) // TEMPORARY
+  const hoursWide = wideHoursVariants.has(hoursVariant)
 
   return (
     <>
@@ -212,6 +215,22 @@ export default function Home() {
 
       {/* Booking, with consultation hours */}
       <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
+        {import.meta.env.DEV && (
+          <div className="mb-4 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
+            Sprechstunde:
+            {hoursVariantNames.map((name, index) => (
+              <button
+                key={name}
+                type="button"
+                title={name}
+                onClick={() => setSearchParams(index ? { hours: String(index) } : {}, { replace: true, preventScrollReset: true })}
+                className={cn("rounded-full border bg-background px-2.5 py-1 font-medium", index === hoursVariant && "border-primary bg-primary text-primary-foreground")}
+              >
+                {index} · {name}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-16">
           <div className="absolute -right-24 -bottom-28 size-96 bg-white/8 sm:-right-16" style={practiceShape} />
           <div className="relative grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-center">
@@ -226,11 +245,8 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
-              <div className="[&_dd]:text-white/75 [&_dl]:text-base">
-                <p className="mb-3 font-semibold">{t.hours}</p>
-                <OpeningHours />
-              </div>
+            <div className={cn("grid gap-8", !hoursWide && "sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2")}>
+              {!hoursWide && <HoursVariant variant={hoursVariant} title={t.hours} />}
               <a href={practice.directionsUrl} target="_blank" rel="noopener" className="group block">
                 <p className="mb-3 font-semibold">{practice.street}</p>
                 <p className="text-white/75">{practice.city}</p>
@@ -240,6 +256,11 @@ export default function Home() {
               </a>
             </div>
           </div>
+          {hoursWide && (
+            <div className="relative mt-12 border-t border-white/20 pt-10">
+              <HoursVariant variant={hoursVariant} title={t.hours} />
+            </div>
+          )}
         </div>
       </section>
     </>
