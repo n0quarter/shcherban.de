@@ -20,3 +20,4 @@ Static website of a gynaecological practice in Berlin. Mostly edited by Claude C
 - Internal links always end with a slash (`/praxis/`) and go through `localizedPath(lang, ...)`.
 - Domain: `SITE_URL` in `app/lib/practice.ts` and `public/CNAME` must match.
 - Use `buttonVariants()` on `<a>`/`<Link>` for link-buttons instead of `<Button render>`.
+- Don't promote the phone number: it appears only in the footer and on the Kontakt page. Calls to action point to Doctolib booking or the Kontakt page.

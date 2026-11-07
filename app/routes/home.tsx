@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon, PhoneIcon } from "lucide-react"
+import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
 import type { CSSProperties, ReactNode } from "react"
 import { Link } from "react-router"
 
@@ -48,7 +48,8 @@ const text = {
     servicesHeading: "Wobei wir Sie begleiten",
     allServices: "Alle Leistungen",
     notListed: "Ihr Anliegen ist nicht dabei?",
-    notListedText: "Rufen Sie uns an – wir sagen Ihnen gern, ob und wie wir Ihnen helfen können.",
+    notListedText: "Schreiben Sie uns – wir sagen Ihnen gern, ob und wie wir Ihnen helfen können.",
+    contactPage: "Kontakt aufnehmen",
     welcomeEyebrow: "Willkommen",
     welcomeHeading: "Willkommen in unserer Frauenarztpraxis",
     team: "Das Praxisteam kennenlernen",
@@ -63,7 +64,7 @@ const text = {
     ],
     contactLabel: "Termin",
     contactHeading: "Vereinbaren Sie Ihren Termin",
-    contactText: "Buchen Sie online über Doctolib oder rufen Sie uns während der Sprechzeiten an. Wir freuen uns auf Sie.",
+    contactText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
     hours: "Sprechstunde",
     directions: "Route planen",
   },
@@ -76,7 +77,8 @@ const text = {
     servicesHeading: "How we can help",
     allServices: "All services",
     notListed: "Don't see your concern?",
-    notListedText: "Give us a call – we will gladly tell you whether and how we can help.",
+    notListedText: "Write to us – we will gladly tell you whether and how we can help.",
+    contactPage: "Get in touch",
     welcomeEyebrow: "Welcome",
     welcomeHeading: "Welcome to our gynaecological practice",
     team: "Meet the team",
@@ -91,7 +93,7 @@ const text = {
     ],
     contactLabel: "Appointments",
     contactHeading: "Book your appointment",
-    contactText: "Book online via Doctolib or call us during consultation hours. We look forward to seeing you.",
+    contactText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
     hours: "Consultation hours",
     directions: "Get directions",
   },
@@ -120,9 +122,9 @@ export default function Home() {
               <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-base" })}>
                 <CalendarCheckIcon /> {bookingLabel[lang]}
               </a>
-              <a href={practice.phoneHref} className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 bg-background px-6 text-base" })}>
-                <PhoneIcon /> {practice.phone}
-              </a>
+              <Link to={localizedPath(lang, "/leistungen/")} className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 bg-background px-6 text-base" })}>
+                {t.allServices}
+              </Link>
             </div>
           </div>
 
@@ -178,9 +180,7 @@ export default function Home() {
                 <div className="mt-8 rounded-2xl bg-tint p-6">
                   <p className="text-xl font-semibold tracking-tight text-ink">{t.notListed}</p>
                   <p className="mt-2 text-sm text-muted-foreground">{t.notListedText}</p>
-                  <a href={practice.phoneHref} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary hover:underline">
-                    <PhoneIcon className="size-4" /> {practice.phone}
-                  </a>
+                  <MoreLink to={localizedPath(lang, "/kontakt/")} className="mt-4">{t.contactPage}</MoreLink>
                 </div>
               )}
             </div>
@@ -237,9 +237,6 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 bg-sun px-6 text-base text-ink hover:bg-sun/85")}>
                   <CalendarCheckIcon /> {bookingLabel[lang]}
-                </a>
-                <a href={practice.phoneHref} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-12 border-white/40 bg-transparent px-6 text-base text-white hover:bg-white/10 hover:text-white")}>
-                  <PhoneIcon /> {practice.phone}
                 </a>
               </div>
             </div>
