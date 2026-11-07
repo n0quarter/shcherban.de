@@ -3,16 +3,15 @@ import type { ReactNode } from "react"
 import { Link } from "react-router"
 
 import { PageHeader } from "~/components/page-header"
-import { buttonVariants } from "~/components/ui/button"
 import { localizedPath, useLang } from "~/lib/i18n"
-import { bookingLabel, practice } from "~/lib/practice"
+import { cn } from "~/lib/utils"
 
 const text = {
-  de: { back: "Alle Leistungen", question: "Fragen zu dieser Leistung? Wir beraten Sie gern." },
-  en: { back: "All services", question: "Questions about this service? We are happy to advise you." },
+  de: { back: "Alle Leistungen" },
+  en: { back: "All services" },
 }
 
-/** Layout for every page under /leistungen/: title, long text, optional photo, booking box. */
+/** Layout for every page under /leistungen/: title, long text and an optional photo beside it. */
 export function ServicePage({ title, image, children }: { title: string; image?: string; children: ReactNode }) {
   const lang = useLang()
 
@@ -24,19 +23,18 @@ export function ServicePage({ title, image, children }: { title: string; image?:
         </Link>
       </div>
       <PageHeader title={title} />
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-[1fr_20rem]">
-        <article className="prose max-w-none prose-neutral prose-headings:font-heading prose-headings:font-semibold">
+      <div className={cn("mx-auto max-w-6xl px-4", image && "grid gap-12 md:grid-cols-[1fr_16rem] lg:grid-cols-[1fr_20rem]")}>
+        <article className="prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold">
           {children}
         </article>
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          {image && <img src={image} alt="" className="aspect-[4/5] w-full rounded-3xl object-cover" loading="lazy" />}
-          <div className="rounded-3xl bg-muted p-6">
-            <p className="mb-4 text-sm">{text[lang].question}</p>
-            <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ className: "w-full" })}>
-              {bookingLabel[lang]}
-            </a>
-          </div>
-        </aside>
+        {image && (
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            className="aspect-[4/5] w-full rounded-3xl object-cover md:sticky md:top-28 md:self-start"
+          />
+        )}
       </div>
     </>
   )
