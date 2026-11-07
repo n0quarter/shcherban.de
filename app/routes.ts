@@ -33,8 +33,6 @@ const newsPosts = [
 ]
 for (const post of newsPosts) pages[post] = "routes/news/post.tsx"
 
-// TEMPORARY while the homepage design is being iterated: only routes whose files exist yet.
-for (const path of Object.keys(pages)) if (path !== "" && !path.startsWith("leistungen/")) delete pages[path]
 
 export default Object.entries(pages).flatMap(([path, file]) => [
   path === "" ? index(file, { id: "de" }) : route(path, file, { id: `de/${path}` }),
