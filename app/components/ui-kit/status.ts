@@ -16,7 +16,7 @@ export const categoryStatus: Record<string, CategoryStatus> = {
     state: "partial",
     detail: "Live as a small CSS diamond: blue in the service groups (A), yellow on Praxisteam (E), and as a faint watermark in the footer. B, C, D are ideas.",
   },
-  star: { state: "partial", detail: "A (single star) is live in the section dividers and list bullets. B and D are approved for later; C is an idea." },
+  star: { state: "partial", detail: "A (single star) is live in the section dividers. B and D are approved for later; C is an idea." },
   eyebrow: {
     state: "idea",
     detail: "Decided: no eyebrows on the site (the Kontakt label was removed). Only the footer keeps the small doctor's name above the practice name.",
@@ -25,7 +25,7 @@ export const categoryStatus: Record<string, CategoryStatus> = {
   divider: { state: "partial", detail: "C (line with star) is live on Startseite and Praxisteam, A (space) on the other pages, E (thin line) on the Impressum. B and D are ideas." },
   bullets: {
     state: "partial",
-    detail: "C (small yellow star) is live on the 4 service pages that have lists (Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung) and the Impressum. A, B, D, E are ideas.",
+    detail: "B (small sharp blue diamond) is live on the 4 service pages that have lists (Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung) and the Impressum. A, C, D, E are ideas.",
   },
   "icon-container": {
     state: "partial",

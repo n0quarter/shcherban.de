@@ -88,7 +88,7 @@ export default function UiKit() {
 
       <Category id="star" questions={questions["star"]} title="5 · The star" note="The yellow four-pointed star from the logo. Approved: A, B and D – used sparingly, as an accent.">
         <Variants>
-          <Variant letter="A" name="Single star" usedOn="section dividers (Startseite, Praxisteam), list bullets">
+          <Variant letter="A" name="Single star" usedOn="section dividers (Startseite, Praxisteam)">
             <div className="flex items-end gap-4 text-sun">
               <Sparkle className="size-12" />
               <Sparkle className="size-7" />
@@ -199,8 +199,8 @@ export default function UiKit() {
         <Variants>
           {[
             { letter: "A", name: "Grey dot (text plugin default)", bullet: <span className="mt-2 size-1.5 shrink-0 rounded-full bg-neutral-400" /> },
-            { letter: "B", name: "Blue diamond", bullet: <LogoDiamond className="mt-1.5 size-3 text-primary" /> },
-            { letter: "C", name: "Small yellow star", usedOn: "Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung, Impressum", bullet: <Sparkle className="mt-1.5 size-2.5 text-sun" /> },
+            { letter: "B", name: "Small sharp blue diamond", usedOn: "Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung, Impressum", bullet: <span className="mt-2 size-1.5 shrink-0 rotate-45 bg-primary" /> },
+            { letter: "C", name: "Small yellow star", bullet: <Sparkle className="mt-1.5 size-2.5 text-sun" /> },
             { letter: "D", name: "Check", bullet: <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" /> },
             { letter: "E", name: "Blue dot (simplest change)", bullet: <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" /> },
           ].map(({ letter, name, usedOn, bullet }) => (
