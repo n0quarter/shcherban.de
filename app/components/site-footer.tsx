@@ -7,7 +7,6 @@ import { practice, siteName } from "~/lib/practice"
 
 const text = {
   de: {
-    writeUs: "Schreiben Sie uns",
     imprint: "Impressum & Datenschutz",
     hours: "Sprechstunde",
     contact: "Kontakt",
@@ -15,7 +14,6 @@ const text = {
     rights: "Alle Rechte vorbehalten.",
   },
   en: {
-    writeUs: "Write to us",
     imprint: "Imprint & privacy",
     hours: "Consultation hours",
     contact: "Contact",
@@ -36,13 +34,7 @@ export function SiteFooter() {
         <div className="md:col-span-2 lg:col-span-1">
           <p className="text-sm font-bold tracking-wide uppercase">{practice.doctor}</p>
           <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance sm:text-5xl">{siteName[lang]}</p>
-          <Link
-            to={localizedPath(lang, "/kontakt/")}
-            className="mt-10 inline-block border-b-3 border-sun pb-2 text-xl font-semibold text-sun transition-opacity hover:opacity-80"
-          >
-            {t.writeUs}
-          </Link>
-          <p className="mt-8">
+          <p className="mt-10">
             <Link to={localizedPath(lang, "/impressum/")} className="text-lg text-sun hover:underline">
               {t.imprint}
             </Link>
