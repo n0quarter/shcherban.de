@@ -16,7 +16,8 @@ export function ColourSystem() {
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Rule title="Start from the logo">
-            Logo blue <b>#1250B3</b> and logo yellow <b>#FFD500</b> are the two brand colours. Blue and yellow sit almost opposite
+            Logo blue <b>#1250B3</b> and logo yellow <b>#FFD500</b> are the two brand colours (the site uses almost the same
+            #1554B8 and #FDD506). Blue and yellow sit almost opposite
             each other on the colour wheel (complementary), so together they are lively but balanced.
           </Rule>
           <Rule title="60 · 30 · 10">
@@ -24,8 +25,9 @@ export function ColourSystem() {
             one button, small marks). Too much yellow quickly looks loud.
           </Rule>
           <Rule title="Tinted neutrals">
-            Text, footer and pale blocks are not plain grey/black but navy and pale blue – both mixed from the logo blue. That
-            keeps every neutral “in the family”.
+            Headings, the footer and pale blocks are not plain grey/black but navy and pale blue – both mixed from the logo
+            blue. That keeps every neutral “in the family”. <b>Not yet everywhere:</b> long texts on service pages, Praxisteam
+            and Impressum still use the plain grey of the text plugin.
           </Rule>
           <Rule title="Contrast for reading">
             Text needs a contrast of at least 4.5 : 1 (WCAG AA). All text pairs below pass. Yellow on white is only 1.4 : 1 –
@@ -52,11 +54,12 @@ export function ColourSystem() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Contrast fg="text-ink" bg="bg-background" label="Navy on white" ratio={16.5} />
           <Contrast fg="text-primary" bg="bg-background" label="Blue on white (links)" ratio={7.0} />
-          <Contrast fg="text-primary-foreground" bg="bg-primary" label="White on blue (buttons)" ratio={7.0} />
+          <Contrast fg="text-primary-foreground" bg="bg-primary" label="White on blue (buttons)" ratio={6.8} />
           <Contrast fg="text-ink" bg="bg-sun" label="Navy on yellow (button)" ratio={11.5} />
           <Contrast fg="text-sun" bg="bg-ink" label="Yellow on navy (footer)" ratio={11.5} />
           <Contrast fg="text-cream" bg="bg-ink" label="Cream on navy (footer)" ratio={14.7} />
           <Contrast fg="text-muted-foreground" bg="bg-background" label="Grey-blue on white (small text)" ratio={6.0} />
+          <Contrast fg="text-neutral-700" bg="bg-background" label="Plain grey on white (long texts)" ratio={10.4} />
           <Contrast fg="text-sun" bg="bg-background" label="Yellow on white – not for text" ratio={1.4} />
         </div>
       </Category>
@@ -96,6 +99,13 @@ export function ColourSystem() {
             swatches={["#1554B8", "#FDD506", "#161F30", "#F8ECEA", "#FFFFFF"]}
             block="#F8ECEA"
             why="Gentle and warm for a women's practice; must stay subtle to avoid cliché."
+          />
+          <PaletteOption
+            letter="E"
+            name="Current + cream (small step)"
+            swatches={["#1554B8", "#FDD506", "#161F30", "#FBF6E4", "#EEF4FC"]}
+            block="#FBF6E4"
+            why="Keeps today's palette, adds the footer's cream for one or two warm blocks. The smallest change towards ‘warmer’."
           />
         </div>
       </Category>

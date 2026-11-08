@@ -33,6 +33,16 @@ export function SparkleCluster({ className }: { className?: string }) {
   )
 }
 
+/** Simplified logo mark: blue diamond with one yellow star (not the real mark – that is /logo-mark.svg). */
+export function SimpleLogoMark({ className }: { className?: string }) {
+  return (
+    <span className={cn("relative inline-flex shrink-0 items-center justify-center", className)}>
+      <LogoDiamond className="absolute inset-0 size-full text-primary" />
+      <Sparkle className="relative w-[36%] text-sun" />
+    </span>
+  )
+}
+
 /** Lightweight CSS diamond (rotated rounded square) for small markers and bullets. */
 export function Diamond({ className }: { className?: string }) {
   return <span aria-hidden className={cn("block shrink-0 rotate-45 rounded-[28%]", className)} />
