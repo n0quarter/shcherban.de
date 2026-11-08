@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from "react"
+import { useId, type CSSProperties, type ReactNode } from "react"
 
 import { cn } from "~/lib/utils"
 
@@ -14,9 +14,9 @@ export function LogoDiamond({ className }: { className?: string }) {
 }
 
 /** The four-pointed star of the logo. Colour via text-* (fill = currentColor). */
-export function Sparkle({ className }: { className?: string }) {
+export function Sparkle({ className, style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 54 57" aria-hidden="true" className={cn("shrink-0", className)}>
+    <svg viewBox="0 0 54 57" aria-hidden="true" className={cn("shrink-0", className)} style={style}>
       <path fill="currentColor" d="M27 0L34.3 20.8L54 28.5L34.3 36.2L27 57L19.7 36.2L0 28.5L19.7 20.8Z" />
     </svg>
   )
