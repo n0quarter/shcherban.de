@@ -26,6 +26,7 @@ const text = {
 export function SiteFooter() {
   const lang = useLang()
   const t = text[lang]
+  const copyright = `© ${new Date().getFullYear()} Frauenarztpraxis im Friedrichshain. ${t.rights}`
 
   return (
     <footer className="relative mt-24 overflow-hidden bg-primary text-white sm:mt-32">
@@ -39,6 +40,8 @@ export function SiteFooter() {
               {t.imprint}
             </Link>
           </p>
+          {/* Under the imprint link on wide screens; at the very bottom when the columns stack. */}
+          <p className="mt-10 hidden text-sm text-white/80 lg:block">{copyright}</p>
         </div>
 
         <div>
@@ -76,9 +79,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <p className="relative mx-auto max-w-6xl px-4 pb-10 text-sm text-white/80">
-        © {new Date().getFullYear()} Frauenarztpraxis im Friedrichshain. {t.rights}
-      </p>
+      <p className="relative mx-auto max-w-6xl px-4 pb-10 text-sm text-white/80 lg:hidden">{copyright}</p>
     </footer>
   )
 }
