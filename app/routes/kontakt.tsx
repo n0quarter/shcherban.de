@@ -1,7 +1,14 @@
 import { ArrowUpRightIcon, CalendarCheckIcon, ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react"
 import type { ComponentType, ReactNode } from "react"
 
+import { useSearchParams } from "react-router"
+
 import { DoctolibLogo } from "~/components/doctolib-logo"
+import { KontaktVariant1 } from "~/components/kontakt-variants/variant-1"
+import { KontaktVariant2 } from "~/components/kontakt-variants/variant-2"
+import { KontaktVariant3 } from "~/components/kontakt-variants/variant-3"
+import { KontaktVariant4 } from "~/components/kontakt-variants/variant-4"
+import { KontaktVariant5 } from "~/components/kontakt-variants/variant-5"
 import { OpeningHours } from "~/components/opening-hours"
 import { PageHeader } from "~/components/page-header"
 import { buttonVariants } from "~/components/ui/button"
@@ -42,7 +49,44 @@ const text = {
   },
 }
 
+// TEMPORARY: design variants to choose from. ?v=0 (current) … ?v=5; the picker shows only in dev.
+const variants = [
+  { name: "Aktuell", Component: CurrentVariant },
+  { name: "Variante 1", Component: KontaktVariant1 },
+  { name: "Variante 2", Component: KontaktVariant2 },
+  { name: "Variante 3", Component: KontaktVariant3 },
+  { name: "Variante 4", Component: KontaktVariant4 },
+  { name: "Variante 5", Component: KontaktVariant5 },
+]
+
 export default function Kontakt() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const current = Math.min(Number(searchParams.get("v")) || 0, variants.length - 1)
+  const { Component } = variants[current]
+
+  return (
+    <>
+      {import.meta.env.DEV && (
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 px-4 pt-6 text-xs text-muted-foreground">
+          Kontakt:
+          {variants.map((variant, index) => (
+            <button
+              key={variant.name}
+              type="button"
+              onClick={() => setSearchParams(index ? { v: String(index) } : {}, { replace: true, preventScrollReset: true })}
+              className={cn("rounded-full border bg-background px-2.5 py-1 font-medium", index === current && "border-primary bg-primary text-primary-foreground")}
+            >
+              {index} · {variant.name}
+            </button>
+          ))}
+        </div>
+      )}
+      <Component />
+    </>
+  )
+}
+
+function CurrentVariant() {
   const lang = useLang()
   const t = text[lang]
 
