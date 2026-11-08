@@ -16,8 +16,8 @@ export function LogoDiamond({ className }: { className?: string }) {
 /** The four-pointed star of the logo. Colour via text-* (fill = currentColor). */
 export function Sparkle({ className, style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 54 57" aria-hidden="true" className={cn("shrink-0", className)} style={style}>
-      <path fill="currentColor" d="M27 0L34.3 20.8L54 28.5L34.3 36.2L27 57L19.7 36.2L0 28.5L19.7 20.8Z" />
+    <svg viewBox="0 0 80 80" aria-hidden="true" className={cn("shrink-0", className)} style={style}>
+      <path fill="currentColor" d="M40 0L50.8 29.2L80 40L50.8 50.8L40 80L29.2 50.8L0 40L29.2 29.2Z" />
     </svg>
   )
 }
