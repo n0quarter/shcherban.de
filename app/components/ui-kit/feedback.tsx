@@ -8,7 +8,7 @@ import { cn } from "~/lib/utils"
 const endpoint = "/__ui-kit-feedback"
 
 /** `target` = element id ("eyebrow.B"), category id ("eyebrow") or "page"; `quote` = text the owner had selected. */
-type Comment = { id: string; target: string; text: string; quote?: string; createdAt: string }
+export type Comment = { id: string; target: string; text: string; quote?: string; createdAt: string }
 type Answer = { choice?: string; note?: string }
 type Feedback = { decisions: Record<string, string>; comments: Comment[]; answers: Record<string, Answer> }
 
@@ -71,7 +71,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   )
 }
 
-function useFeedback() {
+export function useFeedback() {
   const api = useContext(FeedbackContext)
   if (!api) throw new Error("useFeedback needs <FeedbackProvider>")
   return api
@@ -135,7 +135,7 @@ export function Comments({ target, label = "Comment" }: { target: string; label?
   return (
     <div className="space-y-2">
       {comments.map((comment) => (
-        <p key={comment.id} className="flex items-start gap-2 rounded-xl bg-sun/25 px-3 py-2 text-xs text-ink">
+        <p key={comment.id} data-comment-ui className={cn("flex items-start gap-2 rounded-xl bg-sun/25 px-3 py-2 text-xs text-ink", comment.quote && "lg:hidden")}>
           <span className="flex-1 whitespace-pre-wrap">
             {comment.quote && <span className="mb-1 block italic text-ink/60">„{comment.quote}“</span>}
             {comment.text}
@@ -254,7 +254,7 @@ function SelectionComment() {
       const range = current.getRangeAt(0)
       const node = range.commonAncestorContainer
       const element = node instanceof Element ? node : node.parentElement
-      if (element?.closest("textarea, input")) return
+      if (element?.closest("textarea, input, [data-comment-ui]")) return
       const target = element?.closest("[data-feedback-target]")?.getAttribute("data-feedback-target") ?? "page"
       const rect = range.getBoundingClientRect()
       setSelection({ quote: quote.slice(0, 300), target, x: rect.left + rect.width / 2, y: rect.bottom + 8 })
@@ -276,6 +276,7 @@ function SelectionComment() {
   return (
     <div
       ref={panel}
+      data-comment-ui
       className="fixed z-50 -translate-x-1/2"
       style={{ left: Math.min(Math.max(selection.x, 170), window.innerWidth - 170), top: Math.min(selection.y, window.innerHeight - 200) }}
     >

@@ -4,6 +4,7 @@ import type { ReactNode } from "react"
 import { Diamond, LogoDiamond, SimpleLogoMark, Sparkle, SparkleCluster } from "~/components/brand"
 import { KitBlocks } from "~/components/ui-kit/blocks"
 import { ColourSystem } from "~/components/ui-kit/colour-system"
+import { CommentLayer } from "~/components/ui-kit/comment-margin"
 import { FeedbackProvider, SaveStatus } from "~/components/ui-kit/feedback"
 import { questions } from "~/components/ui-kit/questions"
 import { Category, Title, Variant, Variants } from "~/components/ui-kit/parts"
@@ -16,6 +17,7 @@ export const meta = () => [{ title: "UI-Kit | shcherban.de" }, { name: "robots",
 export default function UiKit() {
   return (
     <FeedbackProvider>
+    <CommentLayer>
     <div className="mx-auto max-w-6xl space-y-24 px-4 py-16">
       <header>
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">Intern</p>
@@ -29,7 +31,7 @@ export default function UiKit() {
           <span className="rounded-xl px-3 py-2 outline-2 outline-dashed outline-orange-400">Orange dashed = idea, not used yet</span>
           <span className="rounded-xl px-3 py-2 ring-4 ring-sun ring-offset-4">Yellow ring = your choice</span>
         </div>
-        <p className="mt-3 text-sm text-muted-foreground">Select any text to comment on it.</p>
+        <p className="mt-3 text-sm text-muted-foreground">Select any text to comment on it – the comment appears in the right margin, next to the highlighted text.</p>
         <div className="mt-4">
           <SaveStatus />
         </div>
@@ -218,6 +220,7 @@ export default function UiKit() {
 
       <KitBlocks />
     </div>
+    </CommentLayer>
     </FeedbackProvider>
   )
 }
