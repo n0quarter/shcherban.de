@@ -2,6 +2,7 @@
 import { Sparkle } from "~/components/brand"
 import { useIsChosen } from "~/components/ui-kit/feedback"
 import { Category, VariantFooter } from "~/components/ui-kit/parts"
+import { questions } from "~/components/ui-kit/questions"
 import { cn } from "~/lib/utils"
 
 export function ColourSystem() {
@@ -9,6 +10,7 @@ export function ColourSystem() {
     <>
       <Category
         id="colour-system"
+        questions={questions["colour-system"]}
         title="1 · Colour system – how it works"
         note="Brand palettes are usually built from a few rules. Here is how the current palette follows them."
       >
@@ -57,6 +59,7 @@ export function ColourSystem() {
 
       <Category
         id="palette"
+        questions={questions["palette"]}
         title="2 · Palette options"
         note="Same logo colours everywhere; the options differ in the supporting colour for calm blocks and backgrounds."
       >
@@ -158,7 +161,10 @@ function PaletteOption({
 }) {
   const chosen = useIsChosen(letter)
   return (
-    <div className={cn("flex flex-col rounded-3xl border", usedOn && "border-primary/40 ring-1 ring-primary/20", chosen && "border-sun ring-2 ring-sun")}>
+    <div
+      data-feedback-target={`palette.${letter}`}
+      className={cn("flex flex-col rounded-3xl border", usedOn && "border-primary/40 ring-1 ring-primary/20", chosen && "border-sun ring-2 ring-sun")}
+    >
       <div className="flex-1 p-5">
       <div className="flex gap-2">
         {swatches.map((colour) => (

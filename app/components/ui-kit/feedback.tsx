@@ -1,13 +1,14 @@
 // Feedback for the internal /ui-kit page: picks, comments and answers, saved by the local dev server
 // to design/ui-kit-feedback.json (see tooling/ui-kit-feedback.ts).
 import { CheckIcon, MessageSquareIcon, XIcon } from "lucide-react"
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 
 import { cn } from "~/lib/utils"
 
 const endpoint = "/__ui-kit-feedback"
 
-type Comment = { id: string; target: string; text: string; createdAt: string }
+/** `target` = element id ("eyebrow.B"), category id ("eyebrow") or "page"; `quote` = text the owner had selected. */
+type Comment = { id: string; target: string; text: string; quote?: string; createdAt: string }
 type Answer = { choice?: string; note?: string }
 type Feedback = { decisions: Record<string, string>; comments: Comment[]; answers: Record<string, Answer> }
 
@@ -17,7 +18,7 @@ type FeedbackApi = {
   data: Feedback
   status: "loading" | "saved" | "saving" | "error"
   pick: (category: string, letter: string) => void
-  addComment: (target: string, text: string) => void
+  addComment: (target: string, text: string, quote?: string) => void
   removeComment: (id: string) => void
   answer: (question: string, patch: Answer) => void
 }
@@ -56,13 +57,18 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       else decisions[category] = letter
       save({ ...data, decisions })
     },
-    addComment: (target, text) =>
-      save({ ...data, comments: [...data.comments, { id: crypto.randomUUID(), target, text, createdAt: new Date().toISOString() }] }),
+    addComment: (target, text, quote) =>
+      save({ ...data, comments: [...data.comments, { id: crypto.randomUUID(), target, text, quote, createdAt: new Date().toISOString() }] }),
     removeComment: (id) => save({ ...data, comments: data.comments.filter((comment) => comment.id !== id) }),
     answer: (question, patch) => save({ ...data, answers: { ...data.answers, [question]: { ...data.answers[question], ...patch } } }),
   }
 
-  return <FeedbackContext.Provider value={api}>{children}</FeedbackContext.Provider>
+  return (
+    <FeedbackContext.Provider value={api}>
+      {children}
+      <SelectionComment />
+    </FeedbackContext.Provider>
+  )
 }
 
 function useFeedback() {
@@ -130,7 +136,10 @@ export function Comments({ target, label = "Comment" }: { target: string; label?
     <div className="space-y-2">
       {comments.map((comment) => (
         <p key={comment.id} className="flex items-start gap-2 rounded-xl bg-sun/25 px-3 py-2 text-xs text-ink">
-          <span className="flex-1 whitespace-pre-wrap">{comment.text}</span>
+          <span className="flex-1 whitespace-pre-wrap">
+            {comment.quote && <span className="mb-1 block italic text-ink/60">„{comment.quote}“</span>}
+            {comment.text}
+          </span>
           <button type="button" onClick={() => removeComment(comment.id)} aria-label="Delete comment" className="text-ink/50 hover:text-ink">
             <XIcon className="size-3.5" />
           </button>
@@ -177,24 +186,29 @@ export function Comments({ target, label = "Comment" }: { target: string; label?
 
 export type Question = { id: string; question: string; options: string[] }
 
-/** Questions from Claude with one-click answers plus an optional note. */
-export function Questions({ questions }: { questions: Question[] }) {
+/** Questions and change ideas inside a category; answers are stored as "<category>:<question id>". */
+export function CategoryQuestions({ questions }: { questions: Question[] }) {
   const { data, answer } = useFeedback()
+  const category = useCategoryId()
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-3 md:grid-cols-2">
       {questions.map((item) => {
-        const current = data.answers[item.id] ?? {}
+        const key = `${category}:${item.id}`
+        const current = data.answers[key] ?? {}
         return (
-          <div key={item.id} className="rounded-3xl border p-5">
-            <p className="font-medium text-ink">{item.question}</p>
+          <div key={key} className="rounded-2xl border border-dashed border-primary/40 bg-primary/[0.03] p-4">
+            <p className="flex items-start gap-2 text-sm font-medium text-ink">
+              <span className="mt-0.5 rounded-full bg-primary px-1.5 text-[10px] font-semibold tracking-wide text-primary-foreground uppercase">Question</span>
+              {item.question}
+            </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {item.options.map((option) => (
                 <button
                   key={option}
                   type="button"
-                  onClick={() => answer(item.id, { choice: current.choice === option ? undefined : option })}
+                  onClick={() => answer(key, { choice: current.choice === option ? undefined : option })}
                   className={cn(
-                    "rounded-full border px-3 py-1 text-sm transition-colors",
+                    "rounded-full border bg-background px-3 py-1 text-xs transition-colors",
                     current.choice === option ? "border-sun bg-sun text-ink" : "text-muted-foreground hover:border-primary hover:text-primary"
                   )}
                 >
@@ -205,14 +219,104 @@ export function Questions({ questions }: { questions: Question[] }) {
             <textarea
               defaultValue={current.note ?? ""}
               key={current.note ?? ""}
-              onBlur={(event) => event.target.value !== (current.note ?? "") && answer(item.id, { note: event.target.value })}
-              rows={2}
+              onBlur={(event) => event.target.value !== (current.note ?? "") && answer(key, { note: event.target.value })}
+              rows={1}
               placeholder="Optional note…"
-              className="mt-3 w-full rounded-xl border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+              className="mt-3 w-full rounded-xl border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary"
             />
           </div>
         )
       })}
+    </div>
+  )
+}
+
+/**
+ * Select any text on the page → a "Comment" button appears next to it. The comment is stored with the
+ * selected text and the nearest element id (data-feedback-target), so it is clear what it refers to.
+ */
+function SelectionComment() {
+  const { addComment } = useFeedback()
+  const [selection, setSelection] = useState<{ quote: string; target: string; x: number; y: number } | null>(null)
+  const [writing, setWriting] = useState(false)
+  const [text, setText] = useState("")
+  const panel = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onMouseUp = (event: MouseEvent) => {
+      if (panel.current?.contains(event.target as Node)) return
+      const current = window.getSelection()
+      const quote = current?.toString().trim()
+      if (!current || !quote || current.rangeCount === 0) {
+        if (!writing) setSelection(null)
+        return
+      }
+      const range = current.getRangeAt(0)
+      const node = range.commonAncestorContainer
+      const element = node instanceof Element ? node : node.parentElement
+      if (element?.closest("textarea, input")) return
+      const target = element?.closest("[data-feedback-target]")?.getAttribute("data-feedback-target") ?? "page"
+      const rect = range.getBoundingClientRect()
+      setSelection({ quote: quote.slice(0, 300), target, x: rect.left + rect.width / 2, y: rect.bottom + 8 })
+      setWriting(false)
+      setText("")
+    }
+    document.addEventListener("mouseup", onMouseUp)
+    return () => document.removeEventListener("mouseup", onMouseUp)
+  }, [writing])
+
+  if (!selection) return null
+
+  const close = () => {
+    setSelection(null)
+    setWriting(false)
+    setText("")
+  }
+
+  return (
+    <div
+      ref={panel}
+      className="fixed z-50 -translate-x-1/2"
+      style={{ left: Math.min(Math.max(selection.x, 170), window.innerWidth - 170), top: Math.min(selection.y, window.innerHeight - 200) }}
+    >
+      {writing ? (
+        <form
+          onSubmit={(event) => {
+            event.preventDefault()
+            if (text.trim()) addComment(selection.target, text.trim(), selection.quote)
+            close()
+          }}
+          className="w-80 space-y-2 rounded-2xl border bg-background p-3 shadow-xl"
+        >
+          <p className="line-clamp-2 text-xs text-muted-foreground italic">„{selection.quote}“</p>
+          <p className="font-mono text-[10px] text-muted-foreground">#{selection.target}</p>
+          <textarea
+            autoFocus
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) event.currentTarget.form?.requestSubmit()
+              if (event.key === "Escape") close()
+            }}
+            rows={3}
+            placeholder="Your comment… (⌘↵ to save)"
+            className="w-full rounded-xl border px-3 py-2 text-sm outline-none focus:border-primary"
+          />
+          <div className="flex gap-2">
+            <button type="submit" className="rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">Save</button>
+            <button type="button" onClick={close} className="rounded-full border px-3 py-1 text-xs text-muted-foreground">Cancel</button>
+          </div>
+        </form>
+      ) : (
+        <button
+          type="button"
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => setWriting(true)}
+          className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-medium text-white shadow-lg"
+        >
+          <MessageSquareIcon className="size-3.5" /> Comment
+        </button>
+      )}
     </div>
   )
 }
