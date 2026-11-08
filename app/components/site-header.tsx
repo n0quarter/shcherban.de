@@ -9,15 +9,19 @@ import { localizedPath, switchLanguagePath, useLang } from "~/lib/i18n"
 import { bookingLabel, navigation, practice, siteName } from "~/lib/practice"
 import { cn } from "~/lib/utils"
 
-/** True once the page is scrolled down a little; the header then shrinks. */
-function useScrolled(offset = 24) {
+/**
+ * True once the page is scrolled down; the header then shrinks.
+ * Shrinking moves the page up by the height difference, so shrink and grow use different thresholds
+ * (more apart than that difference) – otherwise the header flickers between both states.
+ */
+function useScrolled() {
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > offset)
+    const update = () => setScrolled((wasScrolled) => (wasScrolled ? window.scrollY > 8 : window.scrollY > 80))
     update()
     window.addEventListener("scroll", update, { passive: true })
     return () => window.removeEventListener("scroll", update)
-  }, [offset])
+  }, [])
   return scrolled
 }
 
