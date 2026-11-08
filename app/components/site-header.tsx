@@ -1,5 +1,5 @@
-import { MenuIcon } from "lucide-react"
-import { useEffect, useState } from "react"
+import { CalendarCheckIcon, MenuIcon } from "lucide-react"
+import { useState } from "react"
 import { Link, NavLink, useLocation } from "react-router"
 
 import { DoctolibLogo } from "~/components/doctolib-logo"
@@ -9,41 +9,18 @@ import { localizedPath, switchLanguagePath, useLang } from "~/lib/i18n"
 import { bookingLabel, navigation, practice, siteName } from "~/lib/practice"
 import { cn } from "~/lib/utils"
 
-/**
- * True once the page is scrolled down; the header then shrinks.
- * Shrinking moves the page up by the height difference, so shrink and grow use different thresholds
- * (more apart than that difference) – otherwise the header flickers between both states.
- */
-function useScrolled() {
-  const [scrolled, setScrolled] = useState(false)
-  useEffect(() => {
-    const update = () => setScrolled((wasScrolled) => (wasScrolled ? window.scrollY > 8 : window.scrollY > 80))
-    update()
-    window.addEventListener("scroll", update, { passive: true })
-    return () => window.removeEventListener("scroll", update)
-  }, [])
-  return scrolled
-}
-
 export function SiteHeader() {
   const lang = useLang()
-  const scrolled = useScrolled()
 
   return (
-    <header className={cn("sticky top-0 z-40 border-b bg-background/90 backdrop-blur transition-shadow", scrolled && "shadow-sm")}>
-      {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu.
-          At the top of the page the header is taller with a larger logo; it shrinks on scroll. */}
-      <div
-        className={cn(
-          "mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 transition-[height] duration-300",
-          scrolled ? "h-16" : "h-20 xl:h-24"
-        )}
-      >
+    <header className="border-b bg-background">
+      {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu. Not sticky: it scrolls away with the page. */}
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 xl:h-24">
         <Link to={localizedPath(lang, "/")} className="shrink-0">
           <img
             src="/logo.svg"
             alt={`${siteName[lang]} – ${practice.doctor}`}
-            className={cn("w-auto transition-[height] duration-300", scrolled ? "h-8 lg:h-9 xl:h-10" : "h-11 md:h-12 lg:h-14")}
+            className="h-11 w-auto md:h-12 lg:h-14"
           />
         </Link>
 
@@ -75,6 +52,7 @@ export function SiteHeader() {
             aria-label={`${bookingLabel[lang]} – Doctolib`}
             className={cn(buttonVariants(), "hidden gap-2.5 px-4 sm:inline-flex")}
           >
+            <CalendarCheckIcon className="md:max-lg:hidden" />
             <span>{bookingLabel[lang]}</span>
             <DoctolibLogo className="md:max-lg:hidden" />
           </a>
@@ -126,7 +104,7 @@ function MobileMenu() {
           </NavLink>
         ))}
         <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "mt-4 gap-2.5")}>
-          {bookingLabel[lang]}
+          <CalendarCheckIcon /> {bookingLabel[lang]}
           <DoctolibLogo />
         </a>
       </SheetContent>

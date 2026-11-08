@@ -55,9 +55,9 @@ export function ServiceGroups({ className }: { className?: string }) {
                   <li key={slug}>
                     <Link
                       to={localizedPath(lang, `/leistungen/${slug}/`)}
-                      className="group flex items-start gap-4 rounded-2xl p-3 transition-colors hover:bg-background"
+                      className="group flex items-start gap-4 rounded-2xl p-3 transition-all hover:-translate-y-1 hover:bg-background hover:shadow-lg hover:shadow-primary/10"
                     >
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary transition-colors group-hover:bg-tint">
                         <Icon className="size-5" />
                       </span>
                       <span className="min-w-0 flex-1">

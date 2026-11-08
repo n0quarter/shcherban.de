@@ -21,7 +21,6 @@ const text = {
     fax: "Fax",
     email: "E-Mail",
     directions: "Route planen",
-    bookingLabel: "Online-Termin",
     bookingHeading: "Vereinbaren Sie Ihren Termin",
     bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
   },
@@ -35,7 +34,6 @@ const text = {
     fax: "Fax",
     email: "Email",
     directions: "Get directions",
-    bookingLabel: "Online booking",
     bookingHeading: "Book your appointment",
     bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
   },
@@ -58,10 +56,7 @@ export function KontaktVariant2() {
             <Nameplate />
 
             <section className="px-3 sm:px-0">
-              <p className="inline-flex rounded-[5px] border border-primary/40 px-2 py-0.5 text-[13px] font-semibold tracking-wide text-primary">
-                {t.bookingLabel}
-              </p>
-              <h2 className="mt-5 text-3xl leading-tight font-semibold tracking-tight text-balance text-ink lg:text-4xl">{t.bookingHeading}</h2>
+              <h2 className="text-3xl leading-tight font-semibold tracking-tight text-balance text-ink lg:text-4xl">{t.bookingHeading}</h2>
               <p className="mt-4 max-w-sm leading-relaxed text-muted-foreground">{t.bookingText}</p>
               <a
                 href={practice.bookingUrl}

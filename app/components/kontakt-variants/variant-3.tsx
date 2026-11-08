@@ -59,7 +59,7 @@ export function KontaktVariant3() {
 
       <div className="px-4 pt-10 md:px-10 md:py-14 lg:px-14">
         <div className="max-w-[32rem]">
-          <h1 className="font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
+          <h1 className="font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
             {t.title}
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{t.bookingText}</p>

@@ -44,7 +44,7 @@ export function KontaktVariant1() {
     <div className="mx-auto max-w-2xl px-4 pt-12 sm:pt-20">
       <section className="text-center">
         <Diamond className="mx-auto" />
-        <h1 className="mt-6 font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-ink">{t.title}</h1>
+        <h1 className="mt-6 font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-ink">{t.title}</h1>
         <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">{t.bookingText}</p>
         <a
           href={practice.bookingUrl}

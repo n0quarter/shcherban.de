@@ -3,6 +3,7 @@ import type { ComponentType, ReactNode } from "react"
 
 import { useSearchParams } from "react-router"
 
+import { LogoDiamond } from "~/components/brand"
 import { DoctolibLogo } from "~/components/doctolib-logo"
 import { KontaktVariant1 } from "~/components/kontakt-variants/variant-1"
 import { KontaktVariant2 } from "~/components/kontakt-variants/variant-2"
@@ -28,7 +29,6 @@ export const meta = ({ location }: Route.MetaArgs) => pageMeta(location.pathname
 
 const text = {
   de: {
-    bookingLabel: "Online-Termin",
     bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
     hours: "Sprechstunde",
     email: "E-Mail",
@@ -38,7 +38,6 @@ const text = {
     directions: "Route planen",
   },
   en: {
-    bookingLabel: "Online booking",
     bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
     hours: "Consultation hours",
     email: "Email",
@@ -96,15 +95,15 @@ function CurrentVariant() {
 
       <div className="mx-auto max-w-6xl space-y-6 px-4">
         <div className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
-          <section className="rounded-3xl bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-12">
-            <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.bookingLabel}</p>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{bookingLabel[lang]}</h2>
-            <p className="mt-4 max-w-md text-primary-foreground/80">{t.bookingText}</p>
+          <section className="relative overflow-hidden rounded-3xl bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-12">
+            <LogoDiamond className="absolute -right-16 -bottom-20 size-72 text-white/8" />
+            <h2 className="relative text-2xl font-semibold tracking-tight text-balance sm:text-3xl lg:text-[2.125rem]">{bookingLabel[lang]}</h2>
+            <p className="relative mt-4 max-w-md text-primary-foreground/80">{t.bookingText}</p>
             <a
               href={practice.bookingUrl}
               target="_blank"
               rel="noopener"
-              className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}
+              className={cn(buttonVariants({ size: "lg" }), "relative mt-8 h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}
             >
               <CalendarCheckIcon /> {bookingLabel[lang]}
               <DoctolibLogo color="ink" className="h-[15px]" />
@@ -113,7 +112,10 @@ function CurrentVariant() {
 
           <section className="rounded-3xl bg-tint px-6 py-10 sm:px-10 sm:py-12">
             <h2 className="flex items-center gap-3 text-2xl font-semibold tracking-tight text-ink">
-              <ClockIcon className="size-6 text-primary" /> {t.hours}
+              <span className="flex size-11 items-center justify-center rounded-xl bg-background">
+                <ClockIcon className="size-5 text-primary" />
+              </span>
+              {t.hours}
             </h2>
             <div className="mt-6 text-ink [&_dd]:text-ink [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2.5 [&_dl]:text-base [&_dt]:font-semibold">
               <OpeningHours />
@@ -168,7 +170,7 @@ function ContactCard({
 }) {
   return (
     <section className={cn("rounded-3xl border p-6 sm:p-8", className)}>
-      <span className="flex size-11 items-center justify-center rounded-full bg-tint">
+      <span className="flex size-11 items-center justify-center rounded-xl bg-tint">
         <Icon className="size-5 text-primary" />
       </span>
       <h2 className="mt-5 text-sm font-semibold tracking-wide text-muted-foreground uppercase">{label}</h2>

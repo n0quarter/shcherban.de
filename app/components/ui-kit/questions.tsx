@@ -14,21 +14,14 @@ export const questions: Record<string, Question[] | undefined> = {
   ],
   diamond: [{ id: "where", question: "Where should the diamond appear?", options: ["Only small markers", "Markers + photo frames", "Signature element everywhere"] }],
   star: [{ id: "signature", question: "The star is not used on the site yet. Make it a recurring signature?", options: ["Yes", "Only in 1–2 places", "No"] }],
-  eyebrow: [
-    { id: "use", question: "There are no eyebrows above section titles today. Add them?", options: ["On every section", "Only on the homepage", "No"] },
-    { id: "one-style", question: "Small labels come in 4 styles today (door sign, CV headings, Kontakt labels, footer). One style everywhere?", options: ["Yes, one style", "Keep as is"] },
-    { id: "service-group", question: "Show the service group (e.g. “Vorsorge”) as a small label above each service page title?", options: ["Yes", "No"] },
-  ],
   "title-accent": [{ id: "other-pages", question: "Use the chosen accent on other page titles too (e.g. Praxisteam, Leistungen)?", options: ["Yes", "Homepage only"] }],
   bullets: [{ id: "cv-rows", question: "Use CV-style rows (label + text, thin line between) for lists on service pages, like on Praxisteam?", options: ["Yes", "No, keep bullets"] }],
-  "icon-container": [{ id: "unify", question: "Three styles are in use (square on services, circle and bare icon on Kontakt). Use one style everywhere?", options: ["Yes, one style", "Keep both"] }],
   "photo-frame": [
     { id: "one-frame", question: "Photos use three different frames today. One frame for all?", options: ["Yes, one frame", "Portraits differ from room photos", "No preference"] },
     { id: "captions", question: "Photo captions sit on the photo (Startseite) or below it (Praxis). One way?", options: ["On the photo", "Below the photo", "Keep as is"] },
   ],
   panel: [
     { id: "blue-highlight", question: "The blue panel is used only for booking today. Allow one blue highlight per page (e.g. a quote)?", options: ["Yes", "Booking only"] },
-    { id: "booking-panels", question: "Booking panels: watermark diamond (Startseite) or plain blue (Kontakt)?", options: ["Watermark on both", "Plain on both", "Keep as is"] },
     { id: "notes", question: "Highlight notes like “Empfehlung” or “von den Kassen erstattet” on service pages as small pale-blue boxes?", options: ["Yes", "No"] },
   ],
   background: [{ id: "where", question: "Where could a texture go?", options: ["Kontakt booking panel", "Footer", "Nowhere"] }],
@@ -42,8 +35,6 @@ export const questions: Record<string, Question[] | undefined> = {
   ],
   hover: [{ id: "intensity", question: "Hover effects should be…", options: ["Subtle", "Noticeable"] }],
   header: [
-    { id: "shrink", question: "The header shrinks when you scroll down. Keep that?", options: ["Keep", "Always small", "Always large"] },
-    { id: "mark-only", question: "When scrolled, show only the logo mark (diamond) instead of the full logo?", options: ["Yes", "No"] },
     { id: "phone-booking", question: "On phones the booking button is hidden in the header bar (only in the menu). Show it in the bar too?", options: ["Yes", "No"] },
   ],
   buttons: [

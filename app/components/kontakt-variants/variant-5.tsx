@@ -12,7 +12,6 @@ import { cn } from "~/lib/utils"
 const text = {
   de: {
     title: "Kontakt",
-    bookingLabel: "Online-Termin",
     bookingHeading: "Vereinbaren Sie Ihren Termin",
     bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
     photoCaption: "Die Rezeption",
@@ -26,7 +25,6 @@ const text = {
   },
   en: {
     title: "Contact",
-    bookingLabel: "Online booking",
     bookingHeading: "Book your appointment",
     bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
     photoCaption: "The reception",
@@ -47,7 +45,7 @@ export function KontaktVariant5() {
   return (
     <div className="mx-auto max-w-6xl px-4">
       <ShapeDefs />
-      <h1 className="pt-10 pb-8 font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-ink sm:pt-12 lg:pt-8 lg:pb-6">
+      <h1 className="pt-10 pb-8 font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-ink sm:pt-12 lg:pt-8 lg:pb-6">
         {t.title}
       </h1>
 
@@ -110,8 +108,7 @@ function BookingTile() {
     <section className="relative flex flex-col justify-between overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8 md:col-span-2 lg:row-span-2">
       <div className="absolute -right-20 -bottom-24 size-80 bg-white/8" style={shape} aria-hidden="true" />
       <div className="relative">
-        <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.bookingLabel}</p>
-        <h2 className="mt-5 text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl">{t.bookingHeading}</h2>
+        <h2 className="text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl lg:text-[2.125rem]">{t.bookingHeading}</h2>
         <p className="mt-4 max-w-md text-primary-foreground/80">{t.bookingText}</p>
       </div>
       <div className="relative mt-8">

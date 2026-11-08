@@ -4,6 +4,7 @@ import { Link } from "react-router"
 
 import { DoctolibLogo } from "~/components/doctolib-logo"
 import { PhotoGallery } from "~/components/photo-gallery"
+import { SectionDivider } from "~/components/section-divider"
 import { ServiceGroups } from "~/components/service-groups"
 import { buttonVariants } from "~/components/ui/button"
 import { localizedPath, useLang, type Lang } from "~/lib/i18n"
@@ -67,7 +68,7 @@ export default function Home() {
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
         <div className="mx-auto grid max-w-6xl items-center gap-14 md:items-start px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
           <div className="min-w-0">
-            <h1 className="font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
+            <h1 className="font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
               {t.heading[0]}
               <span className="text-primary">{t.heading[1]}</span>
               {t.heading[2]}
@@ -87,7 +88,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-sm md:sticky md:top-28 md:max-w-none">
+          <div className="relative mx-auto w-full max-w-sm md:sticky md:top-8 md:max-w-none">
             <div className="absolute -inset-3 -z-10 rotate-3 rounded-[2.5rem] bg-primary/10" />
             <img
               src="/images/ganna-portrait.jpg"
@@ -102,16 +103,20 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* Services, grouped */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
+      <section className="mx-auto max-w-6xl px-4 pt-12 sm:pt-16">
         <SectionHeading heading={t.servicesHeading}>
           <MoreLink to={localizedPath(lang, "/leistungen/")}>{t.allServices}</MoreLink>
         </SectionHeading>
         <ServiceGroups className="mt-12" />
       </section>
 
+      <SectionDivider />
+
       {/* Practice photos */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
+      <section className="mx-auto max-w-6xl px-4 pt-12 sm:pt-16">
         <SectionHeading heading={t.practiceHeading}>
           <MoreLink to={localizedPath(lang, "/praxis/")}>{t.practiceTour}</MoreLink>
         </SectionHeading>
@@ -126,7 +131,7 @@ export default function Home() {
 function SectionHeading({ heading, children }: { heading: string; children?: ReactNode }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-6">
-      <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{heading}</h2>
+      <h2 className="max-w-2xl text-2xl font-semibold tracking-tight text-balance text-ink sm:text-3xl lg:text-[2.125rem]">{heading}</h2>
       {children}
     </div>
   )

@@ -32,7 +32,7 @@ export function ServicePage({ title, image, children }: { title: string; image?:
             src={image}
             alt=""
             loading="lazy"
-            className="aspect-[4/5] w-full rounded-3xl object-cover md:sticky md:top-28 md:self-start"
+            className="aspect-[4/5] w-full rounded-3xl object-cover md:sticky md:top-8 md:self-start"
           />
         )}
       </div>

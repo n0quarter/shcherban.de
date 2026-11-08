@@ -21,7 +21,7 @@ export function Category({
 }) {
   return (
     <CategoryScope id={id}>
-      <section id={id} data-feedback-target={id} className={cn("scroll-mt-28", sectionOutline(categoryStatus[id]?.state))}>
+      <section id={id} data-feedback-target={id} className={cn("scroll-mt-8", sectionOutline(categoryStatus[id]?.state))}>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-ink">

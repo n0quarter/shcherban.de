@@ -1,4 +1,5 @@
 import { PageHeader } from "~/components/page-header"
+import { SectionDivider } from "~/components/section-divider"
 import { TeamMember } from "~/components/team-member"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion"
 import { useLang, type Lang } from "~/lib/i18n"
@@ -52,10 +53,10 @@ export default function Praxisteam() {
         <img
           src="/images/praxis-10.jpg"
           alt={practice.doctor}
-          className="mx-auto aspect-[3/4] w-full max-w-sm rounded-[2rem] object-cover md:sticky md:top-28 md:max-w-none"
+          className="mx-auto aspect-[3/4] w-full max-w-sm rounded-[2rem] object-cover md:sticky md:top-8 md:max-w-none"
         />
         <div className="min-w-0">
-          <h2 className="text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{practice.doctor}</h2>
+          <h2 className="text-2xl font-semibold tracking-tight text-balance text-ink sm:text-3xl lg:text-[2.125rem]">{practice.doctor}</h2>
           <p className="mt-2 text-lg text-primary">{t.doctorRole}</p>
           <div className="prose prose-lg mt-8 max-w-none prose-neutral prose-strong:text-ink">
             {lang === "de" ? <IntroGerman /> : <IntroEnglish />}
@@ -78,9 +79,11 @@ export default function Praxisteam() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* Medical assistants */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
-        <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance text-ink sm:text-4xl lg:text-[2.625rem]">{t.assistantsHeading}</h2>
+      <section className="mx-auto max-w-6xl px-4 pt-12 sm:pt-16">
+        <h2 className="max-w-2xl text-2xl font-semibold tracking-tight text-balance text-ink sm:text-3xl lg:text-[2.125rem]">{t.assistantsHeading}</h2>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <TeamMember name="Jessica Richter" role={t.assistantRole}>
             {t.jessica}

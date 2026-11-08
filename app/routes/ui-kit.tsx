@@ -21,7 +21,7 @@ export default function UiKit() {
     <div className="mx-auto max-w-6xl space-y-24 px-4 py-16">
       <header>
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">Intern</p>
-        <h1 className="mt-2 text-[clamp(2rem,4vw,3rem)] leading-tight font-semibold tracking-tight text-ink">UI-Kit</h1>
+        <h1 className="mt-2 text-[clamp(1.75rem,3.2vw,2.5rem)] leading-tight font-semibold tracking-tight text-ink">UI-Kit</h1>
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
           Building blocks of the site. Pick one variant per category (e.g. “Eyebrow B, Divider C”) and they get used on every
           page, so the site reads as one designed system.
@@ -41,8 +41,8 @@ export default function UiKit() {
 
       <Category id="typography" questions={questions["typography"]} title="3 · Typography" note="Roboto everywhere. The main sizes as used now.">
         <div className="space-y-6 rounded-3xl border p-8">
-          <p className="text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-ink">Page title (H1)</p>
-          <p className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-[2.625rem]">Section title (H2)</p>
+          <p className="text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-ink">Page title (H1)</p>
+          <p className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-[2.125rem]">Section title (H2)</p>
           <p className="text-lg font-semibold text-ink">Card title (H3)</p>
           <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">Lead text – a short introduction under a title, slightly larger and softer.</p>
           <p className="max-w-xl text-base leading-relaxed text-neutral-700">Long text, service pages – 16 px, plain grey (text plugin).</p>
@@ -86,9 +86,9 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category id="star" questions={questions["star"]} title="5 · The star" note="The yellow four-pointed star from the logo. Not used on the site yet – best used sparingly, as an accent.">
+      <Category id="star" questions={questions["star"]} title="5 · The star" note="The yellow four-pointed star from the logo. Approved: A, B and D – used sparingly, as an accent.">
         <Variants>
-          <Variant letter="A" name="Single star">
+          <Variant letter="A" name="Single star" usedOn="section dividers (Startseite, Praxisteam), list bullets">
             <div className="flex items-end gap-4 text-sun">
               <Sparkle className="size-12" />
               <Sparkle className="size-7" />
@@ -113,7 +113,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category id="eyebrow" questions={questions["eyebrow"]} title="6 · Eyebrow (small label above a title)" note="Small label above section titles.">
+      <Category id="eyebrow" questions={questions["eyebrow"]} title="6 · Eyebrow (small label above a title)" note="Small label above section titles. Decided: no eyebrows on the site.">
         <Variants>
           <Variant letter="A" name="Pill with diamond">
             <p className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-sm text-muted-foreground">
@@ -130,7 +130,7 @@ export default function UiKit() {
               <LogoDiamond className="size-3 text-primary" /> Unsere Leistungen
             </p>
           </Variant>
-          <Variant letter="D" name="Door sign" usedOn="“Online-Termin” on the blue Kontakt booking panel">
+          <Variant letter="D" name="Door sign">
             <div className="rounded-2xl bg-primary p-5 text-primary-foreground">
               <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">Termin</p>
             </div>
@@ -171,15 +171,15 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category id="divider" questions={questions["divider"]} title="8 · Divider between sections" note="Sections are separated by space today; the Impressum uses thin lines.">
+      <Category id="divider" questions={questions["divider"]} title="8 · Divider between sections" note="C (line with star) separates the big sections on Startseite and Praxisteam; elsewhere space only; the Impressum uses thin lines.">
         <Variants wide>
-          <Variant letter="A" name="Space only" usedOn="between sections on all pages">
+          <Variant letter="A" name="Space only" usedOn="between sections on the other pages">
             <div className="h-10" />
           </Variant>
           <Variant letter="B" name="Line with diamond">
             <Divider center={<LogoDiamond className="size-4 text-primary" />} />
           </Variant>
-          <Variant letter="C" name="Line with star">
+          <Variant letter="C" name="Line with star" usedOn="Startseite, Praxisteam (between the big sections)">
             <Divider center={<Sparkle className="size-5 text-sun" />} />
           </Variant>
           <Variant letter="D" name="Three diamonds">

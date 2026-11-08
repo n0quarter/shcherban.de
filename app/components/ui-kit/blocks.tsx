@@ -13,9 +13,9 @@ const quote = "Gemeinsam setzen wir alles daran, eine beruhigende und sichere At
 export function KitBlocks() {
   return (
     <>
-      <Category id="icon-container" questions={questions["icon-container"]} title="10 · Icon container" note="For service icons and contact icons. Three different ones are in use today – picking one makes it consistent.">
+      <Category id="icon-container" questions={questions["icon-container"]} title="10 · Icon container" note="For service icons and contact icons. One style everywhere: A.">
         <Variants>
-          <Variant letter="A" name="White square on pale blue" usedOn="services (Startseite, Leistungen) – fills blue on hover">
+          <Variant letter="A" name="White square on pale blue" usedOn="services (Startseite, Leistungen), Kontakt cards and hours">
             <div className="rounded-2xl bg-tint p-4">
               <IconBox className="size-10 rounded-xl bg-background" />
             </div>
@@ -26,7 +26,7 @@ export function KitBlocks() {
               <MicroscopeIcon className="relative size-5" />
             </span>
           </Variant>
-          <Variant letter="C" name="Circle" usedOn="Kontakt cards (E-Mail, Telefon, Adresse)">
+          <Variant letter="C" name="Circle">
             <IconBox className="rounded-full bg-tint" />
           </Variant>
           <Variant letter="D" name="Solid blue diamond">
@@ -35,7 +35,7 @@ export function KitBlocks() {
               <MicroscopeIcon className="relative size-5" />
             </span>
           </Variant>
-          <Variant letter="E" name="Bare icon, no container" usedOn="Kontakt opening hours (clock)">
+          <Variant letter="E" name="Bare icon, no container">
             <p className="flex items-center gap-3 text-xl font-semibold text-ink">
               <ClockIcon className="size-6 text-primary" /> Sprechzeiten
             </p>
@@ -65,6 +65,18 @@ export function KitBlocks() {
           <Variant letter="D" name="Plain rounded" usedOn="Praxis, Leistungen, Praxisteam (3 different corner radii)">
             <Photo className="mx-auto w-36 rounded-[1.5rem]" />
           </Variant>
+          <Variant letter="F" name="A, tilt in mid blue">
+            <TiltedPhoto tint="bg-primary/30" />
+          </Variant>
+          <Variant letter="G" name="A, tilt in logo blue">
+            <TiltedPhoto tint="bg-primary" />
+          </Variant>
+          <Variant letter="H" name="A, tilt in navy">
+            <TiltedPhoto tint="bg-ink" />
+          </Variant>
+          <Variant letter="I" name="A, logo blue + stars (A + C)">
+            <TiltedPhoto tint="bg-primary" stars />
+          </Variant>
           <Variant letter="E" name="Rotated square + yellow backing" usedOn="team avatars (Praxisteam; Jessica shows initials)">
             <span className="flex size-28 items-center justify-center">
               <span className="relative size-[71%] rotate-45 overflow-hidden rounded-[28%] bg-sun">
@@ -83,7 +95,7 @@ export function KitBlocks() {
           <Variant letter="B" name="Outlined" usedOn="Kontakt cards, “Anliegen nicht dabei?”, accordion">
             <Panel className="border" />
           </Variant>
-          <Variant letter="C" name="Blue + watermark diamond" usedOn="footer (Kontakt booking is plain blue)">
+          <Variant letter="C" name="Blue + watermark diamond" usedOn="footer, Kontakt booking panel">
             <div className="relative w-full overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground">
               <LogoDiamond className="absolute -right-10 -bottom-12 size-40 text-white/10" />
               <p className="relative font-semibold">Vereinbaren Sie Ihren Termin</p>
@@ -102,7 +114,7 @@ export function KitBlocks() {
 
       <Category id="background" questions={questions["background"]} title="13 · Background texture" note="A quiet texture for one or two special areas (e.g. the booking block or the footer) – never behind long text.">
         <Variants>
-          <Variant letter="A" name="Plain colour blocks" usedOn="pale panels, Kontakt booking">
+          <Variant letter="A" name="Plain colour blocks" usedOn="pale panels">
             <div className="h-28 w-full rounded-2xl bg-primary" />
           </Variant>
           <Variant letter="B" name="Diamond lattice">
@@ -125,7 +137,7 @@ export function KitBlocks() {
         <Variants wide>
           <Variant letter="A" name="Title + link on the right" usedOn="Startseite sections">
             <div className="flex w-full flex-wrap items-end justify-between gap-4">
-              <p className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-[2.625rem]">Wobei wir Sie begleiten</p>
+              <p className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-[2.125rem]">Wobei wir Sie begleiten</p>
               <span className="inline-flex items-center gap-1.5 font-semibold text-primary">Alle Leistungen <ArrowRightIcon className="size-4" /></span>
             </div>
           </Variant>
@@ -207,7 +219,7 @@ export function KitBlocks() {
               <Constellation className="h-24 text-sun" />
             </div>
           </Variant>
-          <Variant letter="D" name="Watermark diamond with stars" usedOn="watermark only, without stars: footer">
+          <Variant letter="D" name="Watermark diamond with stars" usedOn="watermark only, without stars: footer, Kontakt booking">
             <div className="relative h-32 w-full overflow-hidden rounded-2xl bg-tint">
               <LogoDiamond className="absolute -right-6 -bottom-10 size-36 text-primary/10" />
               <Constellation className="absolute right-4 bottom-2 h-24 text-sun/70" />
@@ -224,7 +236,7 @@ export function KitBlocks() {
 
       <Category id="hover" questions={questions["hover"]} title="17 · Hover feedback" note="What happens when the mouse moves over a link or card. Hover the examples.">
         <Variants>
-          <Variant letter="A" name="Card turns white, icon fills" usedOn="service list">
+          <Variant letter="A" name="Card turns white, icon fills">
             <a className="group flex w-full items-center gap-3 rounded-2xl bg-tint p-3 transition-colors hover:bg-background">
               <span className="flex size-10 items-center justify-center rounded-xl bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <MicroscopeIcon className="size-5" />
@@ -232,7 +244,7 @@ export function KitBlocks() {
               <span className="font-semibold text-ink">Krebsvorsorge</span>
             </a>
           </Variant>
-          <Variant letter="B" name="Lift + shadow">
+          <Variant letter="B" name="Lift + shadow" usedOn="service list (Startseite, Leistungen)">
             <a className="block w-full rounded-2xl border p-4 font-semibold text-ink transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">Krebsvorsorge</a>
           </Variant>
           <Variant letter="C" name="Star appears">
@@ -254,9 +266,9 @@ export function KitBlocks() {
         id="header"
         questions={questions["header"]}
         title="18 · Header"
-        note="Current behaviour: tall header with a large logo at the top of the page; it shrinks when you scroll. The booking button (“Termin buchen” + Doctolib logo, no icon) is hidden on phones, and its Doctolib logo is hidden on tablets."
+        note="Current behaviour: always large, not sticky (it scrolls away with the page). The booking button shows a calendar icon, “Termin buchen” and the Doctolib logo; it is hidden on phones (in the menu instead), icon and logo are hidden on tablets."
       >
-        <p className="text-sm text-muted-foreground">See the header of this page – scroll down a little to watch it shrink.</p>
+        <p className="text-sm text-muted-foreground">See the header at the top of this page.</p>
       </Category>
 
       <Category id="buttons" questions={questions["buttons"]} title="19 · Buttons and links" note="Already in use; shown for completeness. Booking buttons come in three heights today: 36 px (header), 40 px (phone menu), 48 px (pages).">
@@ -305,6 +317,17 @@ function IconBox({ className }: { className?: string }) {
     <span className={cn("flex size-11 items-center justify-center text-primary", className)}>
       <MicroscopeIcon className="size-5" />
     </span>
+  )
+}
+
+/** Variant A (rounded photo on a tilted colour card) with a different card colour. */
+function TiltedPhoto({ tint, stars }: { tint: string; stars?: boolean }) {
+  return (
+    <div className="relative mx-auto w-36">
+      <div className={cn("absolute -inset-2 -z-10 rotate-3 rounded-[1.75rem]", tint)} />
+      <Photo className="rounded-[1.5rem]" />
+      {stars && <SparkleCluster className="absolute -top-5 -right-6 size-14" />}
+    </div>
   )
 }
 
