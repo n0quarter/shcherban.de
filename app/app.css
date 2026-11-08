@@ -60,7 +60,7 @@
     --ink: oklch(0.24 0.035 262); /* navy text, dark footer */
     --sun: oklch(0.88 0.18 95); /* logo yellow, matches the team's scrubs */
     --tint: oklch(0.965 0.012 255); /* pale blue blocks */
-    --cream: oklch(0.96 0.04 95); /* footer headline, as on the old site */
+    --cream: oklch(0.96 0.04 95); /* warm cream from the old site; not used on the live pages now */
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.24 0.035 262);
     --popover: oklch(1 0 0);

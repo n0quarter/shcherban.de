@@ -5,7 +5,7 @@ export const categoryStatus: Record<string, CategoryStatus> = {
   "colour-system": {
     state: "partial",
     detail:
-      "The two brand colours, navy, pale blue and the button/link contrasts are live. Not everything follows the rules yet: long texts (service pages, Praxisteam, Impressum) use the plain grey of the text plugin, the footer uses white with transparency. The tonal scales are reference only.",
+      "The two brand colours, navy, pale blue and the button/link contrasts are live. Not everything follows the rules yet: long texts (service pages, Praxisteam, Impressum) use the plain grey of the text plugin, footer text is white at 80 %. The tonal scales are reference only.",
   },
   palette: { state: "partial", detail: "A is the live palette. B–E are ideas." },
   typography: {
@@ -14,12 +14,12 @@ export const categoryStatus: Record<string, CategoryStatus> = {
   },
   diamond: {
     state: "partial",
-    detail: "Live as a small CSS diamond: blue in the service groups (A), yellow on Praxisteam (E), and as a faint watermark in the homepage booking block. B, C, D are ideas.",
+    detail: "Live as a small CSS diamond: blue in the service groups (A), yellow on Praxisteam (E), and as a faint watermark in the footer. B, C, D are ideas.",
   },
   star: { state: "idea", detail: "The star is not used anywhere on the site yet." },
   eyebrow: {
     state: "partial",
-    detail: "No eyebrows above section titles today. D is live as a white label on blue (“Termin”, “Online-Termin”); the Praxisteam CV headings are similar to C (yellow diamond + line). A and B are ideas.",
+    detail: "No eyebrows above section titles today. D is live as a white label on blue (“Online-Termin” on Kontakt); the Praxisteam CV headings are similar to C (yellow diamond + line). A and B are ideas.",
   },
   "title-accent": { state: "partial", detail: "A is live on the Startseite headline. B, C, D are ideas." },
   divider: { state: "partial", detail: "A (space only) is live between sections; E (thin line) on the Impressum. B, C, D are ideas." },
@@ -37,14 +37,14 @@ export const categoryStatus: Record<string, CategoryStatus> = {
   },
   panel: {
     state: "partial",
-    detail: "A and B are live. C is live on the Startseite booking block only; the Kontakt booking panel is plain blue. D is an idea.",
+    detail: "A and B are live. C is live as the footer (blue + watermark diamond); the Kontakt booking panel is plain blue. D is an idea.",
   },
   background: { state: "partial", detail: "Only A (plain colour blocks) is live. All textures are ideas." },
   "section-title": { state: "partial", detail: "A is live on the Startseite sections. B–E are ideas." },
   quote: { state: "idea", detail: "No quotes on the site yet." },
   "logo-ornament": {
     state: "partial",
-    detail: "Only the faint watermark diamond (without stars) is live, in the homepage booking block. Everything else is an idea; the full logo appears only in the header.",
+    detail: "Only the faint watermark diamond (without stars) is live, in the footer. Everything else is an idea; the full logo appears only in the header.",
   },
   hover: {
     state: "partial",

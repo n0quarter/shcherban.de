@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 
+import { LogoDiamond } from "~/components/brand"
 import { OpeningHours } from "~/components/opening-hours"
 import { localizedPath, useLang } from "~/lib/i18n"
 import { practice, siteName } from "~/lib/practice"
@@ -23,17 +24,18 @@ const text = {
   },
 }
 
-/** Layout follows the footer of the old shcherban.de site. */
+/** Layout follows the footer of the old shcherban.de site; colours and the corner diamond follow the blue booking panel. */
 export function SiteFooter() {
   const lang = useLang()
   const t = text[lang]
 
   return (
-    <footer className="mt-24 bg-ink text-white sm:mt-32">
-      <div className="mx-auto grid max-w-6xl gap-x-12 gap-y-14 px-4 py-16 md:grid-cols-2 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr]">
+    <footer className="relative mt-24 overflow-hidden bg-primary text-white sm:mt-32">
+      <LogoDiamond className="absolute -right-24 -bottom-28 size-96 text-white/8 sm:-right-16 lg:size-[28rem]" />
+      <div className="relative mx-auto grid max-w-6xl gap-x-12 gap-y-14 px-4 py-16 md:grid-cols-2 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr]">
         <div className="md:col-span-2 lg:col-span-1">
           <p className="text-sm font-bold tracking-wide uppercase">{practice.doctor}</p>
-          <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance text-cream sm:text-5xl">{siteName[lang]}</p>
+          <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance sm:text-5xl">{siteName[lang]}</p>
           <Link
             to={localizedPath(lang, "/kontakt/")}
             className="mt-10 inline-block border-b-3 border-sun pb-2 text-xl font-semibold text-sun transition-opacity hover:opacity-80"
@@ -49,7 +51,7 @@ export function SiteFooter() {
 
         <div>
           <FooterHeading>{t.hours}</FooterHeading>
-          <div className="text-base [&_dd]:text-white [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2 [&_dl]:text-base [&_dt]:font-bold">
+          <div className="text-base [&_dd]:text-white/80 [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2 [&_dl]:text-base [&_dt]:font-bold">
             <OpeningHours />
           </div>
           <a href={practice.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram" className="mt-8 inline-block hover:text-sun">
@@ -82,7 +84,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <p className="mx-auto max-w-6xl px-4 pb-10 text-sm text-white/60">
+      <p className="relative mx-auto max-w-6xl px-4 pb-10 text-sm text-white/80">
         © {new Date().getFullYear()} Frauenarztpraxis im Friedrichshain. {t.rights}
       </p>
     </footer>
@@ -90,7 +92,7 @@ export function SiteFooter() {
 }
 
 function FooterHeading({ children }: { children: string }) {
-  return <p className="mb-6 border-b border-white/70 pb-4 text-2xl font-medium text-cream">{children}</p>
+  return <p className="mb-6 border-b border-white/20 pb-4 text-2xl font-medium">{children}</p>
 }
 
 /** Instagram glyph (lucide-react v1 dropped brand icons). */

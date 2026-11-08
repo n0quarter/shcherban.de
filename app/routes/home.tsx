@@ -1,9 +1,8 @@
-import { ArrowRightIcon, ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
-import type { CSSProperties, ReactNode } from "react"
-import { Link, useSearchParams } from "react-router"
+import { ArrowRightIcon, CalendarCheckIcon } from "lucide-react"
+import type { ReactNode } from "react"
+import { Link } from "react-router"
 
 import { DoctolibLogo } from "~/components/doctolib-logo"
-import { HoursVariant, hoursVariantNames, wideHoursVariants } from "~/components/hours-variants"
 import { PhotoGallery } from "~/components/photo-gallery"
 import { ServiceGroups } from "~/components/service-groups"
 import { buttonVariants } from "~/components/ui/button"
@@ -39,11 +38,6 @@ const text = {
       { src: "/images/praxis-13.jpg", caption: "Das Arztzimmer" },
       { src: "/images/praxis-23.jpg", caption: "Kolposkop" },
     ],
-    contactLabel: "Termin",
-    contactHeading: "Vereinbaren Sie Ihren Termin",
-    contactText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
-    hours: "Sprechstunde",
-    directions: "Route planen",
   },
   en: {
     heading: ["Gynaecological practice ", "Ganna Shcherban", " in Berlin-Friedrichshain"],
@@ -59,25 +53,15 @@ const text = {
       { src: "/images/praxis-13.jpg", caption: "The consultation room" },
       { src: "/images/praxis-23.jpg", caption: "Colposcope" },
     ],
-    contactLabel: "Appointments",
-    contactHeading: "Book your appointment",
-    contactText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
-    hours: "Consultation hours",
-    directions: "Get directions",
   },
 }
 
 export default function Home() {
   const lang = useLang()
   const t = text[lang]
-  const [searchParams, setSearchParams] = useSearchParams()
-  const hoursVariant = Math.min(Number(searchParams.get("hours")) || 0, hoursVariantNames.length - 1) // TEMPORARY
-  const hoursWide = wideHoursVariants.has(hoursVariant)
 
   return (
     <>
-      <PracticeShapeDefs />
-
       {/* Hero */}
       <section className="relative overflow-clip">
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
@@ -135,74 +119,7 @@ export default function Home() {
           <PhotoGallery photos={t.photos} />
         </div>
       </section>
-
-      {/* Booking, with consultation hours */}
-      <section className="mx-auto max-w-6xl px-4 pt-24 sm:pt-32">
-        {import.meta.env.DEV && (
-          <div className="mb-4 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
-            Sprechstunde:
-            {hoursVariantNames.map((name, index) => (
-              <button
-                key={name}
-                type="button"
-                title={name}
-                onClick={() => setSearchParams(index ? { hours: String(index) } : {}, { replace: true, preventScrollReset: true })}
-                className={cn("rounded-full border bg-background px-2.5 py-1 font-medium", index === hoursVariant && "border-primary bg-primary text-primary-foreground")}
-              >
-                {index} · {name}
-              </button>
-            ))}
-          </div>
-        )}
-        <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-16">
-          <div className="absolute -right-24 -bottom-28 size-96 bg-white/8 sm:-right-16" style={practiceShape} />
-          <div className="relative grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-center">
-            <div>
-              <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">{t.contactLabel}</p>
-              <h2 className="mt-6 text-[clamp(2rem,4.2vw,3rem)] leading-[1.04] font-semibold tracking-tight text-balance">{t.contactHeading}</h2>
-              <p className="mt-5 max-w-lg text-primary-foreground/80">{t.contactText}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 gap-2.5 bg-sun px-6 text-base text-ink hover:bg-sun/85")}>
-                  <CalendarCheckIcon /> {bookingLabel[lang]}
-                  <DoctolibLogo color="ink" className="h-[15px]" />
-                </a>
-              </div>
-            </div>
-            <div className={cn("grid gap-8", !hoursWide && "sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2")}>
-              {!hoursWide && <HoursVariant variant={hoursVariant} title={t.hours} />}
-              <a href={practice.directionsUrl} target="_blank" rel="noopener" className="group block">
-                <p className="mb-3 font-semibold">{practice.street}</p>
-                <p className="text-white/85">{practice.city}</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-white/80 group-hover:text-white">
-                  {t.directions} <ArrowUpRightIcon className="size-4" />
-                </span>
-              </a>
-            </div>
-          </div>
-          {hoursWide && (
-            <div className="relative mt-12 border-t border-white/20 pt-10">
-              <HoursVariant variant={hoursVariant} title={t.hours} />
-            </div>
-          )}
-        </div>
-      </section>
     </>
-  )
-}
-
-/** The rounded diamond from the logo, used to crop avatars and as a background shape. */
-const practiceShape: CSSProperties = { clipPath: "url(#practice-shape)" }
-
-function PracticeShapeDefs() {
-  return (
-    <svg width="0" height="0" className="absolute" aria-hidden="true">
-      <clipPath id="practice-shape" clipPathUnits="objectBoundingBox">
-        <path
-          transform="scale(0.003263 0.003247)"
-          d="M20.5 203.7C-6.8 176.4-6.8 132.1 20.5 104.7L103.7 21.5C131.1-5.8 175.4-5.8 202.7 21.5L286 104.7C313.3 132.1 313.3 176.4 286 203.7L202.7 287C175.4 314.3 131.1 314.3 103.7 287Z"
-        />
-      </clipPath>
-    </svg>
   )
 }
 

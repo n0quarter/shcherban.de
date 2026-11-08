@@ -83,7 +83,7 @@ export function KitBlocks() {
           <Variant letter="B" name="Outlined" usedOn="Kontakt cards, “Anliegen nicht dabei?”, accordion">
             <Panel className="border" />
           </Variant>
-          <Variant letter="C" name="Blue + watermark diamond" usedOn="Startseite booking block only (Kontakt booking is plain blue)">
+          <Variant letter="C" name="Blue + watermark diamond" usedOn="footer (Kontakt booking is plain blue)">
             <div className="relative w-full overflow-hidden rounded-3xl bg-primary p-6 text-primary-foreground">
               <LogoDiamond className="absolute -right-10 -bottom-12 size-40 text-white/10" />
               <p className="relative font-semibold">Vereinbaren Sie Ihren Termin</p>
@@ -102,7 +102,7 @@ export function KitBlocks() {
 
       <Category id="background" questions={questions["background"]} title="13 · Background texture" note="A quiet texture for one or two special areas (e.g. the booking block or the footer) – never behind long text.">
         <Variants>
-          <Variant letter="A" name="Plain colour blocks" usedOn="pale panels, navy footer, Kontakt booking">
+          <Variant letter="A" name="Plain colour blocks" usedOn="pale panels, Kontakt booking">
             <div className="h-28 w-full rounded-2xl bg-primary" />
           </Variant>
           <Variant letter="B" name="Diamond lattice">
@@ -207,7 +207,7 @@ export function KitBlocks() {
               <Constellation className="h-24 text-sun" />
             </div>
           </Variant>
-          <Variant letter="D" name="Watermark diamond with stars" usedOn="watermark only, without stars: Startseite booking block">
+          <Variant letter="D" name="Watermark diamond with stars" usedOn="watermark only, without stars: footer">
             <div className="relative h-32 w-full overflow-hidden rounded-2xl bg-tint">
               <LogoDiamond className="absolute -right-6 -bottom-10 size-36 text-primary/10" />
               <Constellation className="absolute right-4 bottom-2 h-24 text-sun/70" />

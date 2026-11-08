@@ -5,7 +5,6 @@ import type { Question } from "~/components/ui-kit/feedback"
 export const questions: Record<string, Question[] | undefined> = {
   "colour-system": [
     { id: "yellow-amount", question: "Yellow is about 10 % today (one button, links in the footer). Keep it, or use more?", options: ["Keep ~10 %", "A bit more", "Less"] },
-    { id: "footer-colour", question: "The footer is dark navy today. Keep it, or try a light or blue footer?", options: ["Keep navy", "Light footer", "Blue footer"] },
     { id: "long-text-colour", question: "Long texts use plain grey instead of our navy. Switch them to the brand colours?", options: ["Yes, navy text", "Keep grey"] },
   ],
   palette: [{ id: "warmth", question: "Overall feel of the site?", options: ["Cooler / clinical", "As now", "Warmer / personal"] }],
@@ -32,13 +31,13 @@ export const questions: Record<string, Question[] | undefined> = {
     { id: "booking-panels", question: "Booking panels: watermark diamond (Startseite) or plain blue (Kontakt)?", options: ["Watermark on both", "Plain on both", "Keep as is"] },
     { id: "notes", question: "Highlight notes like “Empfehlung” or “von den Kassen erstattet” on service pages as small pale-blue boxes?", options: ["Yes", "No"] },
   ],
-  background: [{ id: "where", question: "Where could a texture go?", options: ["Booking block", "Footer", "Nowhere"] }],
+  background: [{ id: "where", question: "Where could a texture go?", options: ["Kontakt booking panel", "Footer", "Nowhere"] }],
   quote: [
-    { id: "homepage", question: "Show one sentence from Ganna on the site?", options: ["Before the booking block", "On Praxisteam", "No"] },
+    { id: "homepage", question: "Show one sentence from Ganna on the site?", options: ["End of the homepage", "On Praxisteam", "No"] },
     { id: "letter", question: "The long welcome letter sits in the homepage hero. Move it into its own “letter with signature” block further down?", options: ["Yes, own block", "Keep in the hero"] },
   ],
   "logo-ornament": [
-    { id: "footer", question: "Put the logo's star constellation into the dark footer?", options: ["Yes", "No"] },
+    { id: "footer", question: "Put the logo's star constellation into the blue footer (next to the watermark diamond)?", options: ["Yes", "No"] },
     { id: "real-mark", question: "Use the real logo mark (E) somewhere – e.g. scrolled header or footer?", options: ["Scrolled header", "Footer", "Nowhere"] },
   ],
   hover: [{ id: "intensity", question: "Hover effects should be…", options: ["Subtle", "Noticeable"] }],

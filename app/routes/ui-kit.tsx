@@ -128,7 +128,7 @@ export default function UiKit() {
               <LogoDiamond className="size-3 text-primary" /> Unsere Leistungen
             </p>
           </Variant>
-          <Variant letter="D" name="Door sign" usedOn="“Termin” / “Online-Termin” on the blue booking blocks (Startseite, Kontakt)">
+          <Variant letter="D" name="Door sign" usedOn="“Online-Termin” on the blue Kontakt booking panel">
             <div className="rounded-2xl bg-primary p-5 text-primary-foreground">
               <p className="inline-flex rounded-[5px] border border-white/70 px-2 py-0.5 text-[13px] font-semibold tracking-wide">Termin</p>
             </div>

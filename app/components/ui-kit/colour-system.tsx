@@ -25,8 +25,8 @@ export function ColourSystem() {
             one button, small marks). Too much yellow quickly looks loud.
           </Rule>
           <Rule title="Tinted neutrals">
-            Headings, the footer and pale blocks are not plain grey/black but navy and pale blue – both mixed from the logo
-            blue. That keeps every neutral “in the family”. <b>Not yet everywhere:</b> long texts on service pages, Praxisteam
+            Headings and pale blocks are not plain grey/black but navy and pale blue – both mixed from the logo blue; the
+            footer is the logo blue itself. That keeps every neutral “in the family”. <b>Not yet everywhere:</b> long texts on service pages, Praxisteam
             and Impressum still use the plain grey of the text plugin.
           </Rule>
           <Rule title="Contrast for reading">
@@ -56,8 +56,8 @@ export function ColourSystem() {
           <Contrast fg="text-primary" bg="bg-background" label="Blue on white (links)" ratio={7.0} />
           <Contrast fg="text-primary-foreground" bg="bg-primary" label="White on blue (buttons)" ratio={6.8} />
           <Contrast fg="text-ink" bg="bg-sun" label="Navy on yellow (button)" ratio={11.5} />
-          <Contrast fg="text-sun" bg="bg-ink" label="Yellow on navy (footer)" ratio={11.5} />
-          <Contrast fg="text-cream" bg="bg-ink" label="Cream on navy (footer)" ratio={14.7} />
+          <Contrast fg="text-sun" bg="bg-primary" label="Yellow on blue (footer links)" ratio={4.9} />
+          <Contrast fg="text-white/80" bg="bg-primary" label="White 80 % on blue (footer text)" ratio={5.1} />
           <Contrast fg="text-muted-foreground" bg="bg-background" label="Grey-blue on white (small text)" ratio={6.0} />
           <Contrast fg="text-neutral-700" bg="bg-background" label="Plain grey on white (long texts)" ratio={10.4} />
           <Contrast fg="text-sun" bg="bg-background" label="Yellow on white – not for text" ratio={1.4} />
@@ -105,7 +105,7 @@ export function ColourSystem() {
             name="Current + cream (small step)"
             swatches={["#1554B8", "#FDD506", "#161F30", "#FBF6E4", "#EEF4FC"]}
             block="#FBF6E4"
-            why="Keeps today's palette, adds the footer's cream for one or two warm blocks. The smallest change towards ‘warmer’."
+            why="Keeps today's palette, adds a warm cream for one or two blocks. The smallest change towards ‘warmer’."
           />
         </div>
       </Category>
