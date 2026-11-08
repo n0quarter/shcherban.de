@@ -138,3 +138,9 @@
     @apply font-sans;
     }
 }
+/* Visible keyboard focus on dark backgrounds (blue panels, navy footer), where the blue default ring disappears.
+   Unlayered on purpose: it must win over the components' outline-none. */
+:is(.bg-primary, .bg-ink) :focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 3px;
+}

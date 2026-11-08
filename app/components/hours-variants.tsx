@@ -181,7 +181,7 @@ export function HoursVariant({ variant, title }: { variant: number; title: strin
 
   // 0 – current simple list
   return (
-    <div className="[&_dd]:text-white/75 [&_dl]:text-base">
+    <div className="[&_dd]:text-white/85 [&_dl]:text-base">
       {heading}
       <OpeningHours />
     </div>

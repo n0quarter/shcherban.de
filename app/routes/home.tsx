@@ -172,7 +172,7 @@ export default function Home() {
               {!hoursWide && <HoursVariant variant={hoursVariant} title={t.hours} />}
               <a href={practice.directionsUrl} target="_blank" rel="noopener" className="group block">
                 <p className="mb-3 font-semibold">{practice.street}</p>
-                <p className="text-white/75">{practice.city}</p>
+                <p className="text-white/85">{practice.city}</p>
                 <span className="mt-3 inline-flex items-center gap-1.5 text-white/80 group-hover:text-white">
                   {t.directions} <ArrowUpRightIcon className="size-4" />
                 </span>

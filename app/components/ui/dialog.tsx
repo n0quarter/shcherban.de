@@ -41,8 +41,10 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel = "Schließen",
   ...props
 }: DialogPrimitive.Popup.Props & {
+  closeLabel?: string
   showCloseButton?: boolean
 }) {
   return (
@@ -63,14 +65,14 @@ function DialogContent({
             render={
               <Button
                 variant="ghost"
-                className="absolute top-4 right-4"
-                size="icon-sm"
+                className="absolute top-3 right-3 size-10"
+                size="icon"
               />
             }
           >
             <XIcon
             />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>

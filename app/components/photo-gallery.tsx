@@ -9,8 +9,8 @@ import { cn } from "~/lib/utils"
 export type Photo = { src: string; caption: string }
 
 const text = {
-  de: { open: "Foto vergrößern", previous: "Vorheriges Foto", next: "Nächstes Foto" },
-  en: { open: "Enlarge photo", previous: "Previous photo", next: "Next photo" },
+  de: { open: "Foto vergrößern", previous: "Vorheriges Foto", next: "Nächstes Foto", close: "Schließen" },
+  en: { open: "Enlarge photo", previous: "Previous photo", next: "Next photo", close: "Close" },
 }
 
 /** Photo grid: first photo large, the rest small. Each photo opens enlarged in a dialog. */
@@ -68,6 +68,7 @@ export function PhotoLightbox({
     <Dialog open={current !== null} onOpenChange={(open) => !open && onOpenIndexChange(null)}>
       <DialogContent
         className="gap-3 bg-background p-3 sm:max-w-5xl"
+        closeLabel={t.close}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft") step(-1)
           if (event.key === "ArrowRight") step(1)

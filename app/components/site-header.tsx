@@ -110,19 +110,20 @@ function MobileMenu() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger render={<Button variant="ghost" size="icon" className="md:hidden" />}>
         <MenuIcon />
-        <span className="sr-only">Menu</span>
+        <span className="sr-only">{lang === "en" ? "Menu" : "Menü"}</span>
       </SheetTrigger>
-      <SheetContent side="right" className="gap-1 p-6 pt-14">
-        <SheetTitle className="sr-only">Menu</SheetTitle>
+      <SheetContent side="right" className="gap-1 p-6 pt-16" closeLabel={lang === "en" ? "Close menu" : "Menü schließen"}>
+        <SheetTitle className="sr-only">{lang === "en" ? "Menu" : "Menü"}</SheetTitle>
         {navigation.map((item) => (
-          <Link
+          <NavLink
             key={item.path}
             to={localizedPath(lang, item.path)}
+            end={item.path === "/"}
             onClick={() => setOpen(false)}
-            className="rounded-xl px-3 py-2 text-base font-medium hover:bg-muted"
+            className={({ isActive }) => cn("rounded-xl px-3 py-2 text-base font-medium hover:bg-muted", isActive && "bg-muted text-primary")}
           >
             {item.label[lang]}
-          </Link>
+          </NavLink>
         ))}
         <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "mt-4 gap-2.5")}>
           {bookingLabel[lang]}
