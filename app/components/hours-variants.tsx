@@ -1,8 +1,8 @@
 // TEMPORARY: design variants for the consultation hours in the blue booking block.
-// Pick one with ?hours=0…6 (dev-only picker on the homepage). Delete the unused ones afterwards.
-import { useEffect, useState } from "react"
-
+// Pick one with ?hours=0…10 (7–10 are clocks, see hours-clock.tsx) (dev-only picker on the homepage). Delete the unused ones afterwards.
+import { ClockHours } from "~/components/hours-clock"
 import { OpeningHours } from "~/components/opening-hours"
+import { parseTime, useTodayIndex } from "~/lib/hours"
 import { useLang, type Lang } from "~/lib/i18n"
 import { openingHours } from "~/lib/practice"
 import { cn } from "~/lib/utils"
@@ -15,36 +15,23 @@ export const hoursVariantNames = [
   "Gruppiert",
   "Tabelle mit Linien",
   "Heute markiert",
+  "Uhr: zwei Ringe",
+  "Uhr: fünf Tage",
+  "Uhr: Tagesrad 24 h",
+  "Uhr: mit Jetzt-Zeiger",
 ]
 
 /** Variants that need the full width of the block (shown under the booking text instead of beside it). */
-export const wideHoursVariants = new Set([1, 2])
+export const wideHoursVariants = new Set([1, 2, 8])
 
 const today: Record<Lang, string> = { de: "Heute", en: "Today" }
-
-/** "11.00–18.00" -> [11, 18]; "nach Vereinbarung" -> null */
-function parseTime(time: string): [number, number] | null {
-  const match = time.match(/(\d{2})\.(\d{2})–(\d{2})\.(\d{2})/)
-  if (!match) return null
-  const [, h1, m1, h2, m2] = match.map(Number)
-  return [h1 + m1 / 60, h2 + m2 / 60]
-}
-
-/** Index 0–4 for Mon–Fri in Berlin time, or null at weekends. Only known in the browser. */
-function useTodayIndex() {
-  const [index, setIndex] = useState<number | null>(null)
-  useEffect(() => {
-    const weekday = new Intl.DateTimeFormat("en-GB", { weekday: "short", timeZone: "Europe/Berlin" }).format(new Date())
-    const position = ["Mon", "Tue", "Wed", "Thu", "Fri"].indexOf(weekday)
-    setIndex(position === -1 ? null : position)
-  }, [])
-  return index
-}
 
 export function HoursVariant({ variant, title }: { variant: number; title: string }) {
   const lang = useLang()
   const todayIndex = useTodayIndex()
   const heading = <p className="mb-4 font-semibold">{title}</p>
+
+  if (variant >= 7) return <ClockHours variant={variant} title={title} />
 
   // 1 – one tile per weekday
   if (variant === 1)
