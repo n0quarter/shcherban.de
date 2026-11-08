@@ -93,8 +93,9 @@ export default function Home() {
               <WelcomeLetter lang={lang} />
             </div>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-base" })}>
+              <a href={practice.bookingUrl} target="_blank" rel="noopener" className={buttonVariants({ size: "lg", className: "h-12 gap-2.5 px-6 text-base" })}>
                 <CalendarCheckIcon /> {bookingLabel[lang]}
+                <DoctolibLogo className="h-[15px]" />
               </a>
               <Link to={localizedPath(lang, "/leistungen/")} className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 bg-background px-6 text-base" })}>
                 {t.allServices}
