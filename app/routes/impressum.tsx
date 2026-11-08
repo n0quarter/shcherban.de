@@ -26,7 +26,7 @@ export default function Impressum() {
         )}
         <article
           lang="de"
-          className="prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold prose-headings:text-ink prose-a:text-primary prose-strong:text-ink"
+          className="star-bullets prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold prose-headings:text-ink prose-a:text-primary prose-strong:text-ink"
         >
           <LegalText />
         </article>

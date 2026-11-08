@@ -25,7 +25,7 @@ export const categoryStatus: Record<string, CategoryStatus> = {
   divider: { state: "partial", detail: "A (space only) is live between sections; E (thin line) on the Impressum. B, C, D are ideas." },
   bullets: {
     state: "partial",
-    detail: "A (grey dot) is live on the 4 service pages that have lists (Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung). B–E are ideas.",
+    detail: "C (small yellow star) is live on the 4 service pages that have lists (Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung) and the Impressum. A, B, D, E are ideas.",
   },
   "icon-container": {
     state: "partial",

@@ -198,9 +198,9 @@ export default function UiKit() {
       <Category id="bullets" questions={questions["bullets"]} title="9 · List bullets" note="For lists on the service pages (e.g. Krebsvorsorge). Only 4 service pages have lists today.">
         <Variants>
           {[
-            { letter: "A", name: "Grey dot (text plugin default)", usedOn: "Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung", bullet: <span className="mt-2 size-1.5 shrink-0 rounded-full bg-neutral-400" /> },
+            { letter: "A", name: "Grey dot (text plugin default)", bullet: <span className="mt-2 size-1.5 shrink-0 rounded-full bg-neutral-400" /> },
             { letter: "B", name: "Blue diamond", bullet: <LogoDiamond className="mt-1.5 size-3 text-primary" /> },
-            { letter: "C", name: "Yellow star", bullet: <Sparkle className="mt-1 size-3.5 text-sun" /> },
+            { letter: "C", name: "Small yellow star", usedOn: "Krebsvorsorge, Impfungen, Mädchensprechstunde, Schwangerenbetreuung, Impressum", bullet: <Sparkle className="mt-1.5 size-2.5 text-sun" /> },
             { letter: "D", name: "Check", bullet: <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" /> },
             { letter: "E", name: "Blue dot (simplest change)", bullet: <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" /> },
           ].map(({ letter, name, usedOn, bullet }) => (

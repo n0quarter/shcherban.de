@@ -24,7 +24,7 @@ export function ServicePage({ title, image, children }: { title: string; image?:
       </div>
       <PageHeader title={title} />
       <div className={cn("mx-auto max-w-6xl px-4", image && "grid gap-12 md:grid-cols-[1fr_16rem] lg:grid-cols-[1fr_20rem]")}>
-        <article className="prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold">
+        <article className="star-bullets prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold">
           {children}
         </article>
         {image && (
