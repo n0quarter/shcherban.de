@@ -6,7 +6,7 @@ import { DoctolibLogo } from "~/components/doctolib-logo"
 import { ColourSystem } from "~/components/ui-kit/colour-system"
 import { FeedbackProvider, SaveStatus } from "~/components/ui-kit/feedback"
 import { questions } from "~/components/ui-kit/questions"
-import { Category, Title, UsedBadge, Variant, Variants } from "~/components/ui-kit/parts"
+import { Category, Title, Variant, Variants } from "~/components/ui-kit/parts"
 import { buttonVariants } from "~/components/ui/button"
 import { cn } from "~/lib/utils"
 
@@ -28,10 +28,12 @@ export default function UiKit() {
           Building blocks of the site. Pick one variant per category (e.g. “Eyebrow B, Divider C”) and they get used on every
           page, so the site reads as one designed system.
         </p>
-        <p className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-          <UsedBadge>where</UsedBadge> = live on the site today
-          <span className="rounded-full bg-muted px-2 py-0.5 text-xs">Idea</span> = suggestion, not used yet
-        </p>
+        <div className="mt-6 flex flex-wrap gap-4 text-sm text-ink">
+          <span className="rounded-xl px-3 py-2 outline-3 outline-emerald-500">Green frame = live on the site today</span>
+          <span className="rounded-xl px-3 py-2 outline-2 outline-dashed outline-orange-400">Orange dashed = idea, not used yet</span>
+          <span className="rounded-xl px-3 py-2 ring-4 ring-sun ring-offset-4">Yellow ring = your choice</span>
+        </div>
+        <p className="mt-3 text-sm text-muted-foreground">Select any text to comment on it.</p>
         <div className="mt-4">
           <SaveStatus />
         </div>

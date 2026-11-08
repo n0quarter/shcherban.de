@@ -1,7 +1,7 @@
 // Colour section of the internal /ui-kit page: how the palette is built and which options exist.
 import { Sparkle } from "~/components/brand"
 import { useIsChosen } from "~/components/ui-kit/feedback"
-import { Category, VariantFooter } from "~/components/ui-kit/parts"
+import { Category, chosenRing, liveOutline, NotLiveBox, VariantFooter } from "~/components/ui-kit/parts"
 import { questions } from "~/components/ui-kit/questions"
 import { cn } from "~/lib/utils"
 
@@ -40,9 +40,13 @@ export function ColourSystem() {
           <div className="flex w-[10%] items-center justify-center bg-sun text-xs text-ink">10 %</div>
         </div>
 
-        <p className="mt-10 mb-3 text-sm font-semibold text-ink">Tonal scales (same hue, different lightness)</p>
-        <Scale name="Blue" hue={260} chroma={0.17} />
-        <Scale name="Yellow" hue={95} chroma={0.18} />
+        <div className="mt-10">
+          <NotLiveBox label="Reference only – the site uses a few of these steps, not the scales as a set">
+            <p className="mb-3 text-sm font-semibold text-ink">Tonal scales (same hue, different lightness)</p>
+            <Scale name="Blue" hue={260} chroma={0.17} />
+            <Scale name="Yellow" hue={95} chroma={0.18} />
+          </NotLiveBox>
+        </div>
 
         <p className="mt-10 mb-3 text-sm font-semibold text-ink">Contrast of the text pairs in use</p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -163,7 +167,7 @@ function PaletteOption({
   return (
     <div
       data-feedback-target={`palette.${letter}`}
-      className={cn("flex flex-col rounded-3xl border", usedOn && "border-primary/40 ring-1 ring-primary/20", chosen && "border-sun ring-2 ring-sun")}
+      className={cn("flex flex-col rounded-3xl", liveOutline(Boolean(usedOn)), chosen && chosenRing)}
     >
       <div className="flex-1 p-5">
       <div className="flex gap-2">

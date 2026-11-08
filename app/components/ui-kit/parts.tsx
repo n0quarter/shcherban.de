@@ -21,7 +21,7 @@ export function Category({
 }) {
   return (
     <CategoryScope id={id}>
-      <section id={id} data-feedback-target={id} className="scroll-mt-28">
+      <section id={id} data-feedback-target={id} className={cn("scroll-mt-28", sectionOutline(categoryStatus[id]?.state))}>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-ink">
@@ -56,7 +56,7 @@ export function Variant({ letter, name, usedOn, children }: { letter: string; na
   return (
     <div
       data-feedback-target={`${category}.${letter}`}
-      className={cn("flex flex-col rounded-3xl border", usedOn && "border-primary/40 ring-1 ring-primary/20", chosen && "border-sun ring-2 ring-sun")}
+      className={cn("flex flex-col rounded-3xl", liveOutline(Boolean(usedOn)), chosen && chosenRing)}
     >
       <div className="flex min-h-36 flex-1 items-center justify-center p-6">{children}</div>
       <VariantFooter letter={letter} name={name} usedOn={usedOn} />
@@ -73,7 +73,7 @@ export function VariantFooter({ letter, name, usedOn }: { letter: string; name: 
         <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-semibold text-white">{letter}</span>
         <span className="text-ink">{name}</span>
       </p>
-      <p>{usedOn ? <UsedBadge>{usedOn}</UsedBadge> : <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">Idea</span>}</p>
+      <p>{usedOn ? <UsedBadge>{usedOn}</UsedBadge> : <IdeaBadge />}</p>
       <div className="flex flex-wrap items-start gap-2">
         <PickButton letter={letter} />
         <div className="min-w-0 flex-1">
@@ -84,8 +84,36 @@ export function VariantFooter({ letter, name, usedOn }: { letter: string; name: 
   )
 }
 
+// Meta colours for the kit itself (deliberately NOT brand colours): green = live today, orange dashed = idea.
+export function liveOutline(isLive: boolean) {
+  return isLive ? "outline-3 outline-emerald-500" : "outline-2 outline-dashed outline-orange-400"
+}
+
+/** Whole sections: green frame when the section describes the live site, orange dashed when it is only ideas. */
+function sectionOutline(state?: "live" | "partial" | "idea") {
+  if (state === "live") return "rounded-[2rem] p-6 outline-3 outline-emerald-500"
+  if (state === "idea") return "rounded-[2rem] p-6 outline-2 outline-dashed outline-orange-400"
+  return ""
+}
+
+export const chosenRing = "ring-4 ring-sun ring-offset-4"
+
 export function UsedBadge({ children }: { children: ReactNode }) {
-  return <span className="inline-flex rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">In use: {children}</span>
+  return <span className="inline-flex rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">Live: {children}</span>
+}
+
+export function IdeaBadge() {
+  return <span className="inline-flex rounded-full border border-dashed border-orange-400 px-2 py-0.5 text-xs font-medium text-orange-700">Idea – not used yet</span>
+}
+
+/** Wraps part of a live section that is NOT live (e.g. reference material). */
+export function NotLiveBox({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="rounded-2xl p-4 outline-2 outline-dashed outline-orange-400">
+      <p className="mb-3 text-xs font-medium text-orange-700">{label}</p>
+      {children}
+    </div>
+  )
 }
 
 export function Title({ children }: { children: ReactNode }) {
@@ -93,9 +121,9 @@ export function Title({ children }: { children: ReactNode }) {
 }
 
 const statusStyle = {
-  live: { label: "Live today", className: "bg-primary text-primary-foreground" },
-  partial: { label: "Partly live", className: "bg-sun text-ink" },
-  idea: { label: "Not used yet", className: "bg-muted text-muted-foreground" },
+  live: { label: "Whole section = live today", className: "bg-emerald-600 text-white" },
+  partial: { label: "Partly live – see green outlines", className: "bg-slate-700 text-white" },
+  idea: { label: "Not used yet – ideas only", className: "border border-dashed border-orange-400 text-orange-700" },
 }
 
 /** Explicit statement of how much of this category is on the live site today. */
