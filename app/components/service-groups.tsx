@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 import { Link } from "react-router"
 
 import { localizedPath, useLang } from "~/lib/i18n"
@@ -39,37 +39,41 @@ export function ServiceGroups({ className }: { className?: string }) {
   const t = text[lang]
 
   return (
-    <div className={cn("grid gap-x-8 gap-y-12 lg:grid-cols-3", className)}>
+    <div className={cn("grid items-start gap-5 lg:grid-cols-3", className)}>
       {serviceGroups.map((group) => (
-        <div key={group.title.de}>
-          <p className="flex items-center gap-2.5 border-b-2 border-ink pb-3 text-sm font-semibold tracking-wide text-ink uppercase">
-            <Diamond className="size-2.5 bg-sun" />
-            {group.title[lang]}
-          </p>
-          <ul className="md:grid md:grid-cols-2 md:gap-x-8 lg:block">
-            {group.slugs.map((slug) => {
-              const service = services.find((s) => s.slug === slug)!
-              const Icon = service.icon
-              return (
-                <li key={slug} className="border-b">
-                  <Link to={localizedPath(lang, `/leistungen/${slug}/`)} className="group flex items-start gap-4 py-5">
-                    <span className="relative mt-0.5 flex size-11 shrink-0 items-center justify-center">
-                      <Diamond className="absolute inset-1 bg-tint transition-colors group-hover:bg-primary" />
-                      <Icon className="relative size-5 text-primary transition-colors group-hover:text-primary-foreground" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-xl font-semibold tracking-tight text-ink">{service.title[lang]}</span>
-                      <span className="mt-1 block text-sm text-muted-foreground">{service.teaser[lang]}</span>
-                    </span>
-                    <ArrowUpRightIcon className="mt-1 size-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+        <div key={group.title.de} className="space-y-5">
+          <div className="rounded-3xl bg-tint p-3 sm:p-4">
+            <p className="flex items-center gap-2.5 px-3 pt-3 pb-2 text-lg font-semibold text-ink">
+              <Diamond className="size-2.5 bg-primary" />
+              {group.title[lang]}
+            </p>
+            <ul className="md:grid md:grid-cols-2 md:gap-x-2 lg:block">
+              {group.slugs.map((slug) => {
+                const service = services.find((s) => s.slug === slug)!
+                const Icon = service.icon
+                return (
+                  <li key={slug}>
+                    <Link
+                      to={localizedPath(lang, `/leistungen/${slug}/`)}
+                      className="group flex items-start gap-4 rounded-2xl p-3 transition-colors hover:bg-background"
+                    >
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <Icon className="size-5" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-semibold text-ink">{service.title[lang]}</span>
+                        <span className="mt-0.5 block text-sm text-muted-foreground">{service.teaser[lang]}</span>
+                      </span>
+                      <ArrowRightIcon className="mt-2.5 size-4 shrink-0 text-primary opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
           {group.slugs.length < 3 && (
-            <div className="mt-8 rounded-2xl bg-tint p-6">
-              <p className="text-xl font-semibold tracking-tight text-ink">{t.notListed}</p>
+            <div className="rounded-3xl border p-6 sm:p-7">
+              <p className="text-lg font-semibold text-ink">{t.notListed}</p>
               <p className="mt-2 text-sm text-muted-foreground">{t.notListedText}</p>
               <Link to={localizedPath(lang, "/kontakt/")} className="group mt-4 inline-flex items-center gap-2 font-semibold text-primary">
                 {t.contactPage}
