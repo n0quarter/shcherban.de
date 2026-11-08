@@ -21,7 +21,11 @@ const pages: Record<string, string> = {
   impressum: "routes/impressum.tsx",
 }
 
-export default Object.entries(pages).flatMap(([path, file]) => [
-  path === "" ? index(file, { id: "de" }) : route(path, file, { id: `de/${path}` }),
-  route(path === "" ? "en" : `en/${path}`, file, { id: `en/${path}` }),
-]) satisfies RouteConfig
+export default [
+  ...Object.entries(pages).flatMap(([path, file]) => [
+    path === "" ? index(file, { id: "de" }) : route(path, file, { id: `de/${path}` }),
+    route(path === "" ? "en" : `en/${path}`, file, { id: `en/${path}` }),
+  ]),
+  // Internal design overview, not linked and not indexed; one language only.
+  route("ui-kit", "routes/ui-kit.tsx", { id: "ui-kit" }),
+] satisfies RouteConfig

@@ -1,0 +1,57 @@
+import { useId, type ReactNode } from "react"
+
+import { cn } from "~/lib/utils"
+
+// Shapes taken from public/logo.svg, so every ornament on the site matches the logo exactly.
+
+/** The rounded diamond of the logo. Colour via text-* (fill = currentColor). */
+export function LogoDiamond({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 306.5 308.5" aria-hidden="true" className={cn("shrink-0", className)}>
+      <path fill="currentColor" d={DIAMOND_PATH} />
+    </svg>
+  )
+}
+
+/** The four-pointed star of the logo. Colour via text-* (fill = currentColor). */
+export function Sparkle({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 54 57" aria-hidden="true" className={cn("shrink-0", className)}>
+      <path fill="currentColor" d="M27 0L34.3 20.8L54 28.5L34.3 36.2L27 57L19.7 36.2L0 28.5L19.7 20.8Z" />
+    </svg>
+  )
+}
+
+/** Three stars arranged like in the logo; a small decorative cluster. */
+export function SparkleCluster({ className }: { className?: string }) {
+  return (
+    <span aria-hidden="true" className={cn("relative inline-block size-12 text-sun", className)}>
+      <Sparkle className="absolute top-0 left-[18%] w-[34%]" />
+      <Sparkle className="absolute right-0 bottom-[22%] w-[24%]" />
+      <Sparkle className="absolute bottom-0 left-0 w-[20%]" />
+    </span>
+  )
+}
+
+/** Lightweight CSS diamond (rotated rounded square) for small markers and bullets. */
+export function Diamond({ className }: { className?: string }) {
+  return <span aria-hidden className={cn("block shrink-0 rotate-45 rounded-[28%]", className)} />
+}
+
+/** Crops its content (e.g. a photo) to the logo diamond. */
+export function DiamondFrame({ className, children }: { className?: string; children: ReactNode }) {
+  const id = useId().replace(/:/g, "")
+  return (
+    <div className={cn("relative", className)} style={{ clipPath: `url(#${id})` }}>
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <clipPath id={id} clipPathUnits="objectBoundingBox">
+          <path transform="scale(0.003263 0.003242)" d={DIAMOND_PATH} />
+        </clipPath>
+      </svg>
+      {children}
+    </div>
+  )
+}
+
+const DIAMOND_PATH =
+  "M20.5 203.7C-6.8 176.4-6.8 132.1 20.5 104.7L103.7 21.5C131.1-5.8 175.4-5.8 202.7 21.5L286 104.7C313.3 132.1 313.3 176.4 286 203.7L202.7 287C175.4 314.3 131.1 314.3 103.7 287Z"
