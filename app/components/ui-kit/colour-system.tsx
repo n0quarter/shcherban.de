@@ -1,12 +1,14 @@
 // Colour section of the internal /ui-kit page: how the palette is built and which options exist.
 import { Sparkle } from "~/components/brand"
-import { Category, UsedBadge } from "~/components/ui-kit/parts"
+import { useIsChosen } from "~/components/ui-kit/feedback"
+import { Category, VariantFooter } from "~/components/ui-kit/parts"
 import { cn } from "~/lib/utils"
 
 export function ColourSystem() {
   return (
     <>
       <Category
+        id="colour-system"
         title="1 · Colour system – how it works"
         note="Brand palettes are usually built from a few rules. Here is how the current palette follows them."
       >
@@ -54,6 +56,7 @@ export function ColourSystem() {
       </Category>
 
       <Category
+        id="palette"
         title="2 · Palette options"
         note="Same logo colours everywhere; the options differ in the supporting colour for calm blocks and backgrounds."
       >
@@ -153,13 +156,11 @@ function PaletteOption({
   block: string
   why: string
 }) {
+  const chosen = useIsChosen(letter)
   return (
-    <div className={cn("rounded-3xl border p-5", usedOn && "border-primary/40 ring-1 ring-primary/20")}>
-      <p className="flex items-center gap-2 text-sm">
-        <span className="flex size-6 items-center justify-center rounded-full bg-ink text-xs font-semibold text-white">{letter}</span>
-        <span className="font-medium text-ink">{name}</span>
-      </p>
-      <div className="mt-4 flex gap-2">
+    <div className={cn("flex flex-col rounded-3xl border", usedOn && "border-primary/40 ring-1 ring-primary/20", chosen && "border-sun ring-2 ring-sun")}>
+      <div className="flex-1 p-5">
+      <div className="flex gap-2">
         {swatches.map((colour) => (
           <span key={colour} className="h-10 flex-1 rounded-xl border" style={{ background: colour }} title={colour} />
         ))}
@@ -172,7 +173,8 @@ function PaletteOption({
         </span>
       </div>
       <p className="mt-3 text-sm text-muted-foreground">{why}</p>
-      {usedOn && <p className="mt-2"><UsedBadge>{usedOn}</UsedBadge></p>}
+      </div>
+      <VariantFooter letter={letter} name={name} usedOn={usedOn} />
     </div>
   )
 }

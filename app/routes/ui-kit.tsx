@@ -4,6 +4,7 @@ import type { ReactNode } from "react"
 import { Diamond, DiamondFrame, LogoDiamond, Sparkle, SparkleCluster } from "~/components/brand"
 import { DoctolibLogo } from "~/components/doctolib-logo"
 import { ColourSystem } from "~/components/ui-kit/colour-system"
+import { FeedbackProvider, Questions, SaveStatus, type Question } from "~/components/ui-kit/feedback"
 import { Category, Title, UsedBadge, Variant, Variants } from "~/components/ui-kit/parts"
 import { buttonVariants } from "~/components/ui/button"
 import { cn } from "~/lib/utils"
@@ -15,8 +16,19 @@ export const meta = () => [{ title: "UI-Kit | shcherban.de" }, { name: "robots",
 
 const quote = "Ihre Gesundheit und Ihr Wohlbefinden stehen bei uns an erster Stelle."
 
+// Questions from Claude Code to the owner; answers are saved with the picks and comments.
+const questions: Question[] = [
+  { id: "ornament-amount", question: "How much decoration overall?", options: ["Minimal", "A little", "Noticeable"] },
+  { id: "star-usage", question: "Should the yellow star become a recurring signature element?", options: ["Yes", "Only in 1–2 places", "No"] },
+  { id: "ganna-voice", question: "Show a short quote from Ganna (her own words) on the homepage?", options: ["Yes", "No", "Maybe later"] },
+  { id: "warmth", question: "Should the site feel cooler/clinical or warmer/personal?", options: ["Cooler", "As now", "Warmer"] },
+  { id: "photo-shape", question: "Should photos use one consistent frame across all pages?", options: ["Yes, one frame", "Portraits differ from rooms", "No preference"] },
+  { id: "texture", question: "Use a subtle pattern (e.g. diamond lattice) somewhere?", options: ["Booking block", "Footer", "Nowhere"] },
+]
+
 export default function UiKit() {
   return (
+    <FeedbackProvider>
     <div className="mx-auto max-w-6xl space-y-24 px-4 py-16">
       <header>
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">Intern</p>
@@ -29,11 +41,22 @@ export default function UiKit() {
           <UsedBadge>where</UsedBadge> = live on the site today
           <span className="rounded-full bg-muted px-2 py-0.5 text-xs">Idea</span> = suggestion, not used yet
         </p>
+        <div className="mt-4">
+          <SaveStatus />
+        </div>
       </header>
+
+      <section id="questions" className="scroll-mt-28">
+        <h2 className="text-2xl font-semibold tracking-tight text-ink">Questions from Claude</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Click an answer; add a note if you like. Saved automatically.</p>
+        <div className="mt-6">
+          <Questions questions={questions} />
+        </div>
+      </section>
 
       <ColourSystem />
 
-      <Category title="3 · Typography" note="Roboto everywhere. Sizes as used now.">
+      <Category id="typography" title="3 · Typography" note="Roboto everywhere. Sizes as used now.">
         <div className="space-y-6 rounded-3xl border p-8">
           <p className="text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-semibold tracking-tight text-ink">Page title (H1)</p>
           <p className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-[2.625rem]">Section title (H2)</p>
@@ -44,7 +67,7 @@ export default function UiKit() {
         </div>
       </Category>
 
-      <Category title="4 · The diamond" note="The logo shape. Used as marker, frame, background or icon base.">
+      <Category id="diamond" title="4 · The diamond" note="The logo shape. Used as marker, frame, background or icon base.">
         <Variants>
           <Variant letter="A" name="Solid blue" usedOn="small markers in the service groups (Startseite, Leistungen)">
             <div className="flex items-end gap-4">
@@ -73,7 +96,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="5 · The star" note="The yellow four-pointed star from the logo. Not used on the site yet – best used sparingly, as an accent.">
+      <Category id="star" title="5 · The star" note="The yellow four-pointed star from the logo. Not used on the site yet – best used sparingly, as an accent.">
         <Variants>
           <Variant letter="A" name="Single star">
             <div className="flex items-end gap-4 text-sun">
@@ -100,7 +123,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="6 · Eyebrow (small label above a title)" note="Small label above section titles.">
+      <Category id="eyebrow" title="6 · Eyebrow (small label above a title)" note="Small label above section titles.">
         <Variants>
           <Variant letter="A" name="Pill with diamond">
             <p className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-sm text-muted-foreground">
@@ -123,7 +146,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="7 · Title accent" note="How a key word in a big title is emphasised.">
+      <Category id="title-accent" title="7 · Title accent" note="How a key word in a big title is emphasised.">
         <Variants wide>
           <Variant letter="A" name="Blue word" usedOn="Startseite headline">
             <Title>
@@ -156,7 +179,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="8 · Divider between sections" note="Sections are separated only by space today.">
+      <Category id="divider" title="8 · Divider between sections" note="Sections are separated only by space today.">
         <Variants wide>
           <Variant letter="A" name="Space only" usedOn="all pages">
             <div className="h-10" />
@@ -177,7 +200,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="9 · List bullets" note="For lists on the service pages (e.g. Krebsvorsorge).">
+      <Category id="bullets" title="9 · List bullets" note="For lists on the service pages (e.g. Krebsvorsorge).">
         <Variants>
           {[
             { letter: "A", name: "Default dot", usedOn: "all Leistungen pages", bullet: <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-muted-foreground" /> },
@@ -199,7 +222,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="10 · Icon container" note="For service icons and contact icons. Two different ones are in use today – picking one makes it consistent.">
+      <Category id="icon-container" title="10 · Icon container" note="For service icons and contact icons. Two different ones are in use today – picking one makes it consistent.">
         <Variants>
           <Variant letter="A" name="Rounded square" usedOn="services (Startseite, Leistungen)">
             <IconBox className="rounded-xl bg-background ring-1 ring-border" />
@@ -222,7 +245,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="11 · Photo frame" note="How portraits and practice photos are framed.">
+      <Category id="photo-frame" title="11 · Photo frame" note="How portraits and practice photos are framed.">
         <Variants>
           <Variant letter="A" name="Rounded + tilted tint" usedOn="Startseite portrait">
             <div className="relative mx-auto w-36">
@@ -247,7 +270,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="12 · Panel / card" note="Containers for grouped content.">
+      <Category id="panel" title="12 · Panel / card" note="Containers for grouped content.">
         <Variants>
           <Variant letter="A" name="Pale tint" usedOn="service groups, Kontakt hours">
             <Panel className="bg-tint" />
@@ -272,7 +295,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="13 · Background texture (new ideas)" note="A quiet texture for one or two special areas (e.g. the booking block or the footer) – never behind long text.">
+      <Category id="background" title="13 · Background texture (new ideas)" note="A quiet texture for one or two special areas (e.g. the booking block or the footer) – never behind long text.">
         <Variants>
           <Variant letter="A" name="Plain" usedOn="everywhere">
             <div className="h-28 w-full rounded-2xl bg-primary" />
@@ -293,7 +316,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="14 · Section title layout (new ideas)" note="How a section starts.">
+      <Category id="section-title" title="14 · Section title layout (new ideas)" note="How a section starts.">
         <Variants wide>
           <Variant letter="A" name="Title + link on the right" usedOn="Startseite sections">
             <div className="flex w-full items-end justify-between gap-4">
@@ -322,7 +345,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="15 · Quote / highlight (new ideas)" note="To bring Ganna's own voice forward – e.g. one sentence from her welcome letter.">
+      <Category id="quote" title="15 · Quote / highlight (new ideas)" note="To bring Ganna's own voice forward – e.g. one sentence from her welcome letter.">
         <Variants wide>
           <Variant letter="A" name="Large quote with star">
             <figure className="w-full">
@@ -355,7 +378,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="16 · Logo mark as ornament (new ideas)" note="Reusing parts of the logo itself, so ornaments feel like ‘ours’.">
+      <Category id="logo-ornament" title="16 · Logo mark as ornament (new ideas)" note="Reusing parts of the logo itself, so ornaments feel like ‘ours’.">
         <Variants>
           <Variant letter="A" name="Mark badge (diamond + star)">
             <div className="flex items-center gap-3">
@@ -380,7 +403,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="17 · Hover feedback (new ideas)" note="What happens when the mouse moves over a link or card. Hover the examples.">
+      <Category id="hover" title="17 · Hover feedback (new ideas)" note="What happens when the mouse moves over a link or card. Hover the examples.">
         <Variants>
           <Variant letter="A" name="Card turns white, icon fills" usedOn="service list">
             <a className="group flex w-full items-center gap-3 rounded-2xl bg-tint p-3 transition-colors hover:bg-background">
@@ -408,7 +431,7 @@ export default function UiKit() {
         </Variants>
       </Category>
 
-      <Category title="18 · Buttons and links" note="Already in use; shown for completeness.">
+      <Category id="buttons" title="18 · Buttons and links" note="Already in use; shown for completeness.">
         <div className="flex flex-wrap items-center gap-4 rounded-3xl border p-8">
           <a className={buttonVariants({ size: "lg", className: "h-12 gap-2.5 px-6 text-base" })}>
             <CalendarCheckIcon /> Termin buchen <DoctolibLogo className="h-[15px]" />
@@ -423,6 +446,7 @@ export default function UiKit() {
         </div>
       </Category>
     </div>
+    </FeedbackProvider>
   )
 }
 

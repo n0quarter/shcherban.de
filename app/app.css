@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/roboto";
 @plugin "@tailwindcss/typography";
+@source not "../design";
 
 @custom-variant dark (&:is(.dark *));
 

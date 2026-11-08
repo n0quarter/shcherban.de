@@ -22,3 +22,8 @@ Static website of a gynaecological practice in Berlin. Mostly edited by Claude C
 - Domain: `SITE_URL` in `app/lib/practice.ts` and `public/CNAME` must match.
 - Use `buttonVariants()` on `<a>`/`<Link>` for link-buttons instead of `<Button render>`.
 - Don't promote the phone number: it appears only in the footer and on the Kontakt page. Calls to action point to Doctolib booking or the Kontakt page.
+
+## UI kit and design feedback (local only)
+- `/ui-kit` (http://localhost:5180/ui-kit/) shows the design building blocks with lettered variants. The route exists only on the dev server (`app/routes.ts`), never in the published build.
+- The owner's picks, comments and answers are saved by the dev server to `design/ui-kit-feedback.json` (`tooling/ui-kit-feedback.ts`). Element ids are `<category>.<letter>` (e.g. `eyebrow.B`); a comment target without a letter refers to the whole category. Read this file when asked to apply the UI-kit decisions.
+- Shared brand shapes (logo diamond, star) live in `app/components/brand.tsx`.

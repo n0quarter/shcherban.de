@@ -26,6 +26,6 @@ export default [
     path === "" ? index(file, { id: "de" }) : route(path, file, { id: `de/${path}` }),
     route(path === "" ? "en" : `en/${path}`, file, { id: `en/${path}` }),
   ]),
-  // Internal design overview, not linked and not indexed; one language only.
-  route("ui-kit", "routes/ui-kit.tsx", { id: "ui-kit" }),
+  // Internal design overview with feedback tool: only on the local dev server, never in the published build.
+  ...(process.env.NODE_ENV === "production" ? [] : [route("ui-kit", "routes/ui-kit.tsx", { id: "ui-kit" })]),
 ] satisfies RouteConfig
