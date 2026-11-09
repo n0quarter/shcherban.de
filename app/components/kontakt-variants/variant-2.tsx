@@ -1,4 +1,4 @@
-// TEMPORARY: Kontakt page design variant 2 (pick one with ?v=1…5 on /kontakt/).
+// TEMPORARY: Kontakt page design variant 2 (pick it with ?v=1 on /kontakt/).
 // Idea: the practice nameplate (Praxisschild) at the door, mounted on a pale-blue "wall", with the booking next to it.
 import { ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
 import type { ReactNode } from "react"

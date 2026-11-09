@@ -5,11 +5,12 @@ import { useSearchParams } from "react-router"
 
 import { LogoDiamond } from "~/components/brand"
 import { DoctolibLogo } from "~/components/doctolib-logo"
-import { KontaktVariant1 } from "~/components/kontakt-variants/variant-1"
+import { KontaktVariant10 } from "~/components/kontakt-variants/variant-10"
 import { KontaktVariant2 } from "~/components/kontakt-variants/variant-2"
-import { KontaktVariant3 } from "~/components/kontakt-variants/variant-3"
-import { KontaktVariant4 } from "~/components/kontakt-variants/variant-4"
-import { KontaktVariant5 } from "~/components/kontakt-variants/variant-5"
+import { KontaktVariant6 } from "~/components/kontakt-variants/variant-6"
+import { KontaktVariant7 } from "~/components/kontakt-variants/variant-7"
+import { KontaktVariant8 } from "~/components/kontakt-variants/variant-8"
+import { KontaktVariant9 } from "~/components/kontakt-variants/variant-9"
 import { OpeningHours } from "~/components/opening-hours"
 import { PageHeader } from "~/components/page-header"
 import { buttonVariants } from "~/components/ui/button"
@@ -48,14 +49,16 @@ const text = {
   },
 }
 
-// TEMPORARY: design variants to choose from. ?v=0 (current) … ?v=5; the picker shows only in dev.
+// TEMPORARY: design variants to choose from. ?v=0 (current) … ?v=6; the picker shows only in dev.
+// 6–10 all build on variant 2 (the nameplate); their shared pieces are in kontakt-variants/plate-parts.tsx.
 const variants = [
   { name: "Aktuell", Component: CurrentVariant },
-  { name: "Variante 1", Component: KontaktVariant1 },
   { name: "Variante 2", Component: KontaktVariant2 },
-  { name: "Variante 3", Component: KontaktVariant3 },
-  { name: "Variante 4", Component: KontaktVariant4 },
-  { name: "Variante 5", Component: KontaktVariant5 },
+  { name: "6 · Schild + Foto", Component: KontaktVariant6 },
+  { name: "7 · Schild auf Praxisfoto", Component: KontaktVariant7 },
+  { name: "8 · Alles im Schild + Foto", Component: KontaktVariant8 },
+  { name: "9 · Blaues Schild", Component: KontaktVariant9 },
+  { name: "10 · Quer-Schild", Component: KontaktVariant10 },
 ]
 
 export default function Kontakt() {
@@ -75,7 +78,7 @@ export default function Kontakt() {
               onClick={() => setSearchParams(index ? { v: String(index) } : {}, { replace: true, preventScrollReset: true })}
               className={cn("rounded-full border bg-background px-2.5 py-1 font-medium", index === current && "border-primary bg-primary text-primary-foreground")}
             >
-              {index} · {variant.name}
+              {variant.name}
             </button>
           ))}
         </div>
