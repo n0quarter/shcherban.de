@@ -34,7 +34,7 @@ export function SiteFooter() {
   return (
     <footer className="relative mt-24 overflow-hidden bg-primary text-white sm:mt-32">
       <LogoDiamond className="absolute -right-24 -bottom-28 size-96 text-white/8 sm:-right-16 lg:size-[28rem]" />
-      <div className="relative mx-auto grid max-w-6xl gap-x-12 gap-y-14 px-4 py-16 md:grid-cols-2 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr]">
+      <div className="relative mx-auto grid max-w-6xl gap-x-12 gap-y-12 px-4 py-12 md:grid-cols-2 sm:py-14 lg:grid-cols-[1.5fr_1fr_1fr]">
         <div className="md:col-span-2 lg:col-span-1">
           <p className="text-sm font-bold tracking-wide uppercase">{practice.doctor}</p>
           <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance sm:text-5xl">{siteName[lang]}</p>
@@ -87,7 +87,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <p className="relative mx-auto max-w-6xl px-4 pb-10 text-sm text-white/80 lg:hidden">{copyright}</p>
+      <p className="relative mx-auto max-w-6xl px-4 pb-8 text-sm text-white/80 lg:hidden">{copyright}</p>
     </footer>
   )
 }
