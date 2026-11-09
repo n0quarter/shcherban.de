@@ -191,6 +191,7 @@ function WelcomeLetter({ lang }: { lang: Lang }) {
         </p>
         <p>Together we do everything we can to create a calm and safe atmosphere for your well-being.</p>
         <p>Book your first appointment and experience personal, competent care from our team. We look forward to welcoming you to our practice.</p>
+        <p className="font-medium text-ink italic">– Your team at the gynaecological practice of Ganna Shcherban</p>
       </>
     )
   }
@@ -209,6 +210,7 @@ function WelcomeLetter({ lang }: { lang: Lang }) {
         Vereinbaren Sie Ihren ersten Termin und erleben Sie die Vorteile einer persönlichen und kompetenten Betreuung
         durch unser Team. Wir freuen uns darauf, Sie in unserer Praxis begrüßen zu dürfen.
       </p>
+      <p className="font-medium text-ink italic">– Ihr Team der Frauenarztpraxis Ganna Shcherban</p>
     </>
   )
 }
