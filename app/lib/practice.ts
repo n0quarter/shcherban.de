@@ -1,7 +1,7 @@
 import type { Localized } from "~/lib/i18n"
 
 // Change together with public/CNAME when the site moves to shcherban.de.
-export const SITE_URL = "https://new.shcherban.de"
+export const SITE_URL = "https://shcherban.de"
 
 export const siteName: Localized = {
   de: "Frauenarztpraxis in Friedrichshain",
