@@ -8,7 +8,8 @@ import { practice, siteName } from "~/lib/practice"
 
 const text = {
   de: {
-    imprint: "Impressum & Datenschutz",
+    imprint: "Impressum",
+    privacy: "Datenschutz",
     hours: "Sprechstunde",
     contact: "Kontakt",
     directions: "Route planen",
@@ -16,7 +17,8 @@ const text = {
     rights: "Alle Rechte vorbehalten.",
   },
   en: {
-    imprint: "Imprint & privacy",
+    imprint: "Legal notice",
+    privacy: "Privacy",
     hours: "Consultation hours",
     contact: "Contact",
     directions: "Get directions",
@@ -38,9 +40,12 @@ export function SiteFooter() {
         <div className="md:col-span-2 lg:col-span-1">
           <p className="text-sm font-bold tracking-wide uppercase">{practice.doctor}</p>
           <p className="mt-4 max-w-md text-4xl leading-tight font-medium text-balance sm:text-5xl">{siteName[lang]}</p>
-          <p className="mt-10">
-            <Link to={localizedPath(lang, "/impressum/")} className="text-lg text-sun hover:underline">
+          <p className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-lg">
+            <Link to={localizedPath(lang, "/impressum/")} className="text-sun hover:underline">
               {t.imprint}
+            </Link>
+            <Link to={localizedPath(lang, "/datenschutz/")} className="text-sun hover:underline">
+              {t.privacy}
             </Link>
           </p>
           {/* Under the imprint link on wide screens; at the very bottom when the columns stack. */}

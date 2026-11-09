@@ -1,181 +1,178 @@
+import { Link } from "react-router"
+
+import { GermanVersionApplies, LegalArticle } from "~/components/legal-article"
 import { PageHeader } from "~/components/page-header"
-import { useLang } from "~/lib/i18n"
+import { localizedPath, useLang } from "~/lib/i18n"
+import { practice } from "~/lib/practice"
 import { pageMeta } from "~/lib/seo"
 import type { Route } from "./+types/impressum"
 
-const title = { de: "Impressum & Datenschutz", en: "Imprint & privacy" }
+const title = { de: "Impressum", en: "Legal notice" }
 const description = {
-  de: "Impressum und Datenschutzerklärung der Frauenarztpraxis Ganna Shcherban, Matthiasstraße 7, 10249 Berlin.",
-  en: "Legal notice and privacy policy of the gynaecological practice of Ganna Shcherban, Matthiasstraße 7, 10249 Berlin.",
+  de: "Impressum der Frauenarztpraxis Ganna Shcherban, Matthiasstraße 7, 10249 Berlin.",
+  en: "Legal notice (Impressum) of the gynaecological practice of Ganna Shcherban, Matthiasstraße 7, 10249 Berlin.",
 }
 
 export const meta = ({ location }: Route.MetaArgs) => pageMeta(location.pathname, title, description)
 
 export default function Impressum() {
   const lang = useLang()
-
   return (
     <>
       <PageHeader title={title[lang]} />
-      <div className="mx-auto max-w-6xl px-4">
-        {lang === "en" && (
-          <p className="mb-10 max-w-3xl rounded-2xl bg-tint p-6 text-ink">
-            This is the legal notice (Impressum) and privacy policy (Datenschutzerklärung) of our practice. It is
-            provided in German only; the German version applies.
-          </p>
-        )}
-        <article
-          lang="de"
-          className="diamond-bullets prose max-w-3xl prose-neutral prose-headings:font-heading prose-headings:font-semibold prose-headings:text-ink prose-a:text-primary prose-strong:text-ink"
-        >
-          <LegalText />
-        </article>
-      </div>
+      <LegalArticle>{lang === "de" ? <German /> : <English />}</LegalArticle>
     </>
   )
 }
 
-/** German legal text, verbatim from the old site. Do not translate or rewrite. */
-function LegalText() {
+function German() {
   return (
     <>
       <h2>Angaben gemäß § 5 DDG</h2>
       <p>
-        <strong>Frauenarztpraxis Ganna Shcherban</strong>
+        Ganna Shcherban
         <br />
-        Fachärztin für Gynäkologie und Geburtshilfe
+        Frauenarztpraxis Ganna Shcherban
         <br />
-        Matthiasstraße 7, 10249 Berlin
+        {practice.street}
+        <br />
+        {practice.city}
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: <a href={practice.phoneHref}>{practice.phone}</a>
+        <br />
+        Fax: {practice.fax}
+        <br />
+        E-Mail: <a href={`mailto:${practice.email}`}>{practice.email}</a>
       </p>
       <p>
-        <strong>Kontakt:</strong>
-        <br />
-        Tel.: 030 421 08 675 · Fax: 030 421 08 677
-        <br />
-        E-Mail: <a href="mailto:info@shcherban.de">info@shcherban.de</a>
-        <br />
-        Website: <a href="https://shcherban.de">shcherban.de</a>
+        Per E-Mail beraten wir nicht zu medizinischen Fragen. Einen Termin buchen Sie am einfachsten online über{" "}
+        <a href={practice.bookingUrl} target="_blank" rel="noopener">
+          Doctolib
+        </a>
+        .
       </p>
 
       <h2>Berufsrechtliche Angaben</h2>
       <p>
-        <strong>Berufsbezeichnung:</strong> Ärztin, Fachärztin für Gynäkologie und Geburtshilfe
-        <br />
-        <strong>Staat der Verleihung:</strong> Deutschland
+        <strong>Berufsbezeichnung:</strong> Ärztin, Fachärztin für Frauenheilkunde und Geburtshilfe, verliehen in der
+        Bundesrepublik Deutschland
       </p>
       <p>
-        <strong>Approbation erteilt durch:</strong>
-        <br />
-        Landesamt für Gesundheit und Soziales Berlin (LAGeSo) — am 10. Februar 2015
+        <strong>Approbation:</strong> erteilt am 10. Februar 2015 vom Landesamt für Gesundheit und Soziales Berlin
       </p>
       <p>
         <strong>Zuständige Ärztekammer:</strong>
         <br />
-        Ärztekammer Berlin, Friedrichstraße 16, 10969 Berlin — <a href="https://www.aekb.de">www.aekb.de</a>
+        Ärztekammer Berlin, Friedrichstraße 16, 10969 Berlin
+        <br />
+        <a href="https://www.aekb.de">www.aekb.de</a>
       </p>
       <p>
-        <strong>Zuständige Kassenärztliche Vereinigung</strong> (falls vertragsärztlich):
-        <br />
-        Kassenärztliche Vereinigung Berlin, Masurenallee 6A, 14057 Berlin —{" "}
-        <a href="https://www.kvberlin.de">www.kvberlin.de</a>
-        <br />
         <strong>Zuständige Aufsichtsbehörde:</strong>
         <br />
-        Landesamt für Gesundheit und Soziales Berlin (LAGeSo), Turmstraße 21, 10559 Berlin
+        Landesamt für Gesundheit und Soziales Berlin (LAGeSo)
+        <br />
+        <a href="https://www.berlin.de/lageso/">www.berlin.de/lageso</a>
       </p>
       <p>
-        <strong>Berufsrechtliche Regelungen:</strong>
+        <strong>Kassenärztliche Vereinigung</strong> (vertragsärztliche Zulassung):
         <br />
-        Berufsordnung der Ärztekammer Berlin; weitere berufsrechtliche Vorschriften (einsehbar über die Website der
-        Ärztekammer Berlin).
+        Kassenärztliche Vereinigung Berlin, Masurenallee 6A, 14057 Berlin
+        <br />
+        <a href="https://www.kvberlin.de">www.kvberlin.de</a>
       </p>
       <p>
-        <strong>Verantwortlich i.S.d. § 18 Abs. 2 MStV:</strong>
-        <br />
+        <strong>Berufsrechtliche Regelungen:</strong> Berufsordnung der Ärztekammer Berlin, Berliner
+        Heilberufekammergesetz und Bundesärzteordnung. Sie sind auf der Website der Ärztekammer Berlin abrufbar:{" "}
+        <a href="https://www.aekb.de/recht/rechtliche-grundlagen">www.aekb.de/recht/rechtliche-grundlagen</a>
+      </p>
+
+      <h2>Datenschutz</h2>
+      <p>
+        Wie wir mit Ihren Daten umgehen, lesen Sie in unserer{" "}
+        <Link to={localizedPath("de", "/datenschutz/")}>Datenschutzerklärung</Link>.
+      </p>
+    </>
+  )
+}
+
+function English() {
+  return (
+    <>
+      <GermanVersionApplies />
+
+      <h2>Information pursuant to § 5 DDG</h2>
+      <p>
         Ganna Shcherban
-      </p>
-
-      <h2>Berufshaftpflichtversicherung</h2>
-      <p>
-        Versicherer: —
         <br />
-        Räumlicher Geltungsbereich: Deutschland
-      </p>
-
-      <hr />
-
-      <h2>Haftungsausschluss</h2>
-      <h3>Haftung für Inhalte</h3>
-      <p>
-        Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt; für Richtigkeit, Vollständigkeit und Aktualität
-        übernehmen wir keine Gewähr. Als Diensteanbieter sind wir nach den allgemeinen Gesetzen für eigene Inhalte
-        verantwortlich.
-      </p>
-      <h3>Haftung für Links</h3>
-      <p>
-        Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Bei
-        Bekanntwerden von Rechtsverletzungen entfernen wir entsprechende Links umgehend.
-      </p>
-      <h3>Urheberrecht</h3>
-      <p>
-        Alle auf dieser Website veröffentlichten Inhalte unterliegen dem Urheberrecht. Downloads und Kopien sind nur für
-        den privaten, nicht kommerziellen Gebrauch gestattet. Inhalte Dritter sind als solche gekennzeichnet.
-      </p>
-
-      <hr />
-
-      <h2>Datenschutzerklärung</h2>
-      <h3>Verantwortliche Stelle</h3>
-      <p>
-        Frauenarztpraxis Ganna Shcherban, Matthiasstraße 7, 10249 Berlin
+        Frauenarztpraxis Ganna Shcherban
         <br />
-        E-Mail: <a href="mailto:info@shcherban.de">info@shcherban.de</a>
+        {practice.street}
+        <br />
+        {practice.city}, Germany
       </p>
-      <h3>Website-Daten</h3>
-      <ul>
-        <li>
-          <strong>Server-Logs</strong>: Beim Aufruf der Website verarbeitet unser Hosting-Provider u.a. IP-Adresse,
-          Datum/Uhrzeit, aufgerufene URL, Referrer, User-Agent zur Bereitstellung und Sicherheit der Website.{" "}
-          <em>Rechtsgrundlage:</em> Art. 6 Abs. 1 lit. f DSGVO.
-        </li>
-        <li>
-          <strong>Kontakt per E-Mail/Kontaktformular</strong>: Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage.{" "}
-          <em>Rechtsgrundlage:</em> Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO.
-        </li>
-      </ul>
-      <h3>Patientendaten in der Praxis</h3>
+
+      <h2>Contact</h2>
       <p>
-        Für die medizinische Behandlung verarbeiten wir Gesundheitsdaten. <em>Rechtsgrundlagen:</em> Art. 9 Abs. 2 lit.
-        h DSGVO i.V.m. § 22 BDSG sowie Art. 6 Abs. 1 lit. b DSGVO und gesetzliche Pflichten (z. B.
-        Aufbewahrungsfristen).
-      </p>
-      <h3>Empfänger</h3>
-      <p>
-        IT-Dienstleister (Hosting), ggf. Termin-/Kommunikations-Dienstleister, Labore, gesetzliche/privat Versicherer,
-        Kassenärztliche Vereinigung, mitbehandelnde Ärztinnen/Ärzte – soweit erforderlich und rechtlich zulässig.
-      </p>
-      <h3>Speicherdauer</h3>
-      <p>
-        Server-Logs in der Regel 7–30 Tage; Kommunikations-/Termindaten bis Abschluss der Anfrage oder gemäß
-        gesetzlichen Fristen; Behandlungsunterlagen gemäß den gesetzlich vorgesehenen Aufbewahrungsfristen.
-      </p>
-      <h3>Ihre Rechte</h3>
-      <p>
-        Rechte nach Art. 15–22 DSGVO (Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit,
-        Widerspruch) sowie Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft.
-      </p>
-      <h3>Aufsichtsbehörde</h3>
-      <p>
-        Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin —{" "}
-        <a href="https://www.datenschutz-berlin.de/">datenschutz-berlin.de</a>
-      </p>
-      <h3>Datenschutzbeauftragte/r</h3>
-      <p>
-        Eine Benennung ist nach § 38 BDSG regelmäßig nicht erforderlich. Bei Fragen wenden Sie sich an die
-        Praxisinhaberin.
+        Phone: <a href={practice.phoneHref}>{practice.phone}</a>
+        <br />
+        Fax: {practice.fax}
+        <br />
+        Email: <a href={`mailto:${practice.email}`}>{practice.email}</a>
       </p>
       <p>
-        <em>Stand: Oktober 2025</em>
+        We cannot give medical advice by email. The easiest way to book an appointment is online via{" "}
+        <a href={practice.bookingUrl} target="_blank" rel="noopener">
+          Doctolib
+        </a>
+        .
+      </p>
+
+      <h2>Professional information</h2>
+      <p>
+        <strong>Professional title:</strong> Ärztin (physician), Fachärztin für Frauenheilkunde und Geburtshilfe
+        (specialist in obstetrics and gynaecology), awarded in the Federal Republic of Germany
+      </p>
+      <p>
+        <strong>Licence to practise medicine (Approbation):</strong> granted on 10 February 2015 by the Landesamt für
+        Gesundheit und Soziales Berlin
+      </p>
+      <p>
+        <strong>Medical association:</strong>
+        <br />
+        Ärztekammer Berlin, Friedrichstraße 16, 10969 Berlin
+        <br />
+        <a href="https://www.aekb.de">www.aekb.de</a>
+      </p>
+      <p>
+        <strong>Supervisory authority:</strong>
+        <br />
+        Landesamt für Gesundheit und Soziales Berlin (LAGeSo)
+        <br />
+        <a href="https://www.berlin.de/lageso/">www.berlin.de/lageso</a>
+      </p>
+      <p>
+        <strong>Association of statutory health insurance physicians</strong> (licence to treat statutory insurance
+        patients):
+        <br />
+        Kassenärztliche Vereinigung Berlin, Masurenallee 6A, 14057 Berlin
+        <br />
+        <a href="https://www.kvberlin.de">www.kvberlin.de</a>
+      </p>
+      <p>
+        <strong>Professional regulations:</strong> Berufsordnung der Ärztekammer Berlin (professional code of the Berlin
+        Medical Association), Berliner Heilberufekammergesetz and Bundesärzteordnung. They are available (in German) on
+        the website of the Ärztekammer Berlin:{" "}
+        <a href="https://www.aekb.de/recht/rechtliche-grundlagen">www.aekb.de/recht/rechtliche-grundlagen</a>
+      </p>
+
+      <h2>Privacy</h2>
+      <p>
+        How we handle your data is described in our{" "}
+        <Link to={localizedPath("en", "/datenschutz/")}>privacy policy</Link>.
       </p>
     </>
   )

@@ -19,6 +19,7 @@ const pages: Record<string, string> = {
   "leistungen/igel-leistungen": "routes/leistungen/igel-leistungen.tsx",
   kontakt: "routes/kontakt.tsx",
   impressum: "routes/impressum.tsx",
+  datenschutz: "routes/datenschutz.tsx",
 }
 
 export default [

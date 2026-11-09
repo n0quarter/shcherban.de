@@ -4,8 +4,23 @@
     {
       "name": "dev",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev", "--port", "5180"],
+      "runtimeArgs": [
+        "dev",
+        "--port",
+        "5180"
+      ],
       "port": 5180
+    },
+    {
+      "name": "legal",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev",
+        "--port",
+        "5182",
+        "--strictPort"
+      ],
+      "port": 5182
     }
   ]
 }
