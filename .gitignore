@@ -8,3 +8,9 @@ build
 
 # typescript
 *.tsbuildinfo
+
+# Archive of the old WordPress site: kept locally for reference, not published (contains third-party metadata)
+old-site/
+
+# Local Claude Code files (worktrees, local settings, preview config)
+.claude/
