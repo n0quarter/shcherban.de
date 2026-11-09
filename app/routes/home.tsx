@@ -66,7 +66,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-clip">
         <div className="absolute inset-x-0 top-0 -z-10 h-[40rem] bg-linear-to-b from-tint to-transparent" />
-        <div className="mx-auto grid max-w-6xl items-center gap-14 md:items-start px-4 py-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-14 md:items-start px-4 pt-8 pb-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14 lg:pt-12 lg:pb-24">
           <div className="min-w-0">
             <h1 className="font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.05] font-semibold tracking-tight text-balance text-ink">
               {t.heading[0]}

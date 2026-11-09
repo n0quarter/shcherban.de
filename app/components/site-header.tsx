@@ -15,12 +15,12 @@ export function SiteHeader() {
   return (
     <header className="border-b bg-background">
       {/* Phone: logo + burger. Tablet (md): compact one-row menu. Desktop (lg): full menu. Not sticky: it scrolls away with the page. */}
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 xl:h-24">
+      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-3 px-4 xl:h-29">
         <Link to={localizedPath(lang, "/")} className="shrink-0">
           <img
             src="/logo.svg"
             alt={`${siteName[lang]} – ${practice.doctor}`}
-            className="h-11 w-auto md:h-12 lg:h-14"
+            className="h-13 w-auto md:h-14.5 lg:h-17"
           />
         </Link>
 
@@ -32,7 +32,7 @@ export function SiteHeader() {
               end={item.path === "/"}
               className={({ isActive }) =>
                 cn(
-                  "rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground lg:px-3",
+                  "rounded-full px-2 py-2 text-base font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground lg:px-2.5",
                   isActive && "bg-muted text-foreground",
                   item.path === "/" && "hidden lg:block" // the logo links home on smaller screens
                 )
@@ -54,7 +54,7 @@ export function SiteHeader() {
           >
             <CalendarCheckIcon className="md:max-lg:hidden" />
             <span>{bookingLabel[lang]}</span>
-            <DoctolibLogo className="md:max-lg:hidden" />
+            <DoctolibLogo className="md:max-xl:hidden" />
           </a>
           <MobileMenu />
         </div>
