@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import { Link } from "react-router"
 
 import { LogoDiamond } from "~/components/brand"
@@ -11,6 +12,7 @@ const text = {
     hours: "Sprechstunde",
     contact: "Kontakt",
     directions: "Route planen",
+    message: "Nachricht über Doctolib",
     rights: "Alle Rechte vorbehalten.",
   },
   en: {
@@ -18,6 +20,7 @@ const text = {
     hours: "Consultation hours",
     contact: "Contact",
     directions: "Get directions",
+    message: "Message via Doctolib",
     rights: "All rights reserved.",
   },
 }
@@ -49,9 +52,14 @@ export function SiteFooter() {
           <div className="text-base [&_dd]:text-white/80 [&_dl]:grid-cols-[3.25rem_1fr] [&_dl]:gap-y-2 [&_dl]:text-base [&_dt]:font-bold">
             <OpeningHours />
           </div>
-          <a href={practice.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram" className="mt-8 inline-block hover:text-sun">
-            <InstagramIcon />
-          </a>
+          <div className="mt-8 space-y-4">
+            <AppLink href={practice.instagramUrl} icon={<InstagramTile />}>
+              Instagram: @gynberlin
+            </AppLink>
+            <AppLink href={practice.doctolibUrl} icon={<DoctolibTile />}>
+              {t.message}
+            </AppLink>
+          </div>
         </div>
 
         <div>
@@ -88,10 +96,37 @@ function FooterHeading({ children }: { children: string }) {
   return <p className="mb-6 border-b border-white/20 pb-4 text-2xl font-medium">{children}</p>
 }
 
+/** App icon + label, like on the practice's door sign. */
+function AppLink({ href, icon, children }: { href: string; icon: ReactNode; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener" className="group flex items-center gap-3 text-base text-sun">
+      {icon}
+      <span className="group-hover:underline">{children}</span>
+    </a>
+  )
+}
+
+function InstagramTile() {
+  return (
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-[linear-gradient(225deg,#7638fa_0%,#d300c5_35%,#ff0069_65%,#ff7a00_90%,#ffd600_100%)] text-white">
+      <InstagramIcon />
+    </span>
+  )
+}
+
+/** The "D" of the Doctolib app icon. */
+function DoctolibTile() {
+  return (
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-[#107aca] text-xl font-semibold text-white italic ring-1 ring-white/40">
+      D
+    </span>
+  )
+}
+
 /** Instagram glyph (lucide-react v1 dropped brand icons). */
 function InstagramIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-9" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-5" aria-hidden="true">
       <rect x="2" y="2" width="20" height="20" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />

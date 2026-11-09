@@ -18,6 +18,7 @@ export const practice = {
   email: "info@shcherban.de",
   bookingUrl:
     "https://www.doctolib.de/frauenarzt/berlin/ganna-shcherban/booking?utm_campaign=website-button&utm_source=ganna-shcherban-website-button&utm_medium=referral&utm_content=withoutpreview-blue-floating-bottom-right&utm_term=ganna-shcherban",
+  doctolibUrl: "https://www.doctolib.de/frauenarzt/berlin/ganna-shcherban",
   instagramUrl: "https://instagram.com/gynberlin",
   directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Matthiasstra%C3%9Fe+7%2C+10249+Berlin",
 }
