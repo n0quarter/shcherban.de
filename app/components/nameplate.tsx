@@ -1,5 +1,4 @@
-// TEMPORARY: shared pieces for the Kontakt variants 6–10, which all build on variant 2 (the practice nameplate).
-// Delete together with the unused variants once one is chosen.
+// The practice nameplate (like the glass sign at the door), used on the Kontakt page.
 import { ArrowUpRightIcon, CalendarCheckIcon } from "lucide-react"
 import type { ReactNode } from "react"
 
@@ -11,10 +10,9 @@ import { cn } from "~/lib/utils"
 
 export const plateText: Record<
   Lang,
-  { title: string; doctorRole: string; hours: string; address: string; contact: string; phone: string; fax: string; email: string; directions: string; bookingHeading: string; bookingText: string; photoAlt: string; photoCaption: string }
+  { doctorRole: string; hours: string; address: string; contact: string; phone: string; fax: string; email: string; directions: string; photoAlt: string }
 > = {
   de: {
-    title: "Kontakt",
     doctorRole: "Fachärztin für Frauenheilkunde und Geburtshilfe",
     hours: "Sprechstunde",
     address: "Adresse",
@@ -23,13 +21,9 @@ export const plateText: Record<
     fax: "Fax",
     email: "E-Mail",
     directions: "Route planen",
-    bookingHeading: "Vereinbaren Sie Ihren Termin",
-    bookingText: "Buchen Sie Ihren Termin bequem online über Doctolib. Wir freuen uns auf Sie.",
     photoAlt: "Die Rezeption der Praxis",
-    photoCaption: "Willkommen in unserer Praxis",
   },
   en: {
-    title: "Contact",
     doctorRole: "Specialist in gynaecology and obstetrics",
     hours: "Consultation hours",
     address: "Address",
@@ -38,10 +32,7 @@ export const plateText: Record<
     fax: "Fax",
     email: "Email",
     directions: "Get directions",
-    bookingHeading: "Book your appointment",
-    bookingText: "Book your appointment conveniently online via Doctolib. We look forward to seeing you.",
     photoAlt: "The practice reception",
-    photoCaption: "Welcome to our practice",
   },
 }
 
@@ -68,7 +59,7 @@ export function Plate({ className, children }: { className?: string; children: R
 }
 
 /** Logo mark, practice name, doctor and specialty – the top of every nameplate. */
-export function PlateHead({ size = "lg" }: { size?: "lg" | "md" }) {
+export function PlateHead() {
   const lang = useLang()
   const t = plateText[lang]
   return (
@@ -77,14 +68,7 @@ export function PlateHead({ size = "lg" }: { size?: "lg" | "md" }) {
         <img src="/logo-mark.svg" alt="" className="size-10 shrink-0" />
         <p className="text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase sm:text-sm">{siteName[lang]}</p>
       </div>
-      <h2
-        className={cn(
-          "font-semibold tracking-tight text-ink",
-          size === "lg" ? "mt-6 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.02]" : "mt-5 text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight"
-        )}
-      >
-        {practice.doctor}
-      </h2>
+      <h2 className="mt-5 text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight font-semibold tracking-tight text-ink">{practice.doctor}</h2>
       <p className="mt-2 text-lg text-balance text-primary">{t.doctorRole}</p>
     </>
   )
@@ -152,22 +136,12 @@ export function ContactList() {
   )
 }
 
-export function BookingButton({ variant = "blue", className }: { variant?: "blue" | "yellow"; className?: string }) {
+export function BookingButton({ className }: { className?: string }) {
   const lang = useLang()
   return (
-    <a
-      href={practice.bookingUrl}
-      target="_blank"
-      rel="noopener"
-      className={cn(
-        buttonVariants({ size: "lg" }),
-        "h-12 gap-2.5 px-6 text-base",
-        variant === "yellow" && "bg-sun text-ink hover:bg-sun/85",
-        className
-      )}
-    >
+    <a href={practice.bookingUrl} target="_blank" rel="noopener" className={cn(buttonVariants({ size: "lg" }), "h-12 gap-2.5 px-6 text-base", className)}>
       <CalendarCheckIcon /> {bookingLabel[lang]}
-      <DoctolibLogo color={variant === "yellow" ? "ink" : "white"} className="h-[15px]" />
+      <DoctolibLogo className="h-[15px]" />
     </a>
   )
 }
